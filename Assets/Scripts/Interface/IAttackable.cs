@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IAttackable
 {
-    void Attack(int damage);
+    void Attack();
     IEnumerator AttackDelay();
 }

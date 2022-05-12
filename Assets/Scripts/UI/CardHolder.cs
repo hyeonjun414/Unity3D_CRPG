@@ -17,7 +17,7 @@ public class CardHolder : MonoBehaviour
     [Header("카드")]
     [SerializeField] private int selectedCardIndex; // 선택된 카드 인덱스
     [SerializeField] private int mouseOverCardIndex;// 마우스 오버된 카드의 인덱스
-    [SerializeField] private List<Card> cards;  // 카드 리스트
+    [SerializeField] private List<CardUnit> cards;  // 카드 리스트
 
     [Header("일반 카드 수치")]
     [SerializeField] private float lerpTime;        // lerp 정도
@@ -44,20 +44,75 @@ public class CardHolder : MonoBehaviour
         selectedCardIndex = Null;
 
         isControllable = true;
+        CardUnit[] cardArr = GetComponentsInChildren<CardUnit>();
+        foreach(CardUnit card in cardArr)
+        {
+            cards.Add(card);
+            if (card.cardData != null)
+                card.UpdateUI();
+
+        }
     }
     public void SetControllable(bool controllable) => isControllable = controllable;
 
     // Update is called once per frame
     void Update()
     {
-        // 마우스 오버 감지
-        MouseOverDetection();
+        InputSelectCard();
+
+        if(selectedCardIndex != Null)
+        {
+            Time.timeScale = 0.2f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
         // 마우스 클릭 감지
         if (isControllable) MouseClickDetection();
 
         ArrangeCards();
     }
-
+    private void InputSelectCard()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1) && cards.Count >= 1)
+        {
+            selectedCardIndex = 0;
+            bezierCurveDrawer.gameObject.SetActive(true);
+            bezierCurveDrawer.points[0].transform.position = cards[selectedCardIndex].transform.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && cards.Count >= 2)
+        {
+            selectedCardIndex = 1;
+            bezierCurveDrawer.gameObject.SetActive(true);
+            bezierCurveDrawer.points[0].transform.position = cards[selectedCardIndex].transform.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && cards.Count >= 3)
+        {
+            selectedCardIndex = 2;
+            bezierCurveDrawer.gameObject.SetActive(true);
+            bezierCurveDrawer.points[0].transform.position = cards[selectedCardIndex].transform.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && cards.Count >= 4)
+        {
+            selectedCardIndex = 3;
+            bezierCurveDrawer.gameObject.SetActive(true);
+            bezierCurveDrawer.points[0].transform.position = cards[selectedCardIndex].transform.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && cards.Count >= 5)
+        {
+            selectedCardIndex = 4;
+            bezierCurveDrawer.gameObject.SetActive(true);
+            bezierCurveDrawer.points[0].transform.position = cards[selectedCardIndex].transform.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6) && cards.Count >= 6)
+        {
+            selectedCardIndex = 5;
+            bezierCurveDrawer.gameObject.SetActive(true);
+            bezierCurveDrawer.points[0].transform.position = cards[selectedCardIndex].transform.position;
+        }
+    }
     private void ArrangeCards()
     {
         // 시작 각도
@@ -80,7 +135,7 @@ public class CardHolder : MonoBehaviour
             float y = Mathf.Cos(radian) * distance - distance;
 
             // 만약 마우스 오버된 카드라면,
-            if (i == mouseOverCardIndex)
+            if (i == selectedCardIndex)
             {
                 targetPos = new Vector3(x, mouseOverYSpacing, zInterval);
                 targetRot = Quaternion.identity;
@@ -88,12 +143,12 @@ public class CardHolder : MonoBehaviour
             }
             else
             {
-                targetPos = new Vector3(x, y, i * -zInterval);
-                targetRot = Quaternion.Euler(0, 0, angle);
+                targetPos = new Vector3(x, transform.position.y, i * -zInterval);
+                targetRot = Quaternion.identity;
                 targetScl = Vector3.one;
 
                 // 마우스 오버 카드가 있을경우,
-                if (mouseOverCardIndex != Null)
+                if (selectedCardIndex != Null)
                     // 양옆으로 간격만큼 벌려줌
                     targetPos.x += (i < mouseOverCardIndex ? -1 : 1) * mouseOverInterval;
             }
@@ -106,58 +161,25 @@ public class CardHolder : MonoBehaviour
         }
 
         // 마우스 오버 카드가 있을경우,
-        if (mouseOverCardIndex != Null)
+        if (selectedCardIndex != Null)
             // 마우스 오버 카드를 맨 앞에 배치
-            cards[mouseOverCardIndex].transform.SetAsLastSibling();
+            cards[selectedCardIndex].transform.SetAsLastSibling();
 
-    }
-    private void MouseOverDetection()
-    {
-        // Physics2DRaycaster를 이용하여 화면상에서 마우스 오버된 UI 오브젝트를 레이캐스트한다.
-        var eventData = new PointerEventData(null) { position = Input.mousePosition };
-        var results = new List<RaycastResult>();
-        gr.Raycast(eventData, results);
-        //print(results.Count);
-        // 마우스 오버된 카드, 적을 초기화한다.
-        mouseOverCardIndex = Null;
-
-        // 마우스 오버된 오브젝트가 있을 경우,
-        if (results.Count > 0)
-        {
-            // 태그 비교로 카드/에너미 리스트로 분리한다.
-            var cardResults = results.Where(x => x.gameObject.CompareTag("Card")).ToList();
-
-            print(cardResults.Count);
-
-            // 선택된 카드가 없는 상태에서, 마우스 오버된 카드가 있을경우,
-            if (selectedCardIndex == Null && cardResults.Count > 0)
-            {
-                // 카드중 가장 가까운 카드를 선택하여 (카드는 겹치므로)
-                var result = cardResults.Aggregate((a, b) => a.distance > b.distance ? a : b);
-                // 해당 카드의 인덱스를 얻는다.
-                mouseOverCardIndex = cards.IndexOf(result.gameObject.GetComponent<Card>());
-            }
-        }
     }
 
     private void MouseClickDetection()
     {
-        // 좌클릭시,
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && selectedCardIndex != Null)
         {
-            // 카드 선택 (마우스 오버된 카드가 있을 경우에만)
-            if (mouseOverCardIndex != Null)
+            GameObject vfx = cards[selectedCardIndex].cardData.vfx;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 200, LayerMask.GetMask("Ground")))
             {
-                // 선택 카드 설정
-                selectedCardIndex = mouseOverCardIndex;
-                // 마우스 오버 카드 초기화
-                mouseOverCardIndex = Null;
-                // 공격 카드일 경우,
-                bezierCurveDrawer.gameObject.SetActive(true);
-                bezierCurveDrawer.points[0].transform.position = cards[selectedCardIndex].transform.position;
+                Instantiate(vfx, raycastHit.point + vfx.transform.position, vfx.transform.rotation);
             }
+            selectedCardIndex = Null;
+            bezierCurveDrawer.gameObject.SetActive(false);
         }
-        // 우클릭시,
         else if (Input.GetMouseButtonDown(1))
         {
             // 선택된 카드 초기화

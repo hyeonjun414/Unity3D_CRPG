@@ -6,27 +6,36 @@ using UnityEngine.SceneManagement;
 
 public class Player : LivingEntity
 {
-    public Camera mainCamera; // 메인 카메라
+    [Header("Player")]
+    private static Player instance = null;
 
-    private Animator anim;
-
+    [Header("Projectile")]
     public ProjectileMover[] projectile;
     public int projectileCount = 0;
     public Transform projPos;
 
-
+    private Camera mainCamera; // 메인 카메라
+    private Animator anim;
     private Vector3 rayPos;
     private void Awake()
     {
-        print("This is Awake");
-        DontDestroyOnLoad(gameObject);
-        transform.position = Vector3.zero;
+        if (instance != null)
+            Destroy(gameObject);
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        SceneManager.sceneLoaded += FindingMainCam;
     }
     void Start()
     {
-        print("This is Start");
-        mainCamera = Camera.main;
         anim = GetComponentInChildren<Animator>();
+    }
+
+    public void FindingMainCam(Scene scene, LoadSceneMode mode)
+    {
+        mainCamera = Camera.main;
     }
 
     void Update()
@@ -109,17 +118,6 @@ public class Player : LivingEntity
 
         
     }
-    private void Attack()
-    {
-        if (isAttack) return;
-
-        transform.LookAt(rayPos);
-        anim.SetTrigger("Attack");
-        StartCoroutine("AttackDelay");
-        Instantiate(GameManager.Instance.mouseVfx, rayPos+Vector3.up*0.1f, Quaternion.identity);
-        if(projectile != null)
-            Instantiate(projectile[projectileCount], projPos.position+ transform.forward, transform.rotation);
-    }
     public override IEnumerator AttackDelay()
     {
         isAttack = true;
@@ -129,8 +127,16 @@ public class Player : LivingEntity
         anim.SetBool("isAttack", isAttack);
     }
 
-    public override void Attack(int damage)
+    public override void Attack()
     {
+        if (isAttack) return;
+
+        transform.LookAt(rayPos);
+        anim.SetTrigger("Attack");
+        StartCoroutine("AttackDelay");
+        Instantiate(GameManager.Instance.mouseVfx, rayPos + Vector3.up * 0.1f, Quaternion.identity);
+        if (projectile != null)
+            Instantiate(projectile[projectileCount], projPos.position + transform.forward, transform.rotation);
     }
 
     public override void Hit(int damage)

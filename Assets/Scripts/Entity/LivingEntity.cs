@@ -4,21 +4,23 @@ using UnityEngine;
 
 public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
 {
+    [Header("Normal Status")]
     public string entityName;
     public float maxHp;
     public float curHp;
     public float moveSpeed;
     public float roteSpeed;
+
+    [Header("Battle Status")]
     public float damage;
     public float armor;
-
     public float attackDelayTime;
     public float hitDelayTime;
 
     public bool isAttack = false;
     public bool isHit= false;
 
-    public abstract void Attack(int damage);
+    public abstract void Attack();
 
     public virtual IEnumerator AttackDelay()
     {
