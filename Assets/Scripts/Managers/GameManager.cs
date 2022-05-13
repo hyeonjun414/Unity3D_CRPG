@@ -9,6 +9,24 @@ public class GameManager : Singleton<GameManager>
     private Player player;
     private CinemachineVirtualCamera mainCam;
 
+    public bool _isPause = false;
+    public bool IsPause
+    {
+        get { return _isPause; }
+        set 
+        { 
+            _isPause = value; 
+            if(_isPause)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
+    }
+
     private void Awake()
     {
         if (Instance != null)
@@ -23,7 +41,17 @@ public class GameManager : Singleton<GameManager>
     }
 
     public GameObject mouseVfx;
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            OptionManager.Instance.OptionBtn();
+            IsPause = !IsPause;
+        }
 
+
+
+    }
     public void FindingMainCam(Scene scene, LoadSceneMode mode)
     {
         print($"현재 씬 : {scene.name})");

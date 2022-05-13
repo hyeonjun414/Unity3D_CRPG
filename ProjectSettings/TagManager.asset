@@ -7,6 +7,7 @@ TagManager:
   - Gate
   - Card
   - Enemy
+  - Reward
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
+  - Reward
   - 
   - 
   - 
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 836512009
+    locked: 0
+  - name: Object
+    uniqueID: 2052088393
     locked: 0

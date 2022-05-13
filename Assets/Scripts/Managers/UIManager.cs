@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("플레이어")]
+    public Text HpText;
+    public Text MpText;
+    public Slider HpBar;
+    public Slider MpBar;
 
-    // Update is called once per frame
-    void Update()
+    [Header("카드")]
+    public CardHolder cardHolder;
+    public DeckUI deckUI;
+    
+
+    [Header("설정")]
+    public GameObject optionUI;
+
+    private void Awake()
     {
-        
+        _instance = this;
     }
 }

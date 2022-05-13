@@ -16,14 +16,11 @@ public class CardHolder : MonoBehaviour
 
     [Header("카드")]
     [SerializeField] private int selectedCardIndex; // 선택된 카드 인덱스
-    [SerializeField] private int mouseOverCardIndex;// 마우스 오버된 카드의 인덱스
-    [SerializeField] private List<CardUnit> cards;  // 카드 리스트
+    [SerializeField] public List<CardUnit> cards;  // 카드 리스트
 
     [Header("일반 카드 수치")]
     [SerializeField] private float lerpTime;        // lerp 정도
-    [SerializeField] private float angularInterval; // 각도 간격
-    [SerializeField] private float zInterval;       // z 간격
-    [SerializeField] private float distance;
+    [SerializeField] private float xInterval;
 
     [Header("마우스 오버 카드 수치")]
     [SerializeField] private float mouseOverInterval;   // 마우스 오버시 다른 카드들이 양옆으로 밀리는 간격
@@ -34,16 +31,11 @@ public class CardHolder : MonoBehaviour
     [SerializeField] private float selectedScale;   // 선택된 카드의 스케일
     [SerializeField] private float selectedYSpacing;// 선택된 카드의 y 보정값
 
-    private bool isControllable;   // 현재 컨트롤 가능 여부
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        mouseOverCardIndex = Null;
         selectedCardIndex = Null;
 
-        isControllable = true;
         CardUnit[] cardArr = GetComponentsInChildren<CardUnit>();
         foreach(CardUnit card in cardArr)
         {
@@ -53,26 +45,27 @@ public class CardHolder : MonoBehaviour
 
         }
     }
-    public void SetControllable(bool controllable) => isControllable = controllable;
 
-    // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.IsPause) return;
+
         InputSelectCard();
 
         if(selectedCardIndex != Null)
         {
             Time.timeScale = 0.2f;
+            SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 0.2f, 0.1f);
         }
         else
         {
             Time.timeScale = 1f;
+            SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 1f, 0.1f);
         }
 
-        // 마우스 클릭 감지
-        if (isControllable) MouseClickDetection();
-
         ArrangeCards();
+
+        MouseClickDetection();
     }
     private void InputSelectCard()
     {
@@ -115,9 +108,7 @@ public class CardHolder : MonoBehaviour
     }
     private void ArrangeCards()
     {
-        // 시작 각도
-        float startAngle = angularInterval * 0.5f * (cards.Count - 1);
-        float lerpAmount = lerpTime * Time.deltaTime;
+        float lerpAmount = lerpTime * Time.unscaledDeltaTime;
 
         // 목표 수치들
         Vector3 targetPos;
@@ -128,42 +119,32 @@ public class CardHolder : MonoBehaviour
         {
             Transform card = cards[i].transform;
 
-            float angle = startAngle + -angularInterval * i;
-            float radian = angle * Mathf.Deg2Rad;
-
-            float x = Mathf.Sin(-radian) * distance;
-            float y = Mathf.Cos(radian) * distance - distance;
 
             // 만약 마우스 오버된 카드라면,
             if (i == selectedCardIndex)
             {
-                targetPos = new Vector3(x, mouseOverYSpacing, zInterval);
+                targetPos = new Vector3(i * xInterval, mouseOverYSpacing, 0);
                 targetRot = Quaternion.identity;
                 targetScl = Vector3.one * mouseOverScale;
             }
             else
             {
-                targetPos = new Vector3(x, transform.position.y, i * -zInterval);
+                targetPos = new Vector3(i * xInterval, 0, 0);
                 targetRot = Quaternion.identity;
                 targetScl = Vector3.one;
 
                 // 마우스 오버 카드가 있을경우,
                 if (selectedCardIndex != Null)
                     // 양옆으로 간격만큼 벌려줌
-                    targetPos.x += (i < mouseOverCardIndex ? -1 : 1) * mouseOverInterval;
+                    targetPos.x += (i < selectedCardIndex ? -1 : 1) * mouseOverInterval;
             }
 
 
             card.localPosition = Vector3.Lerp(card.localPosition, targetPos, lerpAmount);
             card.localRotation = Quaternion.Lerp(card.localRotation, targetRot, lerpAmount);
             card.localScale = Vector3.Lerp(card.localScale, targetScl, lerpAmount);
-            card.SetSiblingIndex(i);
+            //card.SetSiblingIndex(i);
         }
-
-        // 마우스 오버 카드가 있을경우,
-        if (selectedCardIndex != Null)
-            // 마우스 오버 카드를 맨 앞에 배치
-            cards[selectedCardIndex].transform.SetAsLastSibling();
 
     }
 
@@ -177,6 +158,9 @@ public class CardHolder : MonoBehaviour
             {
                 Instantiate(vfx, raycastHit.point + vfx.transform.position, vfx.transform.rotation);
             }
+            cards[selectedCardIndex].transform.SetAsFirstSibling();
+            cards.Add(cards[selectedCardIndex]);
+            cards.Remove(cards[selectedCardIndex]);
             selectedCardIndex = Null;
             bezierCurveDrawer.gameObject.SetActive(false);
         }

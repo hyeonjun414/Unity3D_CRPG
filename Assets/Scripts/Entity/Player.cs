@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class Player : LivingEntity
 {
-    [Header("Player")]
     private static Player instance = null;
+    [Header("Player")]
+    public float maxMp;
+    public float curMp;
+    public float mpRegenerate = 0.1f;
 
     [Header("Projectile")]
-    public ProjectileMover[] projectile;
-    public int projectileCount = 0;
+    public Projectile projectile;
     public Transform projPos;
 
     private Camera mainCamera; // 메인 카메라
@@ -44,15 +46,8 @@ public class Player : LivingEntity
 
         Move();
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            projectileCount--;
-        }
+        Looting();
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            projectileCount++;
-        }
 
     }
     private void FixedUpdate()
@@ -131,15 +126,67 @@ public class Player : LivingEntity
     {
         if (isAttack) return;
 
-        transform.LookAt(rayPos);
+        Collider[] detects = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Enemy"));
+        if(detects.Length > 0)
+        {
+            float minDist = 5f;
+            Vector3 targetPos = rayPos;
+            for (int i = 0; i < detects.Length; i++)
+            {
+                float dist = Vector3.Distance(transform.position, detects[i].transform.position);
+                if (Vector3.Distance(transform.position, detects[i].transform.position) < minDist)
+                {
+                    minDist = dist;
+                    targetPos = detects[i].transform.position;
+                }
+            }
+            targetPos = (targetPos - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(targetPos);
+        }
+        else
+        {
+            transform.LookAt(rayPos);
+        }
+        
         anim.SetTrigger("Attack");
         StartCoroutine("AttackDelay");
         Instantiate(GameManager.Instance.mouseVfx, rayPos + Vector3.up * 0.1f, Quaternion.identity);
         if (projectile != null)
-            Instantiate(projectile[projectileCount], projPos.position + transform.forward, transform.rotation);
+            Instantiate(projectile, projPos.position + transform.forward, transform.rotation);
     }
 
+    public void Looting()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Reward"));
+            if(hits.Length > 0)
+            {
+                RewardItem item = null;
+                foreach (Collider hit in hits)
+                {
+                    item = hit.gameObject.GetComponent<RewardItem>();
+                    item.RewardGet();
+                }
+            }
+        }
+    }
+    public void MpReGenarate()
+    {
+        if (curMp >= maxMp) return;
+
+        curMp += mpRegenerate * Time.deltaTime;
+        
+
+    }
     public override void Hit(int damage)
     {
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, 5f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 5f);
     }
 }
