@@ -21,7 +21,7 @@ TagManager:
   - Player
   - Enemy
   - Reward
-  - 
+  - InGameUI
   - 
   - 
   - 
@@ -50,4 +50,7 @@ TagManager:
     locked: 0
   - name: Object
     uniqueID: 2052088393
+    locked: 0
+  - name: UI
+    uniqueID: 2257272723
     locked: 0

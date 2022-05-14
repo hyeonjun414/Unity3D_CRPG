@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Cinemachine;
 
@@ -26,6 +27,9 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
+
+    public Canvas worldCanvas;
+    public DamageText damageText;
 
     private void Awake()
     {
@@ -61,6 +65,13 @@ public class GameManager : Singleton<GameManager>
         if (mainCam != null && player != null)
             mainCam.m_Follow = player.transform;
 
+    }
+
+    public void CreateDamage(int damage, Vector3 pos)
+    {
+        DamageText dt = Instantiate(damageText, Vector3.zero, Quaternion.identity);
+        dt.transform.SetParent(worldCanvas.transform, false);
+        dt.Enable(damage, pos);
     }
 
 }

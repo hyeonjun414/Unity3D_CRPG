@@ -49,6 +49,14 @@ public class Projectile : MonoBehaviour
     //https ://docs.unity3d.com/ScriptReference/Rigidbody.OnCollisionEnter.html
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.collider.GetComponent<Enemy>();
+
+            if (!enemy.isDead)
+                enemy.Hit(damage);
+        }
+
         //Lock all axes movement and rotation
         rb.constraints = RigidbodyConstraints.FreezeAll;
         speed = 0;
@@ -85,3 +93,5 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 }
+
+        

@@ -55,12 +55,20 @@ public class CardHolder : MonoBehaviour
         if(selectedCardIndex != Null)
         {
             Time.timeScale = 0.2f;
-            SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 0.2f, 0.1f);
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 0.2f, 0.1f);
+            }
+            
         }
         else
         {
             Time.timeScale = 1f;
-            SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 1f, 0.1f);
+            if(SoundManager.Instance != null)
+            {
+                SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 1f, 0.1f);
+            }
+           
         }
 
         ArrangeCards();

@@ -16,18 +16,26 @@ public class Enemy : LivingEntity
 
     private Animator anim;
     private SphereCollider sc;
+    private CapsuleCollider cc;
+    private Rigidbody rb;
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
         sc = GetComponent<SphereCollider>();
+        cc = GetComponent<CapsuleCollider>();
         sc.radius = detectRaduis;
+        rb = GetComponent<Rigidbody>();
 
         StartCoroutine("EnemyIdleRoutine");
+        SetUp();
     }
+
 
     private void Update()
     {
+        if (isDead) return;
+
         Trace();
     }
     public void Trace()
@@ -59,9 +67,26 @@ public class Enemy : LivingEntity
         anim.SetTrigger("Attack");
     }
 
-    public override void Hit(int damage)
+    public override void Hit(float damage)
     {
+        HP -= damage;
+        GameManager.Instance.CreateDamage((int)damage, transform.position);
+        if (isDead) return;
+
+        anim.SetTrigger("Hit");
     }
+
+    public override void Die()
+    {
+        base.Die();
+        StopAllCoroutines();
+        anim.SetTrigger("Die");
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        cc.enabled = false;
+        sc.enabled = false;
+    }
+
 
     IEnumerator EnemyIdleRoutine()
     {
@@ -103,7 +128,7 @@ public class Enemy : LivingEntity
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") == true)
+        if (other.CompareTag("Player"))
         {
             target = null;
             isTrace = false;

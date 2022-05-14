@@ -10,6 +10,12 @@ public class StageManager : Singleton<StageManager>
     public GameObject pointsParent;
     public List<Transform> spawnPoints;
 
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
+
     private void Start()
     {
         Transform[] points = pointsParent.GetComponentsInChildren<Transform>();

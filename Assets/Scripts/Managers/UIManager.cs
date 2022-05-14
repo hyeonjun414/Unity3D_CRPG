@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
     [Header("플레이어")]
-    public Text HpText;
-    public Text MpText;
-    public Slider HpBar;
-    public Slider MpBar;
+    public StatusUI statusUI;
 
     [Header("카드")]
     public CardHolder cardHolder;
@@ -21,6 +18,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Awake()
     {
-        _instance = this;
+        if (_instance == null)
+            _instance = this;
     }
 }

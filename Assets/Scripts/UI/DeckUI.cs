@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class DeckUI : MonoBehaviour
 {
+    public Button deckButton;
     public Text deckCountText;
+    
 
     private Animator anim;
     private void Start()

@@ -17,8 +17,15 @@ public class Player : LivingEntity
     public Transform projPos;
 
     private Camera mainCamera; // 메인 카메라
+
     private Animator anim;
-    private Vector3 rayPos;
+    public Vector3 rayPos;
+
+    [Header("Command")]
+    public PlayerMoveCommand moveCmd;
+    public PlayerDodgeCommand dodgeCmd;
+    public PlayerAttackCommand attackCmd;
+
     private void Awake()
     {
         if (instance != null)
@@ -29,10 +36,22 @@ public class Player : LivingEntity
             instance = this;
         }
         SceneManager.sceneLoaded += FindingMainCam;
+
+        
     }
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        AddCommand();
+    }
+
+    public void AddCommand()
+    {
+        moveCmd = gameObject.AddComponent<PlayerMoveCommand>();
+        moveCmd.Setup(this);
+        attackCmd = gameObject.AddComponent<PlayerAttackCommand>();
+        attackCmd.Setup(this);
+
     }
 
     public void FindingMainCam(Scene scene, LoadSceneMode mode)
@@ -72,46 +91,9 @@ public class Player : LivingEntity
         }
     }
 
-    void Move()
+    public void Move()
     {
-
-        Vector3 dir = Vector3.zero;
-
-        if(!isAttack)
-        {
-            if (Input.GetKey(KeyCode.W))
-            {
-                dir += Vector3.forward;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                dir += Vector3.back;
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                dir += Vector3.left;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                dir += Vector3.right;
-            }
-
-            dir = Quaternion.Euler(0, 30, 0) * dir.normalized;
-
-            transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
-
-        }
-
-        if (dir.sqrMagnitude > 0.2f)
-        {
-            anim.SetBool("Run", true);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), roteSpeed*Time.deltaTime);
-        }
-        else
-            anim.SetBool("Run", false);
-
-
-        
+        moveCmd.Excute();
     }
     public override IEnumerator AttackDelay()
     {
@@ -125,34 +107,8 @@ public class Player : LivingEntity
     public override void Attack()
     {
         if (isAttack) return;
-
-        Collider[] detects = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Enemy"));
-        if(detects.Length > 0)
-        {
-            float minDist = 5f;
-            Vector3 targetPos = rayPos;
-            for (int i = 0; i < detects.Length; i++)
-            {
-                float dist = Vector3.Distance(transform.position, detects[i].transform.position);
-                if (Vector3.Distance(transform.position, detects[i].transform.position) < minDist)
-                {
-                    minDist = dist;
-                    targetPos = detects[i].transform.position;
-                }
-            }
-            targetPos = (targetPos - transform.position).normalized;
-            transform.rotation = Quaternion.LookRotation(targetPos);
-        }
-        else
-        {
-            transform.LookAt(rayPos);
-        }
-        
-        anim.SetTrigger("Attack");
+        attackCmd.Excute();
         StartCoroutine("AttackDelay");
-        Instantiate(GameManager.Instance.mouseVfx, rayPos + Vector3.up * 0.1f, Quaternion.identity);
-        if (projectile != null)
-            Instantiate(projectile, projPos.position + transform.forward, transform.rotation);
     }
 
     public void Looting()
@@ -179,7 +135,7 @@ public class Player : LivingEntity
         
 
     }
-    public override void Hit(int damage)
+    public override void Hit(float damage)
     {
     }
     private void OnDrawGizmosSelected()

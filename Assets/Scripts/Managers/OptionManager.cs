@@ -15,7 +15,8 @@ public class OptionManager : Singleton<OptionManager>
 
     private void Awake()
     {
-        _instance = this;
+        if (_instance == null)
+            _instance = this;
     }
     private void Start()
     {
