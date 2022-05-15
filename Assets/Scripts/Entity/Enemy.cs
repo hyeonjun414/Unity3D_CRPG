@@ -24,10 +24,12 @@ public class Enemy : LivingEntity
         anim = GetComponentInChildren<Animator>();
         sc = GetComponent<SphereCollider>();
         cc = GetComponent<CapsuleCollider>();
-        sc.radius = detectRaduis;
         rb = GetComponent<Rigidbody>();
+        sc.radius = detectRaduis;
+        
 
         StartCoroutine("EnemyIdleRoutine");
+        sc.enabled = true;
         SetUp();
     }
 

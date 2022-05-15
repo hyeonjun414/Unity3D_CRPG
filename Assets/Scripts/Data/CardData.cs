@@ -9,6 +9,8 @@ public class CardData : ScriptableObject
     public Sprite icon;
     public new string name;
     public string desc;
+    public int cost;
+    public float range;
 
     public GameObject vfx;
     

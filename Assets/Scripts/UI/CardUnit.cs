@@ -8,6 +8,7 @@ public class CardUnit : MonoBehaviour
     public Image icon;
     public Text nameText;
     public Text descText;
+    public Text costText;
 
     public CardData cardData;
     public void AddCard(CardData data)
@@ -17,11 +18,14 @@ public class CardUnit : MonoBehaviour
         icon.sprite = data.icon;
         nameText.text = data.name;
         descText.text = data.desc;
+        costText.text = data.cost.ToString();
+
+        gameObject.SetActive(true);
     }
-    public void UpdateUI()
+    public void DeleteCard()
     {
-        icon.sprite = cardData.icon;
-        nameText.text = cardData.name;
-        descText.text = cardData.desc;
+        cardData = null;
+        transform.Translate(Vector3.right * 800);
+        gameObject.SetActive(false);
     }
 }

@@ -7,7 +7,7 @@ using Cinemachine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private Player player;
+    public Player player;
     private CinemachineVirtualCamera mainCam;
 
     public bool _isPause = false;
@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
+        // 게임 매니저에서 모든 싱글톤 객체가 담겨있는 오브젝트의 파괴 처리를 담당한다.
         if (Instance != null)
             Destroy(gameObject);
         else
@@ -41,36 +42,24 @@ public class GameManager : Singleton<GameManager>
             _instance = this;
         }
 
-        SceneManager.sceneLoaded += FindingMainCam;
     }
 
     public GameObject mouseVfx;
     private void Update()
     {
+        // 옵션 창을 열고 게임을 일시정지 시킨다.
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             OptionManager.Instance.OptionBtn();
             IsPause = !IsPause;
         }
-
-
-
-    }
-    public void FindingMainCam(Scene scene, LoadSceneMode mode)
-    {
-        print($"현재 씬 : {scene.name})");
-        player = FindObjectOfType<Player>();
-        mainCam = FindObjectOfType<CinemachineVirtualCamera>();
-
-        if (mainCam != null && player != null)
-            mainCam.m_Follow = player.transform;
-
     }
 
+    // 데미지 텍스트를 띄우는 함수
     public void CreateDamage(int damage, Vector3 pos)
     {
         DamageText dt = Instantiate(damageText, Vector3.zero, Quaternion.identity);
-        dt.transform.SetParent(worldCanvas.transform, false);
+        dt.transform.SetParent(worldCanvas.transform, false); // 월드캔버스의 자식으로 만든다.
         dt.Enable(damage, pos);
     }
 

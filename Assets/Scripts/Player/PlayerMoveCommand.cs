@@ -36,7 +36,7 @@ public class PlayerMoveCommand : MonoBehaviour
                 dir += Vector3.right;
             }
 
-            dir = Quaternion.Euler(0, 30, 0) * dir.normalized;
+            dir = Quaternion.Euler(0, 45, 0) * dir.normalized;
 
             transform.Translate(dir * onwer.moveSpeed * Time.deltaTime, Space.World);
 

@@ -20,6 +20,7 @@ public class OptionManager : Singleton<OptionManager>
     }
     private void Start()
     {
+        // 저장된 설정값을 불러와 볼륨 믹서와 슬라이더를 설정해준다.
         float effect = PlayerPrefs.GetFloat("Effect");
         float bgm = PlayerPrefs.GetFloat("BGM");
 
@@ -34,6 +35,7 @@ public class OptionManager : Singleton<OptionManager>
         optionUI.SetActive(!optionUI.activeSelf);
     }
 
+    // 효과음 볼륨 조절 -> 효과음 슬라이더에 부착
     public void SetEffectVolume(float value)
     {
         float sound = effectVolume.value;
@@ -43,6 +45,7 @@ public class OptionManager : Singleton<OptionManager>
 
         PlayerPrefs.SetFloat("Effect", sound);
     }
+    // 배경음 볼륨 조절 -> 배경음 슬라이더에 부착
     public void SetBGMVolume(float value)
     {
         float sound = musicVolume.value;

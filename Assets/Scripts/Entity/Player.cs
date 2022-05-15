@@ -12,19 +12,17 @@ public class Player : LivingEntity
     public float curMp;
     public float mpRegenerate = 0.1f;
 
-    [Header("Projectile")]
-    public Projectile projectile;
-    public Transform projPos;
-
     private Camera mainCamera; // 메인 카메라
 
     private Animator anim;
     public Vector3 rayPos;
 
+    public Transform linePos;
+
     [Header("Command")]
     public PlayerMoveCommand moveCmd;
-    public PlayerDodgeCommand dodgeCmd;
-    public PlayerAttackCommand attackCmd;
+
+    private StatusUI statusUI;
 
     private void Awake()
     {
@@ -43,14 +41,13 @@ public class Player : LivingEntity
     {
         anim = GetComponentInChildren<Animator>();
         AddCommand();
+        statusUI = UIManager.Instance.statusUI;
     }
 
     public void AddCommand()
     {
         moveCmd = gameObject.AddComponent<PlayerMoveCommand>();
         moveCmd.Setup(this);
-        attackCmd = gameObject.AddComponent<PlayerAttackCommand>();
-        attackCmd.Setup(this);
 
     }
 
@@ -61,26 +58,17 @@ public class Player : LivingEntity
 
     void Update()
     {
-        InputMouse();
 
         Move();
 
         Looting();
 
-
+        MpReGenarate();
     }
     private void FixedUpdate()
     {
         GetMouseDir();
     }
-    void InputMouse()
-    {
-        if(Input.GetMouseButton(1))
-        {
-            Attack();
-        }
-    }
-
     public void GetMouseDir()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -106,9 +94,6 @@ public class Player : LivingEntity
 
     public override void Attack()
     {
-        if (isAttack) return;
-        attackCmd.Excute();
-        StartCoroutine("AttackDelay");
     }
 
     public void Looting()
@@ -132,17 +117,12 @@ public class Player : LivingEntity
         if (curMp >= maxMp) return;
 
         curMp += mpRegenerate * Time.deltaTime;
+        statusUI.MpBar.value = curMp / maxMp;
+        statusUI.MpText.text = $"{(int)curMp} / {(int)maxMp}";
         
 
     }
     public override void Hit(float damage)
     {
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 5f);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 5f);
     }
 }

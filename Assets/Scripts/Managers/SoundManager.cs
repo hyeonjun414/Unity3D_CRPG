@@ -15,8 +15,6 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayEffectSound(AudioClip sfx)
     {
-        //int idx = effectSounds.FindIndex(item => item.name == sfx.name);
-        //effectSfxPlayer.PlayOneShot(effectSounds[idx]);
         effectSfxPlayer.PlayOneShot(sfx);
     }
 

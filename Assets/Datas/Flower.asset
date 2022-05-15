@@ -15,4 +15,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a92f486f84519304e99c6f40386cb1e1, type: 3}
   name: "\uAF43"
   desc: "\uAF43\uAF43"
+  cost: 2
   vfx: {fileID: 1492667978523942, guid: 041685ff07476f4448b5ac95ccdd5c01, type: 3}
