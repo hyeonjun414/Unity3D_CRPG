@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
 {
     [Header("Normal Status")]
-    public string entityName;
     public float maxHp;
     public float _curHp;
     public float HP
@@ -61,10 +60,10 @@ public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
     {
         if (!isDead) return;
         
-        Destroy(gameObject, 2f);
+        Destroy(gameObject);
     }
 
-    public void SetUp()
+    public virtual void SetUp()
     {
         _curHp = maxHp;
     }

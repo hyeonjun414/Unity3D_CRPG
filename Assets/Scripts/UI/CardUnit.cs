@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class CardUnit : MonoBehaviour
 {
+    [Header("Card UI")]
     public Image icon;
     public Text nameText;
     public Text descText;
     public Text costText;
 
+    [Header("Card Data")]
     public CardData cardData;
     public void AddCard(CardData data)
     {
@@ -25,7 +27,8 @@ public class CardUnit : MonoBehaviour
     public void DeleteCard()
     {
         cardData = null;
-        transform.Translate(Vector3.right * 800);
+        transform.localPosition = new Vector3(1280, -80, 0);
+        transform.localScale = Vector3.one * 0.1f;
         gameObject.SetActive(false);
     }
 }

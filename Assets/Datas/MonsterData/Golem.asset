@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c95e1f76069484a9f40698e89e3ed2, type: 3}
+  m_Name: Golem
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 39f337341056230469456b2036df88dc, type: 3}
+  name: "\uACE8\uB818"
+  desc: "\uD06C\uACE0 \uB4EC\uC9C1\uD55C \uACE8\uB818\uC744 \uC18C\uD658\uD569\uB2C8\uB2E4"
+  cost: 3
+  monster: {fileID: 4647553589652301176, guid: 0fe3e75bce074fc4b808f52215a09612, type: 3}

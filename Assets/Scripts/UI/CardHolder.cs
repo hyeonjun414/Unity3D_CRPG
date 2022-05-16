@@ -57,31 +57,10 @@ public class CardHolder : MonoBehaviour
     {
         if (GameManager.Instance.IsPause) return;
 
-        InputSelectCard();
-
-        if(selectedCardIndex != Null)
-        {
-            Time.timeScale = 0.2f;
-            if (SoundManager.Instance != null)
-            {
-                SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 0.2f, 0.1f);
-            }
-            
-        }
-        else
-        {
-            Time.timeScale = 1f;
-            if(SoundManager.Instance != null)
-            {
-                SoundManager.Instance.effectSfxPlayer.pitch = Mathf.Lerp(SoundManager.Instance.effectSfxPlayer.pitch, 1f, 0.1f);
-            }
-           
-        }
-
         ArrangeCards();
 
     }
-    private void InputSelectCard()
+    public void InputSelectCard()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1) && handList.Count >= 1)
         {

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c95e1f76069484a9f40698e89e3ed2, type: 3}
+  m_Name: Egglet
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 0ad2a8cd0d4888141b65abd26b09005b, type: 3}
+  name: "\uC5D0\uADF8\uB81B"
+  desc: "\uBB54\uAC00 \uC228\uC5B4\uC788\uB294 \uC54C\uC774\uB2E4."
+  cost: 3
+  monster: {fileID: 3787774488293618002, guid: cb1d63f640311ea4eb2331d9a31c1d7e, type: 3}

@@ -9,16 +9,17 @@ public class DeckUI : MonoBehaviour
     public Text deckCountText;
     
 
-    private Animator anim;
+    public Animator anim;
     private void Start()
     {
         anim = GetComponent<Animator>();
     }
 
-    public void AddDeckCard(List<CardData> deckList, CardData data)
+    public void UpdateUI()
     {
         anim.SetTrigger("Active");
-        deckList.Add(data);
-        deckCountText.text = deckList.Count.ToString();
+        deckCountText.text = CardManager.Instance.deck.Count.ToString();
+
     }
+
 }

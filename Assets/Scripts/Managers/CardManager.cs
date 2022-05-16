@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardSpace
+{
+    Hands,
+    Deck,
+    Graveyard,
+    Field,
+}
+
 public class CardManager : Singleton<CardManager>
 {
     private int Null = -1;
@@ -9,10 +17,12 @@ public class CardManager : Singleton<CardManager>
     [Header("UI")]
     public CardHolder holder;
     public DeckUI deckUI;
+    public GraveyardUI graveyardUI;
 
     [Header("Card")]
     public List<CardData> deck;
-    public List<CardData> hand;
+    public List<CardData> hands;
+    public List<CardData> graveyard;
     public int maxHandCount = 5;
     public int maxDeckCount = 20;
 
@@ -26,6 +36,7 @@ public class CardManager : Singleton<CardManager>
     public Transform t3;
 
     private Player player;
+    private bool isDraw;
     private void Awake()
     {
         if(_instance == null)
@@ -36,15 +47,21 @@ public class CardManager : Singleton<CardManager>
         // UI 조작을 위한 연결
         deckUI = UIManager.Instance.deckUI;
         holder = UIManager.Instance.cardHolder;
-        holder.handList = hand; // 카드 홀더에 매니저의 핸드 카드 리스트를 연결
+        graveyardUI = UIManager.Instance.graveyardUI;
+
+        holder.handList = hands; // 카드 홀더에 매니저의 핸드 카드 리스트를 연결
 
         // 가이드라인을 위한 베지어 포인트를 대입
         player = FindObjectOfType<Player>();
-        t1 = player.linePos;
     }
 
     private void Update()
     {
+        if(!isDraw)
+        {
+            holder.InputSelectCard();
+        }
+
         // 만약 선택된 홀더에서 선택된 카드가 있다면
         if(holder.selectedCardIndex != Null)
         {
@@ -61,49 +78,122 @@ public class CardManager : Singleton<CardManager>
         // 덱의 카드 개수가 최대 개수이면 습득을 취소한다.
         if (deck.Count >= maxDeckCount) return;
 
-        // 핸드의 카드 개수가 최대 개수이면 덱에 카드를 추가한다.
-        if (hand.Count >= maxHandCount)
+        MoveCard(CardSpace.Field, CardSpace.Deck, data);
+    }
+    public void MoveCard(CardSpace from, CardSpace to, CardData data)
+    {
+        switch(from)
         {
-            deckUI.AddDeckCard(deck, data);
-        }
-        // 아니라면 핸드에 카드를 추가하고 홀더를 업데이트한다.
-        else
-        {
-            hand.Add(data);
-            holder.UpdateUI();
+            case CardSpace.Hands:
+                hands.Remove(data);
+                holder.UpdateUI();
+                break;
+            case CardSpace.Deck:
+                deck.Remove(data);
+                deckUI.UpdateUI();
+                break;
+            case CardSpace.Graveyard:
+                graveyard.Remove(data);
+                graveyardUI.UpdateUI();
+                break;
         }
 
+        switch (to)
+        {
+            case CardSpace.Hands:
+                hands.Add(data);
+                holder.UpdateUI();
+                break;
+            case CardSpace.Deck:
+                deck.Add(data);
+                deckUI.UpdateUI();
+                break;
+            case CardSpace.Graveyard:
+                graveyard.Add(data);
+                graveyardUI.UpdateUI();
+                break;
+        }
+    }
+    public void ActiveReroll()
+    {
+        StartCoroutine(RerollRoutine());
+    }
+    IEnumerator RerollRoutine()
+    {
+        yield return StartCoroutine(FromAtoB(CardSpace.Hands, CardSpace.Graveyard));
+        yield return StartCoroutine(DrawRoutine());
+    }
+    public IEnumerator DrawRoutine()
+    {
+        isDraw = true;
+        while(hands.Count < 5)
+        {
+            
+            if(deck.Count == 0)
+            {
+                if(graveyard.Count == 0) 
+                    break;
+
+                yield return StartCoroutine(FromAtoB(CardSpace.Graveyard, CardSpace.Deck));
+            }
+            MoveCard(CardSpace.Deck, CardSpace.Hands, deck[0]);
+            holder.UpdateUI();
+            yield return new WaitForSeconds(0.2f);
+        }
+        isDraw = false;
+    }
+    IEnumerator FromAtoB(CardSpace a, CardSpace b)
+    {
+        List<CardData> aList = null;
+        switch (a)
+        {
+            case CardSpace.Hands:
+                aList = hands;
+                break;
+            case CardSpace.Deck:
+                aList = deck;
+                break;
+            case CardSpace.Graveyard:
+                aList = graveyard;
+                break;
+        }
+        int aCount = aList.Count;
+
+        ShuffleCard(a);
+
+        for(int i = 0; i < aCount; i++)
+        {
+            MoveCard(a, b, aList[0]);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+    public void ShuffleCard(CardSpace space)
+    {
+        switch(space)
+        {
+            case CardSpace.Graveyard: 
+                for(int i = 0; i < graveyard.Count; i++)
+                {
+                    int rand = Random.Range(0, graveyard.Count);
+                    CardData temp = graveyard[i];
+                    graveyard[i] = graveyard[rand];
+                    graveyard[rand] = temp;
+                }
+                break;
+            case CardSpace.Deck:
+                for (int i = 0; i < deck.Count; i++)
+                {
+                    int rand = Random.Range(0, deck.Count);
+                    CardData temp = deck[i];
+                    deck[i] = deck[rand];
+                    deck[rand] = temp;
+                }
+                break;
+        }
     }
     // 마우스 클릭 처리
     private void MouseClickDetection()
     {
-        // 왼쪽 클릭을 했을때
-        if (Input.GetMouseButtonDown(0))
-        {
-            // 플레이어의 마나가 해당 카드의 코스트보다 많다면
-            if(hand[holder.selectedCardIndex].cost <= player.curMp)
-            {
-                player.curMp -= hand[holder.selectedCardIndex].cost; // 마나 감소
-                // 스킬을 레이캐스트의 위치에 생성한다.
-                GameObject vfx = holder.cards[holder.selectedCardIndex].cardData.vfx;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit raycastHit, 200, LayerMask.GetMask("Ground")))
-                {
-                    Instantiate(vfx, raycastHit.point + vfx.transform.position, vfx.transform.rotation);
-                }
-                // 해당 카드 UI를 해당 계층의 맨뒤로 보내고 덱에 해당 카드의 데이터를 집어넣는다.
-                holder.cards[holder.selectedCardIndex].transform.SetAsFirstSibling();
-                deckUI.AddDeckCard(deck, holder.cards[holder.selectedCardIndex].cardData);
-
-                // 핸드에서 해당 카드를 삭제하고 홀더를 업데이트한다.
-                hand.Remove(holder.cards[holder.selectedCardIndex].cardData);
-                holder.UpdateUI();
-                
-            }
-            // 선택된 카드를 초기화하고 가이드라인을 비활성화 한다.
-            holder.selectedCardIndex = Null;
-            guideLine.enabled = false;
-        }
         // 우클릭의 경우
         if (Input.GetMouseButtonDown(1))
         {
@@ -121,9 +211,11 @@ public class CardManager : Singleton<CardManager>
         {
             // 베지어 포인트를 플레이어 - 충돌점과 플레이어의 사이 - 충돌점으로 대입한다.
             guideLine.enabled = true;
+            t1.position = holder.cards[holder.selectedCardIndex].transform.position;
+            t1.Translate(Vector3.back * 10);
             t3.position = raycastHit.point;
             t2.position = (t1.position + t3.position) * 0.5f + Vector3.up * 10;
-
+            
             // 위치값을 설정한 값만큼 만든다.
             Vector3[] points = new Vector3[pointCount];
 

@@ -42,6 +42,7 @@ public class Player : LivingEntity
         anim = GetComponentInChildren<Animator>();
         AddCommand();
         statusUI = UIManager.Instance.statusUI;
+        SetUp();
     }
 
     public void AddCommand()
@@ -116,13 +117,10 @@ public class Player : LivingEntity
     {
         if (curMp >= maxMp) return;
 
-        curMp += mpRegenerate * Time.deltaTime;
-        statusUI.MpBar.value = curMp / maxMp;
-        statusUI.MpText.text = $"{(int)curMp} / {(int)maxMp}";
-        
-
     }
     public override void Hit(float damage)
     {
+        HP -= damage;
+        GameManager.Instance.CreateDamage((int)damage, transform.position);
     }
 }

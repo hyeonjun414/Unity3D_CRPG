@@ -17,4 +17,6 @@ public class ActiveSkill : Skill
     {
         SoundManager.Instance.EraseEffectSfx(soundClip);
     }
+
+   
 }

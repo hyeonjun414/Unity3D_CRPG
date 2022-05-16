@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
     [Header("카드")]
     public CardHolder cardHolder;
     public DeckUI deckUI;
+    public GraveyardUI graveyardUI;
     
 
     [Header("설정")]
