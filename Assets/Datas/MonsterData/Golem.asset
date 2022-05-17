@@ -12,8 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c95e1f76069484a9f40698e89e3ed2, type: 3}
   m_Name: Golem
   m_EditorClassIdentifier: 
+  cardType: 0
   icon: {fileID: 21300000, guid: 39f337341056230469456b2036df88dc, type: 3}
   name: "\uACE8\uB818"
-  desc: "\uD06C\uACE0 \uB4EC\uC9C1\uD55C \uACE8\uB818\uC744 \uC18C\uD658\uD569\uB2C8\uB2E4"
+  desc: "\uD06C\uACE0 \uC6B0\uB78C\uD55C \uACE8\uB818\uC774\uB2E4."
   cost: 3
-  monster: {fileID: 4647553589652301176, guid: 0fe3e75bce074fc4b808f52215a09612, type: 3}
+  hp: 50
+  mp: 10
+  damage: 5
+  armor: 1
+  range: 1
+  attackSpeed: 1
+  moveSpeed: 1
+  evolutionCost: 0
+  prevMonster: {fileID: 0}
+  nextMonster: {fileID: 0}
+  monster: {fileID: 3065999876194954743, guid: 0fe3e75bce074fc4b808f52215a09612, type: 3}

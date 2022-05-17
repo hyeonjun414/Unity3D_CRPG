@@ -197,11 +197,16 @@ public class CardManager : Singleton<CardManager>
         // 우클릭의 경우
         if (Input.GetMouseButtonDown(1))
         {
-            // 선택된 카드를 초기화하고 가이드라인을 비활성화 한다.
-            holder.selectedCardIndex = Null;
-            guideLine.enabled = false;
+            ResetSelectedCard();
         }
     }
+
+    public void ResetSelectedCard()
+    {
+        holder.selectedCardIndex = Null;
+        guideLine.enabled = false;
+    }
+
     // 가이드라인(베지어 곡선 활용)을 그리는 함수
     public void DrawGuideLine()
     {

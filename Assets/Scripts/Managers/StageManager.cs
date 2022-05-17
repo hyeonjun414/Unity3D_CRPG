@@ -89,13 +89,13 @@ public class StageManager : Singleton<StageManager>
         // 적 몬스터가 아군 몬스터보다 적을 때 -> 플레이어가 승리했을때
         if(EnemyMonster.Count < AllyMonster.Count)
         {
-            enemy.Hit(5);
+            enemy.Hit(player.Attack());
             enemy.waveCount++;
         }
         // 적 몬스터가 아군 몬스터보다 많을 때 -> 적이 승리했을때
         else
         {
-            player.Hit(5);
+            player.Hit(enemy.Attack());
         }
 
         ResetStage();

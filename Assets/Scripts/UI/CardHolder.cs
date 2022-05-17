@@ -11,7 +11,7 @@ public class CardHolder : MonoBehaviour
 
     [Header("카드")]
     [SerializeField] public int selectedCardIndex; // 선택된 카드 인덱스
-    [SerializeField] public List<CardUnit> cards;  // 카드 리스트
+    [SerializeField] public List<CardUI> cards;  // 카드 리스트
 
     [Header("일반 카드 수치")]
     [SerializeField] private float lerpTime;        // lerp 정도
@@ -28,9 +28,9 @@ public class CardHolder : MonoBehaviour
     {
         selectedCardIndex = Null;
 
-        CardUnit[] cardArr = GetComponentsInChildren<CardUnit>();
+        CardUI[] cardArr = GetComponentsInChildren<CardUI>();
         cards = cardArr.ToList();
-        foreach(CardUnit card in cards)
+        foreach(CardUI card in cards)
         {
             card.gameObject.SetActive(false);
         }

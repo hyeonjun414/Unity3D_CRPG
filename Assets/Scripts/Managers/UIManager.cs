@@ -13,6 +13,8 @@ public class UIManager : Singleton<UIManager>
     public DeckUI deckUI;
     public GraveyardUI graveyardUI;
     
+    [Header("Info UI")]
+    public MonsterInfoUI monsterInfoUI;
 
     [Header("설정")]
     public GameObject optionUI;

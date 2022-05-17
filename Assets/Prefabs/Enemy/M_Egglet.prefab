@@ -45,8 +45,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.4
-  m_Height: 1
+  m_Radius: 0.1
+  m_Height: 0.1
   m_Direction: 1
   m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!54 &5227785737099753758
@@ -79,19 +79,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 5
   _curHp: 0
-  moveSpeed: 0
-  roteSpeed: 0
+  maxMp: 0
+  curMp: 0
   damage: 1
   armor: 0
-  attackDelayTime: 1
-  hitDelayTime: 0
-  isAttack: 0
-  isHit: 0
   isDead: 0
-  moveDelayTime: 1
+  attackSpeed: 0
+  moveSpeed: 0
+  range: 0
   state: 0
   owner: 0
-  data: {fileID: 0}
+  monsterData: {fileID: 0}
   returnTile: {fileID: 0}
   target: {fileID: 0}
   curTile: {fileID: 0}

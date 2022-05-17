@@ -8,9 +8,9 @@ public class Player : LivingEntity
 {
     private static Player instance = null;
     [Header("Player")]
-    public float maxMp;
-    public float curMp;
-    public float mpRegenerate = 0.1f;
+
+    public float moveSpeed;
+    public float roteSpeed;
 
     private Camera mainCamera; // 메인 카메라
 
@@ -64,37 +64,17 @@ public class Player : LivingEntity
 
         Looting();
 
-        MpReGenarate();
-    }
-    private void FixedUpdate()
-    {
-        GetMouseDir();
-    }
-    public void GetMouseDir()
-    {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 200, LayerMask.GetMask("Ground")))
-        {
-            rayPos = raycastHit.point;
-            rayPos.y = transform.position.y;
-        }
     }
 
     public void Move()
     {
         moveCmd.Excute();
     }
-    public override IEnumerator AttackDelay()
-    {
-        isAttack = true;
-        anim.SetBool("isAttack", isAttack);
-        yield return new WaitForSeconds(attackDelayTime);
-        isAttack = false;
-        anim.SetBool("isAttack", isAttack);
-    }
 
-    public override void Attack()
+    public override int Attack()
     {
+        anim.SetTrigger("Attack");
+        return damage;
     }
 
     public void Looting()
@@ -113,14 +93,10 @@ public class Player : LivingEntity
             }
         }
     }
-    public void MpReGenarate()
-    {
-        if (curMp >= maxMp) return;
-
-    }
-    public override void Hit(float damage)
+    public override void Hit(int damage)
     {
         HP -= damage;
+        anim.SetTrigger("Hit");
         GameManager.Instance.CreateDamage((int)damage, transform.position);
     }
 }

@@ -16,4 +16,14 @@ MonoBehaviour:
   name: "\uC2A4\uD30C\uC774\uB354"
   desc: "\uADC0\uC5EC\uC6B4 \uAC70\uBBF8\uB2E4"
   cost: 3
-  monster: {fileID: 4251898785486509834, guid: c174041c871593b4c98dc9d553f4f4f6, type: 3}
+  hp: 50
+  mp: 10
+  damage: 5
+  armor: 1
+  range: 3
+  attackSpeed: 1
+  moveSpeed: 1
+  evolutionCost: 0
+  prevMonster: {fileID: 0}
+  nextMonster: {fileID: 0}
+  monster: {fileID: 5124521128772935491, guid: c174041c871593b4c98dc9d553f4f4f6, type: 3}

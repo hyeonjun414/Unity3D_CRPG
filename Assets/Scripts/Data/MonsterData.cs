@@ -6,5 +6,20 @@ using UnityEngine;
 public class MonsterData : CardData
 {
     [Header("Monster Data")]
-    public Monster monster;
+    public int hp;
+    public int mp;
+    public int damage;
+    public int armor;
+    public int range;
+    public float attackSpeed;
+    public float moveSpeed;
+
+
+    [Header("Monster Evolution")]
+    public int evolutionCost;
+    public MonsterData prevMonster;
+    public MonsterData nextMonster;
+
+    [Header("Monster Prefab")]
+    public GameObject monster;
 }
