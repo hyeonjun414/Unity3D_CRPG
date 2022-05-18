@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ public class StageManager : Singleton<StageManager>
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.P))
         {
             BattlePrepare();
         }
@@ -59,24 +60,80 @@ public class StageManager : Singleton<StageManager>
         enemy.SummonMonster();
         CardManager.Instance.ActiveReroll();
     }
+    IEnumerator BattleLogic()
+    {
+        while(true)
+        {
+            FindTurn(EnemyMonster);
+            FindTurn(AllyMonster);
+            //yield return new WaitForSeconds(0.1f);
+            MoveTurn(EnemyMonster);
+            MoveTurn(AllyMonster);
+            AttackTurn(EnemyMonster);
+            AttackTurn(AllyMonster);
+            //yield return new WaitForSeconds(0.1f);
+            
+            //yield return new WaitForSeconds(0.1f);
+            ResultTurn(EnemyMonster);
+            ResultTurn(AllyMonster);
+            //yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1f);
+        }
+
+
+        
+    }
+
+
+
+    private void FindTurn(List<Monster> monList)
+    {
+        foreach (Monster monster in monList)
+        {
+            monster.FindTurn();
+        }
+    }
+    private void AttackTurn(List<Monster> monList)
+    {
+        foreach (Monster monster in monList)
+        {
+            monster.AttackTurn();
+        }
+    }
+    private void MoveTurn(List<Monster> monList)
+    {
+        foreach (Monster monster in monList)
+        {
+            monster.MoveTurn();
+        }
+    }
+    private void ResultTurn(List<Monster> monList)
+    {
+        for(int i = 0; i< monList.Count;)
+        {
+            if(monList[i].isDead)
+            {
+                Destroy(monList[i].gameObject);
+                monList.RemoveAt(i);
+            }
+            else
+            {
+                i++;
+            }
+        }
+    }
+
 
     public void BattleStageStart()
     {
         if (!isPrepared) return;
         MapSearch();
-        foreach (Monster enemy in EnemyMonster)
-        {
-            enemy.BattleStart();
-        }
-        foreach (Monster ally in AllyMonster)
-        {
-            ally.BattleStart();
-        }
-
+        StartCoroutine("BattleLogic");
 
     }
     public void BattleStageEnd()
     {
+        StopCoroutine("BattleLogic");
         foreach (Monster enemy in EnemyMonster)
         {
             enemy.BattleEnd();

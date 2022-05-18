@@ -27,7 +27,10 @@ public class MonsterCardUnit : CardUnit
         range.text = md.range.ToString();
         attackSpeed.text = md.attackSpeed.ToString();
 
-        if (monster != null && monster.monsterData.name != md.name)
+        if (monster != null &&
+            monster.monsterData.name != md.name ||
+            (monster != null && monster.monsterData.name == md.name &&
+            monster.monsterData.level != md.level))
         {
             Destroy(monster.gameObject);
             monster = null;

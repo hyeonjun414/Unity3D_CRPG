@@ -6,6 +6,7 @@ using UnityEngine;
 public class MonsterData : CardData
 {
     [Header("Monster Data")]
+    public MonsterLevel level;
     public int hp;
     public int mp;
     public int damage;

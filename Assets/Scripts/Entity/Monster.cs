@@ -10,6 +10,7 @@ public enum MonsterState
 }
 public enum MonsterOwner
 {
+    None,
     Player,
     Enemy
 }
@@ -17,6 +18,12 @@ public enum MonsterType
 {
     Melee,
     Rangefarther
+}
+public enum MonsterLevel
+{
+    LV1,
+    LV2,
+    LV3,
 }
 public enum TargetStrategy
 {
@@ -36,6 +43,7 @@ public class Monster : LivingEntity
 
     public MonsterState state;
     public MonsterOwner owner;
+    public MonsterLevel level;
     public MonsterData monsterData;
 
     [Header("BattleTile")]
@@ -47,21 +55,22 @@ public class Monster : LivingEntity
     public GameObject allyEffect;
     public GameObject enemyEffect;
 
+    [Header("Command")]
+    public MoveCommand moveCommand;
+    public AttackCommand attackCommand;
+    public FindCommand findCommand;
+    public bool isAttacking = false;
+    public bool isMoving= false;
 
     public Animator anim;
-    private CapsuleCollider cc;
+    public Collider cc;
     private Rigidbody rb;
 
-    private void Start()
-    {
-
-
-    }
     public override void SetUp()
     {
         base.SetUp();
         anim = GetComponentInChildren<Animator>();
-        cc = GetComponent<CapsuleCollider>();
+        cc = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
 
         // 현재 타일을 돌아올 타일로 설정해준다.
@@ -76,66 +85,31 @@ public class Monster : LivingEntity
         {
             enemyEffect.gameObject.SetActive(true);
         }
+
+        moveCommand = gameObject.AddComponent<MonsterMoveCommand>();
+        moveCommand.Setup(this);
+        attackCommand = gameObject.AddComponent<MonsterAttackCommand>();
+        attackCommand.Setup(this);
+        findCommand = gameObject.AddComponent<ClosestTargetFindCommand>();
+        findCommand.Setup(this);
     }
     
     public void InputData(MonsterData data)
     {
         // 데이터에 맞춰서 몬스터의 초기설정을 한다.
         monsterData = data;
+        entityName = data.name;
         maxHp = data.hp;
         maxMp = data.mp;
         damage = data.damage;
         armor = data.armor;
-        range = data.range+1;
+        range = data.range;
         attackSpeed = data.attackSpeed;
         moveSpeed = data.moveSpeed;
 
         SetUp();
     }
-    public IEnumerator MoveRoutine()
-    {
-        BattleStage bs = StageManager.Instance.stage;
-        state = MonsterState.Move;
 
-        List<Vector2> moveList = StageManager.Instance.PathFinding(this, target);
-        if(moveList.Count == 0)
-        {
-            yield return new WaitForSeconds(2f);
-            StartCoroutine(MoveRoutine());
-            yield break;
-        }
-
-        if (moveList.Count <= range)
-        {
-            if (target == null)
-                BattleStart();
-            else
-            {
-                transform.rotation = Quaternion.LookRotation((target.transform.position - transform.position).normalized);
-                StartCoroutine(AttackRoutine());
-            }
-
-            yield break;
-        }
-
-        curTile.state = TileState.NONE;
-        curTile.monster = null;
-        curTile = bs.battleMap[(int)moveList[1].x, (int)moveList[1].y];
-        curTile.state = TileState.STAY;
-        curTile.monster = this;
-
-        StartCoroutine(moveTile(moveList));
-        yield return new WaitForSeconds(moveSpeed);
-        StartCoroutine(MoveRoutine());
-    }
-
-    public IEnumerator AttackRoutine()
-    {
-        anim.SetTrigger("Attack");
-        target.Hit(damage);
-        yield return new WaitForSeconds(1f/attackSpeed);
-        StartCoroutine(MoveRoutine());
-    }
     public override int Attack()
     {
         return damage;
@@ -144,41 +118,25 @@ public class Monster : LivingEntity
     public override void Hit(int damage)
     {
         HP -= damage;
-        GameManager.Instance.CreateDamage((int)damage, transform.position);
+        GameManager.Instance.CreateDamage(damage, transform.position);
     }
-    IEnumerator moveTile(List<Vector2> tiles)
+    public void FindTurn()
     {
-
-        BattleTile nextTile = StageManager.Instance.stage.battleMap[(int)tiles[1].x, (int)tiles[1].y];
-
-
-        Vector3 curPos = transform.position;
-        Vector3 distPos = nextTile.transform.position;
-        float curTime = 0f;
-        float endTime = moveSpeed;
-        anim.SetBool("IsMove", true);
-        transform.rotation = Quaternion.LookRotation((distPos - curPos).normalized);
-        while (true)
-        {
-            if(curTime >= endTime)
-            {
-                break;
-            }
-            curTime += Time.deltaTime;
-            
-            transform.position = Vector3.Lerp(curPos, distPos, curTime/endTime);
-            yield return null;
-        }
-        anim.SetBool("IsMove", false);
+        findCommand.Excute();
     }
-
+    public void AttackTurn()
+    {
+        attackCommand.Excute();
+    }
+    public void MoveTurn()
+    {
+        moveCommand.Excute();
+    }
     public void BattleStart()
     {
-        target = FindingTarget();
-
+        findCommand.Excute();
         if (target == null) return;
-        StopAllCoroutines();
-        StartCoroutine(MoveRoutine());
+        attackCommand.Excute();
     }
     public void BattleEnd()
     {
@@ -196,26 +154,13 @@ public class Monster : LivingEntity
         }
     }
 
-    public Monster FindingTarget()
-    {
-        List<Monster> monList = null;
-        if (owner == MonsterOwner.Player)
-            monList = StageManager.Instance.EnemyMonster;
-        else
-            //return null;
-            monList = StageManager.Instance.AllyMonster;
-        
-        int rand = Random.Range(0, monList.Count);
-
-        return monList[rand];
-    }
     public override void Die()
     {
         base.Die();
-
-        StageManager.Instance.EraseMonster(this);
-        
-
-
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, Vector3.one * range);
     }
 }
