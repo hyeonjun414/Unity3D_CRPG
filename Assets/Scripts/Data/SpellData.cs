@@ -13,5 +13,5 @@ public enum SpellType
 public class SpellData : CardData
 {
     [Header("Spell Data")]
-    public SpellType spellData;
+    public SpellType spellType;
 }

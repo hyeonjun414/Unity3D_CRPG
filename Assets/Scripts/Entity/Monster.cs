@@ -16,7 +16,16 @@ public enum MonsterOwner
 public enum MonsterType
 {
     Melee,
-    Range
+    Rangefarther
+}
+public enum TargetStrategy
+{
+    Closest,
+    Farthest,
+    LowHp,
+    HighHp,
+    Random
+    
 }
 public class Monster : LivingEntity
 {
@@ -39,31 +48,33 @@ public class Monster : LivingEntity
     public GameObject enemyEffect;
 
 
-    private Animator anim;
+    public Animator anim;
     private CapsuleCollider cc;
     private Rigidbody rb;
 
     private void Start()
     {
-        anim = GetComponentInChildren<Animator>();
-        cc = GetComponent<CapsuleCollider>();
-        rb = GetComponent<Rigidbody>();
+
 
     }
     public override void SetUp()
     {
         base.SetUp();
+        anim = GetComponentInChildren<Animator>();
+        cc = GetComponent<CapsuleCollider>();
+        rb = GetComponent<Rigidbody>();
+
         // 현재 타일을 돌아올 타일로 설정해준다.
         curTile = returnTile;
 
         // 소유자에 따라 이펙트를 활성화한다.
         if (owner == MonsterOwner.Player)
         {
-            enemyEffect.gameObject.SetActive(false);
+            allyEffect.gameObject.SetActive(true);
         }
         else
         {
-            allyEffect.gameObject.SetActive(false);
+            enemyEffect.gameObject.SetActive(true);
         }
     }
     
@@ -113,8 +124,8 @@ public class Monster : LivingEntity
         curTile.state = TileState.STAY;
         curTile.monster = this;
 
-        yield return StartCoroutine(moveTile(moveList));
-        yield return new WaitForSeconds(moveSpeed*0.5f);
+        StartCoroutine(moveTile(moveList));
+        yield return new WaitForSeconds(moveSpeed);
         StartCoroutine(MoveRoutine());
     }
 
@@ -144,7 +155,7 @@ public class Monster : LivingEntity
         Vector3 curPos = transform.position;
         Vector3 distPos = nextTile.transform.position;
         float curTime = 0f;
-        float endTime = moveSpeed * 0.5f;
+        float endTime = moveSpeed;
         anim.SetBool("IsMove", true);
         transform.rotation = Quaternion.LookRotation((distPos - curPos).normalized);
         while (true)
@@ -175,6 +186,7 @@ public class Monster : LivingEntity
         if(owner == MonsterOwner.Player)
         {
             Destroy(gameObject, 1f);
+            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monsterData);
             anim.SetTrigger("Die");
         }
         else

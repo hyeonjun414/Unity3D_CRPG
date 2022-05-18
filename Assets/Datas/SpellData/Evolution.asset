@@ -18,4 +18,4 @@ MonoBehaviour:
   desc: "\uC120\uD0DD\uD55C \uBAAC\uC2A4\uD130\uB97C \uB2E4\uC74C \uB2E8\uACC4\uB85C
     \uC9C4\uD654\uC2DC\uD0A8\uB2E4."
   cost: 5
-  buffType: 3
+  spellType: 3

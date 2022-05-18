@@ -35,18 +35,9 @@ public class Enemy : LivingEntity
             BattleTile bt = bs.battleTiles[waveIndex];
             // 소환 데이터의 몬스터 리스트에서 랜덤하게 하나를 소환한다.
             MonsterData md = (MonsterData)summonData.monsters[Random.Range(0, summonData.monsters.Count)];
-            GameObject go = Instantiate(md.monster, bt.transform.position, Quaternion.LookRotation(Vector3.left));
-            Monster monster = go.GetComponent<Monster>();
-            monster.returnTile = bt;
-            monster.owner = MonsterOwner.Enemy;
-
-            // 데이터를 통해 초기 설정을 해준다.
-            monster.InputData(md);
-
-            // 배틀타일에 생성한 데이터의 정보를 넣어준다.
-            bt.monster = monster;
-            bt.state = TileState.STAY;
             
+            // 배틀타일에 생성한 데이터의 정보를 넣어준다.
+            bt.monster = SummonManager.Instance.SummonMonster(md, bt, MonsterOwner.Enemy);
         }
     }
 

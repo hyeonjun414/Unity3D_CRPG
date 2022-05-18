@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CircleItemRed
       objectReference: {fileID: 0}
+    - target: {fileID: 112286, guid: 85aaa47f48c645346864af624d3838aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 425854, guid: 85aaa47f48c645346864af624d3838aa, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -481,6 +485,10 @@ PrefabInstance:
     - target: {fileID: 140536, guid: a294b6604fe4e4047a9cc0c3e76d9a11, type: 3}
       propertyPath: m_Name
       value: CircleItemBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 140536, guid: a294b6604fe4e4047a9cc0c3e76d9a11, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 435446, guid: a294b6604fe4e4047a9cc0c3e76d9a11, type: 3}
       propertyPath: m_RootOrder

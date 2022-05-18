@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3065999876194954743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 7503936230870093353}
   - {fileID: 5543681233440318728}
@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CircleItemBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 140536, guid: a294b6604fe4e4047a9cc0c3e76d9a11, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 435446, guid: a294b6604fe4e4047a9cc0c3e76d9a11, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -226,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 112286, guid: 85aaa47f48c645346864af624d3838aa, type: 3}
       propertyPath: m_Name
       value: CircleItemRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 112286, guid: 85aaa47f48c645346864af624d3838aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 425854, guid: 85aaa47f48c645346864af624d3838aa, type: 3}
       propertyPath: m_RootOrder

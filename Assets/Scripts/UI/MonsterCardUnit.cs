@@ -13,6 +13,9 @@ public class MonsterCardUnit : CardUnit
     public Text range;
     public Text attackSpeed;
 
+    public Transform monsterPos;
+    public Monster monster;
+
     public override void AddCard(CardData data)
     {
         base.AddCard(data);
@@ -23,9 +26,24 @@ public class MonsterCardUnit : CardUnit
         armor.text = md.armor.ToString();
         range.text = md.range.ToString();
         attackSpeed.text = md.attackSpeed.ToString();
+
+        if (monster != null && monster.monsterData.name != md.name)
+        {
+            Destroy(monster.gameObject);
+            monster = null;
+        }
+        if (monster == null)
+        {
+            monster = Instantiate(md.monster, monsterPos.position, Quaternion.identity, monsterPos).GetComponent<Monster>();
+            monster.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
+            monster.monsterData = md;
+        }
+
+        //monster.
     }
     public override void DeleteCard()
     {
         base.DeleteCard();
+        
     }
 }

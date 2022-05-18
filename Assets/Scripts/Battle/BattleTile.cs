@@ -58,7 +58,7 @@ public class BattleTile : MonoBehaviour
                 SummonMonster(cd);
                 break;
             case CardType.Spell:
-                ApplyBuff(cd);
+                CastSpell(cd);
                 break;
         }
     }
@@ -74,20 +74,15 @@ public class BattleTile : MonoBehaviour
         // 몬스터 데이터로 만들어준다.
         MonsterData md = (MonsterData)data;
         // 몬스터를 생성.
-        GameObject go = Instantiate(md.monster, transform.position, Quaternion.LookRotation(Vector3.right));
-        monster = go.GetComponent<Monster>();
-        // 몬스터에 해당하는 타일을 지정하고 누구 소유인지에 대한 설정을 진행한다.
-        monster.returnTile = this;
-        monster.owner = MonsterOwner.Player;
-        // 몬스터에 데이터를 넣고 초기 설정을 진행한다.
-        monster.InputData(md);
-
+        monster = SummonManager.Instance.SummonMonster(md, this, MonsterOwner.Player);
+        if (monster == null)
+            return;
         // 사용된 카드를 무덤으로 이동시키고, 카드 선택을 초기화한다.
-        CardManager.Instance.MoveCard(CardSpace.Hands, CardSpace.Graveyard, md);
+        CardManager.Instance.MoveCard(CardSpace.Hands, CardSpace.Field, md);
         CardManager.Instance.ResetSelectedCard();
 
     }
-    public void ApplyBuff(CardData data)
+    public void CastSpell(CardData data)
     {
         if (monster == null)
         {
@@ -98,7 +93,7 @@ public class BattleTile : MonoBehaviour
 
         // 주문 데이터로 변경한다.
         SpellData bd = (SpellData)data;
-
+        SpellManager.Instance.CastSpell(monster, bd);
         // 사용된 카드를 무덤으로 이동시키고, 카드 선택을 초기화한다.
         CardManager.Instance.MoveCard(CardSpace.Hands, CardSpace.Graveyard, bd);
         CardManager.Instance.ResetSelectedCard();

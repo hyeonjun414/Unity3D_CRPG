@@ -19,4 +19,22 @@ public class RewardManager : Singleton<RewardManager>
         RewardItem reward = Instantiate(rewardPrefab, pos+rewardPrefab.transform.position, Quaternion.identity);
         reward.rewardData = cardDatas[Random.Range(0, cardDatas.Length)];
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            StartText();
+        }
+    }
+    public void StartText()
+    {
+        int rand;
+        for (int i = 0; i < 5; i++)
+        {
+            rand = Random.Range(0, cardDatas.Length);
+            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Deck, cardDatas[rand]);
+        }
+        
+    }
 }

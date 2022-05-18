@@ -17,4 +17,4 @@ MonoBehaviour:
   name: "\uD790"
   desc: "\uC120\uD0DD\uD55C \uBAAC\uC2A4\uD130\uB97C \uCE58\uC720\uD569\uB2C8\uB2E4"
   cost: 2
-  buffType: 1
+  spellType: 1

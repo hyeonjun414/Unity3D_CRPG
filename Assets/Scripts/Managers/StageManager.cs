@@ -137,7 +137,10 @@ public class StageManager : Singleton<StageManager>
     public void EraseMonster(Monster monster)
     {
         if(monster.owner == MonsterOwner.Player)
+        {
             AllyMonster.Remove(monster);
+            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monster.monsterData);
+        }
         else
             EnemyMonster.Remove(monster);
 
