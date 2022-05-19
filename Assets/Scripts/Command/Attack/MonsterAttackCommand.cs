@@ -14,7 +14,7 @@ public class MonsterAttackCommand : AttackCommand
     }
     public override void Excute()
     {
-        if (monster.target == null || monster.isAttacking)
+        if (monster.target == null || monster.isAttacking || monster.target.nextTile != null)
         {
             return;
         }
@@ -27,9 +27,12 @@ public class MonsterAttackCommand : AttackCommand
         if (monster.range >= CalculateRange(monster, monster.target) && !monster.target.isDead)
         {
             anim.SetTrigger("Attack");
+            anim.speed = monster.attackSpeed;
             monster.target.Hit(monster.damage);
+            UIManager.Instance.battleInfoUI.UpdateUI();
             transform.LookAt(monster.target.transform.position);
             yield return new WaitForSeconds(1f / monster.attackSpeed);
+            anim.speed = 1f;
         }
         monster.isAttacking = false;
         

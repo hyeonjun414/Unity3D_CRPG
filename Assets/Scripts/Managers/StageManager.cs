@@ -36,13 +36,9 @@ public class StageManager : Singleton<StageManager>
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.P))
-        {
-            BattlePrepare();
-        }
         if (Input.GetKeyUp(KeyCode.R))
         {
-            BattleStageStart();
+            CardManager.Instance.ActiveReroll();
         }
     }
     public void FindingEnemyAndStage()
@@ -57,6 +53,7 @@ public class StageManager : Singleton<StageManager>
         if (isPrepared || !isStage) return;
 
         isPrepared = true;
+        UIManager.Instance.battleInfoUI.StageStart();
         enemy.SummonMonster();
         CardManager.Instance.ActiveReroll();
     }
@@ -76,15 +73,14 @@ public class StageManager : Singleton<StageManager>
             //yield return new WaitForSeconds(0.1f);
             ResultTurn(EnemyMonster);
             ResultTurn(AllyMonster);
+            EndTurn();
             //yield return new WaitForSeconds(0.1f);
-            yield return new WaitForSeconds(1f);
+            yield return null;
         }
 
 
         
     }
-
-
 
     private void FindTurn(List<Monster> monList)
     {
@@ -113,6 +109,8 @@ public class StageManager : Singleton<StageManager>
         {
             if(monList[i].isDead)
             {
+                monList[i].curTile.state = TileState.NONE;
+                monList[i].curTile.monster = null;
                 Destroy(monList[i].gameObject);
                 monList.RemoveAt(i);
             }
@@ -122,25 +120,36 @@ public class StageManager : Singleton<StageManager>
             }
         }
     }
+    private void EndTurn()
+    {
+        if(AllyMonster.Count == 0 || EnemyMonster.Count == 0)
+        {
+            BattleStageEnd();
+        }
+    }
 
 
     public void BattleStageStart()
     {
         if (!isPrepared) return;
         MapSearch();
+        if (AllyMonster.Count == 0) return;
+        UIManager.Instance.battleInfoUI.UpdateUI();
         StartCoroutine("BattleLogic");
 
     }
     public void BattleStageEnd()
     {
         StopCoroutine("BattleLogic");
-        foreach (Monster enemy in EnemyMonster)
+
+        foreach(Monster monster in AllyMonster)
         {
-            enemy.BattleEnd();
+            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monster.monsterData);
+            Destroy(monster.gameObject);
         }
-        foreach (Monster ally in AllyMonster)
+        foreach(Monster monster in EnemyMonster)
         {
-            ally.BattleEnd();
+            Destroy(monster.gameObject);
         }
 
         // 적 몬스터가 아군 몬스터보다 적을 때 -> 플레이어가 승리했을때
@@ -160,6 +169,7 @@ public class StageManager : Singleton<StageManager>
         if(enemy.HP == 0)
         {
            StageClear();
+           Destroy(enemy.gameObject);
         }
         else if(player.HP == 0)
         {
@@ -175,7 +185,9 @@ public class StageManager : Singleton<StageManager>
     {
         CameraManager.Instance.SwitchCam(0);
         RewardManager.Instance.StageReward(enemy.gameObject.transform.position);
+        UIManager.Instance.battleInfoUI.StageEnd();
         stage.StageOut();
+        
         isStage = false;
 
     }

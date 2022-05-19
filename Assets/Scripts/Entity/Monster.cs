@@ -47,9 +47,10 @@ public class Monster : LivingEntity
     public MonsterData monsterData;
 
     [Header("BattleTile")]
-    public BattleTile returnTile;
-    public Monster target;
     public BattleTile curTile;
+    public BattleTile nextTile;
+    public Monster target;
+    
 
     [Header("Effect")]
     public GameObject allyEffect;
@@ -73,8 +74,6 @@ public class Monster : LivingEntity
         cc = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
 
-        // 현재 타일을 돌아올 타일로 설정해준다.
-        curTile = returnTile;
 
         // 소유자에 따라 이펙트를 활성화한다.
         if (owner == MonsterOwner.Player)
@@ -132,26 +131,9 @@ public class Monster : LivingEntity
     {
         moveCommand.Excute();
     }
-    public void BattleStart()
+    public bool IsActing()
     {
-        findCommand.Excute();
-        if (target == null) return;
-        attackCommand.Excute();
-    }
-    public void BattleEnd()
-    {
-        StopAllCoroutines();
-        if(owner == MonsterOwner.Player)
-        {
-            Destroy(gameObject, 1f);
-            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monsterData);
-            anim.SetTrigger("Die");
-        }
-        else
-        {
-            Destroy(gameObject, 1f);
-            anim.SetTrigger("Die");
-        }
+        return isMoving || isAttacking;
     }
 
     public override void Die()

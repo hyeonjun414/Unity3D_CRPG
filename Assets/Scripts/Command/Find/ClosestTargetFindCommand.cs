@@ -11,8 +11,8 @@ public class ClosestTargetFindCommand : FindCommand
     }
     public override void Excute()
     {
-        if (monster.target != null)
-            return;
+        //if (monster.target != null)
+        //    return;
         monster.target = Find();
     }
 

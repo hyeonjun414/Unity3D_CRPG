@@ -107,3 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mr: {fileID: 7299898454471342791}
+  state: 0
+  monster: {fileID: 0}
+  tilePos: {x: 0, y: 0}
+  allyStayColor: {r: 0.36320752, g: 0.6586044, b: 1, a: 0}
+  enemyStayColor: {r: 1, g: 0.4575472, b: 0.4575472, a: 0}

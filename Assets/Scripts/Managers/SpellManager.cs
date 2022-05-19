@@ -38,7 +38,7 @@ public class SpellManager : Singleton<SpellManager>
         if(monster.monsterData.nextMonster != null)
         {
             MonsterData md = monster.monsterData.nextMonster;
-            BattleTile bt = monster.returnTile;
+            BattleTile bt = monster.curTile;
             Destroy(monster.gameObject);
             bt.monster = SummonManager.Instance.SummonMonster(md, bt, MonsterOwner.Player);
         }

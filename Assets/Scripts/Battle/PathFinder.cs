@@ -122,10 +122,8 @@ public class PathFinder : MonoBehaviour
                 while (null != tempNode)
                 {
                     tempList.Insert(0,map[(int)tempNode.point.x, (int)tempNode.point.y].tilePos);
-                    //print(map[(int)tempNode.point.x, (int)tempNode.point.y].tilePos);
                     tempNode = tempNode.prevNode;
                 }
-                //print("경로 탐색 완료. 결과 출력");
                 return tempList;
             }
             for (int i = 0; i < dir.Count; i++)

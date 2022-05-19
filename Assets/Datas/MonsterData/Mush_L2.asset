@@ -24,7 +24,7 @@ MonoBehaviour:
   armor: 1
   range: 1
   attackSpeed: 1
-  moveSpeed: 1
+  moveSpeed: 5
   evolutionCost: 0
   prevMonster: {fileID: 11400000, guid: ebfc7a12f15838c469244af3122251a3, type: 2}
   nextMonster: {fileID: 11400000, guid: 1ee523482a3e0f7439e447379e245cb7, type: 2}

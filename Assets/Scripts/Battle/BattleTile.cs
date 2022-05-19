@@ -23,13 +23,36 @@ public class BattleTile : MonoBehaviour
     
     Color originColor;
     Color overColor;
+    public Color allyStayColor;
+    public Color enemyStayColor;
 
     private void Start()
     {
         originColor = mr.material.color;
         overColor = new Color(0.8f, 0.45f, 1); //pupple
     }
-
+    private void Update()
+    {
+        if(state == TileState.STAY)
+        {
+            if(monster != null)
+            {
+                switch (monster.owner)
+                {
+                    case MonsterOwner.Player:
+                        mr.material.color = allyStayColor;
+                        break;
+                    case MonsterOwner.Enemy:
+                        mr.material.color = enemyStayColor;
+                        break;
+                }
+            }
+        }
+        else
+        {
+            mr.material.color = originColor;
+        }
+    }
     private void OnMouseEnter()
     {
         if (monster != null)

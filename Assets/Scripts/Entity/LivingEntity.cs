@@ -7,22 +7,22 @@ public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
     [Header("Normal Status")]
     public string entityName;
     public int maxHp;
-    public int _curHp;
+    public int curHp;
     public int HP
     {
-        get { return _curHp; }
+        get { return curHp; }
         set 
         { 
-            _curHp = value;
-            if (_curHp <= 0)
+            curHp = value;
+            if (curHp <= 0)
             {
                 isDead = true;
-                _curHp = 0;
+                curHp = 0;
                 Die();
             }
-            else if(_curHp >= maxHp)
+            else if(curHp >= maxHp)
             {
-                _curHp = maxHp;
+                curHp = maxHp;
             }
         }
     }
@@ -46,6 +46,6 @@ public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
 
     public virtual void SetUp()
     {
-        _curHp = maxHp;
+        curHp = maxHp;
     }
 }

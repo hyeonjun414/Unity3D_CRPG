@@ -11,9 +11,7 @@ public class BattleStage : MonoBehaviour
 
     
     public Material[] tileColors;
-    public int mapSize = 7;
-    int mapSizeX = 7;
-    int mapSizeY = 7;
+    public int mapSize = 8;
 
     
     public BattleTile[,] battleMap;
@@ -22,29 +20,16 @@ public class BattleStage : MonoBehaviour
     private Animator anim;
     void Awake()
     {
-        // 배틀 타일 배열을 맵 사이즈 만큼 할당해준다. -> 7 X 7
-        battleMap = new BattleTile[mapSizeX, mapSizeY];
+        // 배틀 타일 배열을 맵 사이즈 만큼 할당해준다. -> 8 X 8
+        battleMap = new BattleTile[mapSize, mapSize];
         // 자식에서 배틀 타일들을 받아온다.
         battleTiles = GetComponentsInChildren<BattleTile>();
 
-        // 홀수는 검은색, 짝수는 흰색으로 타일의 색상을 변경
-        for(int i = 0; i < battleTiles.Length; i++)
-        {
-            if(i % 2==0)
-            {
-                battleTiles[i].mr.material = tileColors[0];
-            }
-            else
-            {
-                battleTiles[i].mr.material = tileColors[1];
-            }
-        }
-
         // 경로 탐색을 위한 타일 포지션을 잡아준다.
         int count = 0;
-        for(int i = 0; i < mapSizeY; i++)
+        for(int i = 0; i < mapSize; i++)
         {
-            for(int j = 0; j < mapSizeX; j++)
+            for(int j = 0; j < mapSize; j++)
             {
                 battleMap[i,j] = battleTiles[count++];
                 battleMap[i, j].tilePos = new Vector2(i, j);
@@ -55,7 +40,6 @@ public class BattleStage : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
     public void StageOut()
     {
         anim.SetTrigger("StageOut");

@@ -23,7 +23,7 @@ public class SummonManager : Singleton<SummonManager>
         monster = Instantiate(md.monster, bt.transform.position, Quaternion.LookRotation(dir)).GetComponent<Monster>();
         if (monster != null)
         {
-            monster.returnTile = bt;
+            monster.curTile = bt;
             monster.owner = owner;
             // 몬스터에 데이터를 넣고 초기 설정을 진행한다.
             monster.InputData(md);
