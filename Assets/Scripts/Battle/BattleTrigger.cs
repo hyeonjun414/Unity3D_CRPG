@@ -9,6 +9,7 @@ public class BattleTrigger : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             CameraManager.Instance.SwitchCam(1);
+            UIManager.Instance.battleInfoUI.StageStart();
             StageManager.Instance.BattlePrepare();
         }
     }
@@ -17,6 +18,7 @@ public class BattleTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CameraManager.Instance.SwitchCam(0);
+            UIManager.Instance.battleInfoUI.StageEnd();
         }
     }
 }

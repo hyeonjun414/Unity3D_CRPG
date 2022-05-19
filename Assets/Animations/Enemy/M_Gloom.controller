@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1101 &-8356422117443818151
+--- !u!1101 &-8843590103311168965
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,7 +12,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -1831258223567238071}
+  m_DstState: {fileID: 1439245785141103012}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -53,28 +53,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &-7479826968611834475
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -6368986640145753901}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.24999976
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1102 &-6368986640145753901
 AnimatorState:
   serializedVersion: 6
@@ -221,6 +199,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-2108248977812736503
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -6368986640145753901}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-1831258223567238071
 AnimatorState:
   serializedVersion: 6
@@ -231,8 +231,7 @@ AnimatorState:
   m_Name: Head Attack
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -7479826968611834475}
+  m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -369,7 +368,8 @@ AnimatorState:
   m_Name: Projectile Attack
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -2108248977812736503}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -516,13 +516,13 @@ AnimatorStateMachine:
     m_Position: {x: -40, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1831258223567238071}
-    m_Position: {x: 190, y: -20, z: 0}
+    m_Position: {x: 160, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6368986640145753901}
     m_Position: {x: 400, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1439245785141103012}
-    m_Position: {x: -40, y: 310, z: 0}
+    m_Position: {x: 190, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8909937874539081064}
     m_Position: {x: -20, y: -20, z: 0}
@@ -539,8 +539,8 @@ AnimatorStateMachine:
   m_AnyStateTransitions:
   - {fileID: 4768599992025377177}
   - {fileID: -5754121946799994847}
-  - {fileID: -8356422117443818151}
   - {fileID: 982881172805806426}
+  - {fileID: -8843590103311168965}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []

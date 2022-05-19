@@ -17,7 +17,7 @@ public class DamageText : MonoBehaviour
         // 위치 설정
         transform.position = position;
         transform.LookAt(-Camera.main.transform.position);
-        transform.Translate(Vector3.up);
+        transform.Translate(Vector3.up*1.5f);
         // 데미지 텍스트 설정
         text.text = damage.ToString();
         textColor = text.color;

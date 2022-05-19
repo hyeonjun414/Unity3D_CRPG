@@ -53,6 +53,22 @@ public class GameManager : Singleton<GameManager>
             OptionManager.Instance.OptionBtn();
             IsPause = !IsPause;
         }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Time.timeScale = 1f;
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Time.timeScale = 0.5f;
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            Time.timeScale = 2f;
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            Time.timeScale = 4f;
+        }
     }
 
     // 데미지 텍스트를 띄우는 함수

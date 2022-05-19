@@ -39,7 +39,17 @@ public class SpellManager : Singleton<SpellManager>
         {
             MonsterData md = monster.monsterData.nextMonster;
             BattleTile bt = monster.curTile;
+            switch(monster.owner)
+            {
+                case MonsterOwner.Player:
+                    StageManager.Instance.AllyMonster.Remove(monster);
+                    break;
+                case MonsterOwner.Enemy:
+                    StageManager.Instance.EnemyMonster.Remove(monster);
+                    break;
+            }
             Destroy(monster.gameObject);
+            
             bt.monster = SummonManager.Instance.SummonMonster(md, bt, MonsterOwner.Player);
         }
     }

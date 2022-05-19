@@ -29,3 +29,4 @@ MonoBehaviour:
   prevMonster: {fileID: 11400000, guid: 566147231f40f03449842fb986473c4f, type: 2}
   nextMonster: {fileID: 0}
   monster: {fileID: 153715922393405472, guid: 785d2ea550384e245aa0e11e5cc184c2, type: 3}
+  projectile: {fileID: 1449260960837898, guid: 1bc8efcd8f00f324d96630e1ba6a4ec3, type: 3}

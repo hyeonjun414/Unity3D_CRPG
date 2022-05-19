@@ -53,7 +53,7 @@ public class StageManager : Singleton<StageManager>
         if (isPrepared || !isStage) return;
 
         isPrepared = true;
-        UIManager.Instance.battleInfoUI.StageStart();
+        
         enemy.SummonMonster();
         CardManager.Instance.ActiveReroll();
     }
@@ -132,9 +132,8 @@ public class StageManager : Singleton<StageManager>
     public void BattleStageStart()
     {
         if (!isPrepared) return;
-        MapSearch();
+        //MapSearch();
         if (AllyMonster.Count == 0) return;
-        UIManager.Instance.battleInfoUI.UpdateUI();
         StartCoroutine("BattleLogic");
 
     }
@@ -203,41 +202,5 @@ public class StageManager : Singleton<StageManager>
         }
         isPrepared = false;
     }
-    public void EraseMonster(Monster monster)
-    {
-        if(monster.owner == MonsterOwner.Player)
-        {
-            AllyMonster.Remove(monster);
-            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monster.monsterData);
-        }
-        else
-            EnemyMonster.Remove(monster);
 
-        if (AllyMonster.Count == 0 || EnemyMonster.Count == 0)
-            BattleStageEnd();
-    }
-
-    public void MapSearch()
-    {
-        AllyMonster.Clear();
-        EnemyMonster.Clear();
-
-        for (int i = 0; i < stage.mapSize; i++)
-        {
-            for (int j = 0; j < stage.mapSize; j++)
-            {
-                Monster monster = stage.battleMap[i, j].monster;
-                if (monster == null) continue;
-                switch (monster.owner)
-                {
-                    case MonsterOwner.Player:
-                        AllyMonster.Add(monster);
-                        break;
-                    case MonsterOwner.Enemy:
-                        EnemyMonster.Add(monster);
-                        break;
-                }
-            }
-        }
-    }
 }

@@ -8,12 +8,14 @@ public class BattleInfoPanel : MonoBehaviour
     public BattleInfoUnit[] infoUnits;
 
     List<Monster> monList;
-
     private void Start()
     {
-        infoUnits = GetComponentsInChildren<BattleInfoUnit>();
-
-        if(owner == MonsterOwner.Player)
+        infoUnits = GetComponentsInChildren<BattleInfoUnit>(true);
+        foreach(BattleInfoUnit unit in infoUnits)
+        {
+            unit.gameObject.SetActive(false);
+        }
+        if (owner == MonsterOwner.Player)
         {
             monList = StageManager.Instance.AllyMonster;
         }

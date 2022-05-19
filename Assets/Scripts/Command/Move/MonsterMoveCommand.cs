@@ -19,7 +19,7 @@ public class MonsterMoveCommand : MoveCommand
     }
     public override void Excute()
     {
-        if(monster.target == null || monster.isMoving)
+        if(monster.target == null || monster.isMoving || monster.isAttacking)
         {
             return;
         }
@@ -41,7 +41,7 @@ public class MonsterMoveCommand : MoveCommand
         else if (moveList.Count <= monster.range+1)
         {
             lr.positionCount = 0;
-            transform.LookAt(monster.target.transform.position);
+            monster.transform.LookAt(monster.target.transform.position);
             yield break;
         }
         else
@@ -75,12 +75,12 @@ public class MonsterMoveCommand : MoveCommand
         BattleTile nextTile = StageManager.Instance.stage.battleMap[(int)tiles[1].x, (int)tiles[1].y];
 
 
-        Vector3 curPos = transform.position;
+        Vector3 curPos = monster.transform.position;
         Vector3 distPos = nextTile.transform.position;
         float curTime = 0f;
         float endTime = 0.8f;//1f/monster.moveSpeed;
         anim.SetBool("IsMove", true);
-        transform.rotation = Quaternion.LookRotation((distPos - curPos).normalized);
+        monster.transform.rotation = Quaternion.LookRotation((distPos - curPos).normalized);
         while (true)
         {
             if (curTime >= endTime)
@@ -89,7 +89,7 @@ public class MonsterMoveCommand : MoveCommand
             }
             curTime += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(curPos, distPos, curTime / endTime);
+            monster.transform.position = Vector3.Lerp(curPos, distPos, curTime / endTime);
             yield return null;
         }
 

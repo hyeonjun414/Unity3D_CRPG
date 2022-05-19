@@ -15,7 +15,6 @@ public class MonsterData : CardData
     public float attackSpeed;
     public float moveSpeed;
 
-
     [Header("Monster Evolution")]
     public int evolutionCost;
     public MonsterData prevMonster;
@@ -23,4 +22,7 @@ public class MonsterData : CardData
 
     [Header("Monster Prefab")]
     public GameObject monster;
+
+    [Header("Projectile")]
+    public GameObject projectile;
 }

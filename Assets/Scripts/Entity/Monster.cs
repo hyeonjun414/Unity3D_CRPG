@@ -17,7 +17,7 @@ public enum MonsterOwner
 public enum MonsterType
 {
     Melee,
-    Rangefarther
+    Range,
 }
 public enum MonsterLevel
 {
@@ -41,6 +41,7 @@ public class Monster : LivingEntity
     public float moveSpeed = 1f;
     public int range;
 
+    public MonsterType  type;
     public MonsterState state;
     public MonsterOwner owner;
     public MonsterLevel level;
@@ -85,11 +86,20 @@ public class Monster : LivingEntity
             enemyEffect.gameObject.SetActive(true);
         }
 
-        moveCommand = gameObject.AddComponent<MonsterMoveCommand>();
+        moveCommand = anim.gameObject.AddComponent<MonsterMoveCommand>();
         moveCommand.Setup(this);
-        attackCommand = gameObject.AddComponent<MonsterAttackCommand>();
-        attackCommand.Setup(this);
-        findCommand = gameObject.AddComponent<ClosestTargetFindCommand>();
+        if(range > 1)
+        {
+            attackCommand = anim.gameObject.AddComponent<MonsterRangeAttackCommand>();
+            attackCommand.Setup(this);
+        }
+        else
+        {
+            attackCommand = anim.gameObject.AddComponent<MonsterMeleeAttackCommand>();
+            attackCommand.Setup(this);
+        }
+        
+        findCommand = anim.gameObject.AddComponent<ClosestTargetFindCommand>();
         findCommand.Setup(this);
     }
     

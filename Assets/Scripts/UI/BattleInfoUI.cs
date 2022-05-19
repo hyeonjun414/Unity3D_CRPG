@@ -20,11 +20,12 @@ public class BattleInfoUI : MonoBehaviour
 
     public void StageStart()
     {
-        gameObject.SetActive(true);
+        anim.SetBool("IsActive", true);
+        UpdateUI();
     }
     public void StageEnd()
     {
-        anim.SetTrigger("DeActive");
+        anim.SetBool("IsActive", false);
     }
 
     public void Disable()

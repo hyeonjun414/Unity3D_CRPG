@@ -32,8 +32,8 @@ public class CardUI : MonoBehaviour
     public void DeleteCard()
     {
         cardData = null;
-        transform.localPosition = new Vector3(1280, -80, 0);
-        transform.localScale = Vector3.one * 0.1f;
+        transform.localPosition = new Vector3(800, -60, 0);
+        transform.localScale = Vector3.one * 0.01f;
 
         monsterCard.DeleteCard();
         buffCard.DeleteCard();

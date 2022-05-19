@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MonsterAttackCommand : AttackCommand
 {
-    private Monster monster;
-    private Animator anim;
+    protected Monster monster;
+    protected Animator anim;
     public override void Setup(LivingEntity entity)
     {
         monster = (Monster)entity;
@@ -20,23 +20,12 @@ public class MonsterAttackCommand : AttackCommand
         }
         StartCoroutine("AttackRoutine");
     }
-
-    public IEnumerator AttackRoutine()
+    public virtual void Attack(){}
+    public virtual IEnumerator AttackRoutine()
     {
-        monster.isAttacking = true;
-        if (monster.range >= CalculateRange(monster, monster.target) && !monster.target.isDead)
-        {
-            anim.SetTrigger("Attack");
-            anim.speed = monster.attackSpeed;
-            monster.target.Hit(monster.damage);
-            UIManager.Instance.battleInfoUI.UpdateUI();
-            transform.LookAt(monster.target.transform.position);
-            yield return new WaitForSeconds(1f / monster.attackSpeed);
-            anim.speed = 1f;
-        }
-        monster.isAttacking = false;
-        
+        yield return null;
     }
+
     public int CalculateRange(Monster my, Monster target)
     {
         Vector2 start = my.curTile.tilePos;
