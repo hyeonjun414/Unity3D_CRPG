@@ -47,12 +47,12 @@ public class MonsterMoveCommand : MoveCommand
         else
         {
             monster.isMoving = true;
-            lr.positionCount = moveList.Count;
+/*            lr.positionCount = moveList.Count;
             for (int i = 0; i < moveList.Count; i++)
             {
                 BattleTile bt = bs.battleMap[(int)moveList[i].x, (int)moveList[i].y];
                 lr.SetPosition(i, bt.transform.position + Vector3.up * 0.2f);
-            }
+            }*/
             monster.curTile.state = TileState.NONE;
             monster.nextTile = bs.battleMap[(int)moveList[1].x, (int)moveList[1].y];
             monster.nextTile.state = TileState.STAY;
@@ -78,8 +78,9 @@ public class MonsterMoveCommand : MoveCommand
         Vector3 curPos = monster.transform.position;
         Vector3 distPos = nextTile.transform.position;
         float curTime = 0f;
-        float endTime = 0.8f;//1f/monster.moveSpeed;
+        float endTime = 1f / monster.moveSpeed;
         anim.SetBool("IsMove", true);
+        anim.speed = monster.moveSpeed;
         monster.transform.rotation = Quaternion.LookRotation((distPos - curPos).normalized);
         while (true)
         {
@@ -95,6 +96,7 @@ public class MonsterMoveCommand : MoveCommand
 
         monster.nextTile = null;
         anim.SetBool("IsMove", false);
+        anim.speed = 1f;
     }
 
 }

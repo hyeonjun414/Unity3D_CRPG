@@ -61,8 +61,13 @@ public class Monster : LivingEntity
     public MoveCommand moveCommand;
     public AttackCommand attackCommand;
     public FindCommand findCommand;
+    public SkillCommand skillCommand;
     public bool isAttacking = false;
     public bool isMoving= false;
+    public bool isCasting = false;
+
+    [Header("UI")]
+    public MonsterStatusBar statusBar;
 
     public Animator anim;
     public Collider cc;
@@ -86,6 +91,9 @@ public class Monster : LivingEntity
             enemyEffect.gameObject.SetActive(true);
         }
 
+        findCommand = anim.gameObject.AddComponent<ClosestTargetFindCommand>();
+        findCommand.Setup(this);
+
         moveCommand = anim.gameObject.AddComponent<MonsterMoveCommand>();
         moveCommand.Setup(this);
         if(range > 1)
@@ -98,9 +106,16 @@ public class Monster : LivingEntity
             attackCommand = anim.gameObject.AddComponent<MonsterMeleeAttackCommand>();
             attackCommand.Setup(this);
         }
+        if(monsterData.skillData != null)
+        {
+            skillCommand = anim.gameObject.AddComponent<MonsterSkillCommand>();
+            skillCommand.Setup(this);
+        }
+
+
+        statusBar?.AddMonster(this);
+        statusBar?.UpdateUI();
         
-        findCommand = anim.gameObject.AddComponent<ClosestTargetFindCommand>();
-        findCommand.Setup(this);
     }
     
     public void InputData(MonsterData data)
@@ -127,6 +142,7 @@ public class Monster : LivingEntity
     public override void Hit(int damage)
     {
         HP -= damage;
+        statusBar?.UpdateUI();
         GameManager.Instance.CreateDamage(damage, transform.position);
     }
     public void FindTurn()
@@ -135,7 +151,14 @@ public class Monster : LivingEntity
     }
     public void AttackTurn()
     {
-        attackCommand.Excute();
+        if(MP == maxMp && skillCommand != null)
+        {
+            skillCommand?.Excute();
+        }
+        else
+        {
+            attackCommand.Excute();
+        }
     }
     public void MoveTurn()
     {

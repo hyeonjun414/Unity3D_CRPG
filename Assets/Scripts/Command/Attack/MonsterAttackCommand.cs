@@ -20,7 +20,11 @@ public class MonsterAttackCommand : AttackCommand
         }
         StartCoroutine("AttackRoutine");
     }
-    public virtual void Attack(){}
+    public virtual void Attack()
+    {
+        monster.MP += 50;
+        monster.statusBar?.UpdateUI();
+    }
     public virtual IEnumerator AttackRoutine()
     {
         yield return null;

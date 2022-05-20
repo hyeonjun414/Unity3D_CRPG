@@ -21,6 +21,7 @@ public class SummonManager : Singleton<SummonManager>
             dir = Vector3.left;
         Monster monster = null;
         monster = Instantiate(md.monster, bt.transform.position, Quaternion.LookRotation(dir)).GetComponent<Monster>();
+        monster.transform.SetParent(GameManager.Instance.worldCanvas.transform, true);
         if (monster != null)
         {
             switch(owner)

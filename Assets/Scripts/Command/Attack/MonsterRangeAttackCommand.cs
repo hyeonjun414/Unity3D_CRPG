@@ -27,8 +27,8 @@ public class MonsterRangeAttackCommand : MonsterAttackCommand
     }
     public override void Attack()
     {
-        monster.curMp += 5;
-        
+        base.Attack();
+
         Shoting(monster, monster.target, 1f / monster.attackSpeed);
     }
     public void Shoting(Monster my, Monster target, float duration)

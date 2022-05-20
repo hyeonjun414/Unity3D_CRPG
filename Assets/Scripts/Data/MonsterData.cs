@@ -25,4 +25,7 @@ public class MonsterData : CardData
 
     [Header("Projectile")]
     public GameObject projectile;
+
+    [Header("Skill Data")]
+    public SkillData skillData;
 }

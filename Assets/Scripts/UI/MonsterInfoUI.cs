@@ -37,20 +37,20 @@ public class MonsterInfoUI : MonoBehaviour
     }
     private void Update()
     {
-        Vector2 originMouse = Input.mousePosition;
+        Vector3 originMouse = Input.mousePosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, originMouse, cam, out mousePos);
-        Vector2 offset = Vector2.zero;
+        Vector3 offset = Vector2.zero;
         if (originMouse.x < Screen.width / 2)
-            offset += Vector2.right * offsetX;
+            offset += Vector3.right * offsetX;
         else
-            offset += Vector2.left * offsetX;
+            offset += Vector3.left * offsetX;
 
         if (originMouse.y < Screen.height / 2)
-            offset += Vector2.up * offsetY;
+            offset += Vector3.up * offsetY;
         else
-            offset += Vector2.down * offsetY;
+            offset += Vector3.down * offsetY;
 
-        transform.localPosition = mousePos + offset;
+        transform.localPosition = (Vector3)mousePos + offset + new Vector3(0,0,-10);
     }
 
     public void InfoEnter(CardData data)

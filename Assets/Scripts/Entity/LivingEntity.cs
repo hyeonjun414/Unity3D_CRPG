@@ -28,6 +28,22 @@ public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
     }
     public int maxMp;
     public int curMp;
+    public int MP
+    {
+        get { return curMp; }
+        set
+        {
+            curMp = value;
+            if(curMp <= 0)
+            {
+                curMp = 0;
+            }
+            else if(curMp > maxMp)
+            {
+                curMp = maxMp;
+            }
+        }
+    }
 
     [Header("Battle Status")]
     public int damage;

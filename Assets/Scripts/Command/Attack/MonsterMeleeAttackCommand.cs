@@ -22,8 +22,9 @@ public class MonsterMeleeAttackCommand : MonsterAttackCommand
 
     public override void Attack()
     {
+        base.Attack();
         monster.target.Hit(monster.damage);
-        monster.curMp += 5;
+        
         UIManager.Instance.battleInfoUI.UpdateUI();
         
     }

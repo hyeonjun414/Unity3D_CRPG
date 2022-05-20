@@ -12,6 +12,9 @@ public class CardUI : MonoBehaviour
     public MonsterCardUnit monsterCard;
     public BuffCardUnit buffCard;
 
+    [Header("GuideLine Pos")]
+    public Transform guideLinePos;
+
     public void AddCard(CardData data)
     {
         cardData = data;

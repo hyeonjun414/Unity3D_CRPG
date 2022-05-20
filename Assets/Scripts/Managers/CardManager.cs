@@ -216,10 +216,9 @@ public class CardManager : Singleton<CardManager>
         {
             // 베지어 포인트를 플레이어 - 충돌점과 플레이어의 사이 - 충돌점으로 대입한다.
             guideLine.enabled = true;
-            t1.position = holder.cards[holder.selectedCardIndex].transform.position;
-            t1.Translate(Vector3.back * 10);
+            t1.position = holder.cards[holder.selectedCardIndex].guideLinePos.position;
             t3.position = raycastHit.point;
-            t2.position = (t1.position + t3.position) * 0.5f + Vector3.up * 10;
+            t2.position = (t1.position + t3.position) * 0.5f + Vector3.up * 15f;
             
             // 위치값을 설정한 값만큼 만든다.
             Vector3[] points = new Vector3[pointCount];
