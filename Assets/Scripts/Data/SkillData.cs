@@ -5,20 +5,19 @@ using UnityEngine;
 public enum SkillType
 {
     Heal,
-    Rain,
-    Drain,
+    Fireball,
+    CounterShield,
+    EnergyDrain,
+    DeathRay
 }
 
-[CreateAssetMenu(fileName = "Skill Data", menuName = "Data/Skill Data")]
+[CreateAssetMenu(fileName = "Skill Data", menuName = "Skill/Skill Data")]
 public class SkillData : ScriptableObject
 {
     [Header("Skill status")]
-    public string skillName;
-    public string skillDesc;
     public SkillType skillType;
-    public float duration;
-    public float interval;
-    public float castingTime;
+    public float effectInterval;
+    public float effectCount;
 
 
     [Header("Skill Prefab")]

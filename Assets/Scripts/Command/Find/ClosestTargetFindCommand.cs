@@ -19,7 +19,7 @@ public class ClosestTargetFindCommand : FindCommand
     public Monster Find()
     {
         Monster target = null;
-        MonsterOwner targetOwner = MonsterOwner.None;
+        MonsterOwner targetOwner = MonsterOwner.Player;
         switch(monster.owner)
         {
             case MonsterOwner.Player:

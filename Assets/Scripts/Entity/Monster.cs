@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public enum MonsterState
 {
     Idle,
@@ -10,7 +10,6 @@ public enum MonsterState
 }
 public enum MonsterOwner
 {
-    None,
     Player,
     Enemy
 }
@@ -65,6 +64,12 @@ public class Monster : LivingEntity
     public bool isAttacking = false;
     public bool isMoving= false;
     public bool isCasting = false;
+
+    [Header("Action")]
+    public UnityAction<int> OnAttack;
+    public UnityAction<Monster> OnHit;
+    
+
 
     [Header("UI")]
     public MonsterStatusBar statusBar;
@@ -142,8 +147,9 @@ public class Monster : LivingEntity
     public override void Hit(int damage)
     {
         HP -= damage;
+        OnHit?.Invoke(target);
         statusBar?.UpdateUI();
-        GameManager.Instance.CreateDamage(damage, transform.position);
+        GameManager.Instance.CreateText(damage, transform.position, TextType.Damage);
     }
     public void FindTurn()
     {

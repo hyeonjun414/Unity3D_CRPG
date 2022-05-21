@@ -72,11 +72,11 @@ public class GameManager : Singleton<GameManager>
     }
 
     // 데미지 텍스트를 띄우는 함수
-    public void CreateDamage(int damage, Vector3 pos)
+    public void CreateText(int damage, Vector3 pos, TextType tt)
     {
         DamageText dt = Instantiate(damageText, Vector3.zero, Quaternion.identity);
         dt.transform.SetParent(worldCanvas.transform, false); // 월드캔버스의 자식으로 만든다.
-        dt.Enable(damage, pos);
+        dt.Enable(damage, pos, tt);
     }
 
 }

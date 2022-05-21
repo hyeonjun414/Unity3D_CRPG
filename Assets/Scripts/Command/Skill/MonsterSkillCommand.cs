@@ -7,7 +7,6 @@ public class MonsterSkillCommand : SkillCommand
     protected Monster monster;
     protected Animator anim;
 
-    public Skill skill;
     public SkillData skillData;
     public override void Setup(LivingEntity entity)
     {
@@ -17,25 +16,17 @@ public class MonsterSkillCommand : SkillCommand
     }
     public override void Excute()
     {
-        if (monster.target == null)
+        if (monster.target == null || monster.isMoving)
         {
             return;
         }
-        StartCoroutine("SkillRoutine");
-    }
-
-    public virtual IEnumerator SkillRoutine() 
-    {
-        monster.isCasting = true;
         Casting();
-        yield return new WaitForSeconds(skillData.duration);
-        monster.isCasting = false;
     }
 
     public virtual void Casting() 
     {
         monster.MP = 0;
-        Skill skill = Instantiate(skillData.skillPrefab, transform.position, Quaternion.identity).GetComponent<Skill>();
+        Skill skill = Instantiate(skillData.skillPrefab, transform.position, Quaternion.identity, monster.transform).GetComponent<Skill>();
         skill.SetUp(monster, skillData);
     }
 

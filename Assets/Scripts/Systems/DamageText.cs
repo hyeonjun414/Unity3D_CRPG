@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TextType
+{
+    Damage,
+    Heal,
+    Mana,
+    Counter,
+}
+
 public class DamageText : MonoBehaviour
 {
     [SerializeField] private Text text;
 
     public float duration;
-    public Color textColor;
 
-    public void Enable(int damage, Vector3 position)
+    public Color textColor;
+    public Color healColor;
+    public Color damageColor;
+    public Color manaColor;
+    public Color counterColor;
+
+    public void Enable(int damage, Vector3 position, TextType tt)
     {
         // 오브젝트 활성화
         gameObject.SetActive(true);
@@ -20,7 +33,22 @@ public class DamageText : MonoBehaviour
         transform.Translate(Vector3.up*1.5f);
         // 데미지 텍스트 설정
         text.text = damage.ToString();
-        textColor = text.color;
+
+        switch(tt)
+        {
+            case TextType.Damage:
+                textColor = damageColor;
+                break;
+            case TextType.Heal:
+                textColor = healColor;
+                break;
+            case TextType.Mana:
+                textColor = manaColor;
+                break;
+            case TextType.Counter:
+                textColor = counterColor;
+                break;
+        }
 
         StartCoroutine(FloatingRoutine());
     }

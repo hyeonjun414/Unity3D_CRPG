@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb667f5e3a32b9045a27363a5e3b49c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: 1
+  owner: 0
   infoUnits: []
 --- !u!1 &4579435661582757403
 GameObject:
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb667f5e3a32b9045a27363a5e3b49c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: 2
+  owner: 1
   infoUnits: []
 --- !u!1 &4579435661923795087
 GameObject:

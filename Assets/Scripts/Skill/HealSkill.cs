@@ -8,23 +8,10 @@ public class HealSkill : Skill
 
     public override void SetUp(Monster monster, SkillData sd)
     {
-        base.monster = monster;
-        skillData = sd;
-        skillName = skillData.skillName;
-        skillDesc = skillData.skillDesc;
-        skillType = skillData.skillType;
-        skillLevel = 1;
-        duration = skillData.duration;
-        interval = skillData.interval;
-        castingTime = skillData.castingTime;
+        base.SetUp(monster, sd);
+
         StartCoroutine("CastingRoutine");
 
-    }
-    public override IEnumerator CastingRoutine()
-    {
-        
-        yield return new WaitForSeconds(0.1f);
-        Casting();
     }
     public override void Casting()
     {
@@ -44,8 +31,10 @@ public class HealSkill : Skill
         foreach(Monster m in list)
         {
             m.HP += 50;
+            GameManager.Instance.CreateText(50, m.transform.position, TextType.Heal);
             ParticleSystem go = Instantiate(HealEffect, m.transform.position + Vector3.up * 0.5f, Quaternion.identity, m.transform).GetComponent<ParticleSystem>(); ;
             Destroy(go.gameObject, go.main.duration);
         }
+        UIManager.Instance.battleInfoUI.UpdateUI();
     }
 }

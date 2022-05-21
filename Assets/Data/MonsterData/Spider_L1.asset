@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c95e1f76069484a9f40698e89e3ed2, type: 3}
+  m_Name: Spider_L1
+  m_EditorClassIdentifier: 
+  cardType: 0
+  icon: {fileID: 21300000, guid: cdc2fcc817739674fa0b0e1d3a4813bd, type: 3}
+  name: "\uC2A4\uD30C\uC774\uB354"
+  desc: "\uBAAC\uC2A4\uD130 \uC124\uBA85"
+  cost: 2
+  level: 0
+  hp: 50
+  mp: 10
+  damage: 5
+  armor: 1
+  range: 1
+  attackSpeed: 1
+  moveSpeed: 5
+  evolutionCost: 0
+  prevMonster: {fileID: 0}
+  nextMonster: {fileID: 11400000, guid: 6d89066c139b7c9428d88272b09c831a, type: 2}
+  monster: {fileID: 5124521128772935491, guid: c174041c871593b4c98dc9d553f4f4f6, type: 3}

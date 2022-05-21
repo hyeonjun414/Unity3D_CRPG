@@ -14,7 +14,7 @@ public class MonsterAttackCommand : AttackCommand
     }
     public override void Excute()
     {
-        if (monster.target == null || monster.isAttacking || monster.target.nextTile != null)
+        if (monster.target == null || monster.isAttacking || monster.isCasting || monster.target.nextTile != null)
         {
             return;
         }
@@ -22,7 +22,7 @@ public class MonsterAttackCommand : AttackCommand
     }
     public virtual void Attack()
     {
-        monster.MP += 50;
+        monster.MP += 5;
         monster.statusBar?.UpdateUI();
     }
     public virtual IEnumerator AttackRoutine()

@@ -34,6 +34,7 @@ public class MonsterRangeAttackCommand : MonsterAttackCommand
     public void Shoting(Monster my, Monster target, float duration)
     {
         Projectile proj = Instantiate(projectile, projectile.transform.position + monster.transform.position, Quaternion.identity).GetComponent<Projectile>();
-        proj.SetUp(my, target, duration);
+        proj.SetUp(my, target, 0.5f, ProjectileMoveType.Direct);
     }
+
 }

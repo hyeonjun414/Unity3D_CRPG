@@ -97,6 +97,6 @@ public class Player : LivingEntity
     {
         HP -= damage;
         anim.SetTrigger("Hit");
-        GameManager.Instance.CreateDamage((int)damage, transform.position);
+        GameManager.Instance.CreateText((int)damage, transform.position, TextType.Damage);
     }
 }
