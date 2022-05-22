@@ -11,7 +11,7 @@ public enum TextType
     Counter,
 }
 
-public class DamageText : MonoBehaviour
+public class DamageText : MonoBehaviour, IPoolable
 {
     [SerializeField] private Text text;
 
@@ -25,8 +25,6 @@ public class DamageText : MonoBehaviour
 
     public void Enable(int damage, Vector3 position, TextType tt)
     {
-        // 오브젝트 활성화
-        gameObject.SetActive(true);
         // 위치 설정
         transform.position = position;
         transform.LookAt(-Camera.main.transform.position);
@@ -68,9 +66,16 @@ public class DamageText : MonoBehaviour
             yield return null;
         }
 
-        Destroy(gameObject);
-        
+        ReturnPool();
 
 
+
+
+    }
+
+    public void ReturnPool()
+    {
+        gameObject.SetActive(false);
+        ObjectPoolManager.Instance.ReturnObj(gameObject);
     }
 }

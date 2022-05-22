@@ -52,8 +52,8 @@ public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
     [Header("Flag")]
     public bool isDead = false;
 
-    public abstract int Attack();
-    public abstract void Hit(int damage);
+    public abstract LivingEntity Attack();
+    public abstract void Hit(LivingEntity entity);
 
     public virtual void Die()
     {
@@ -63,5 +63,7 @@ public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
     public virtual void SetUp()
     {
         curHp = maxHp;
+        curMp = 0;
+        isDead = false;
     }
 }

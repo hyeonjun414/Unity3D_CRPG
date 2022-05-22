@@ -32,8 +32,10 @@ public class HealSkill : Skill
         {
             m.HP += 50;
             GameManager.Instance.CreateText(50, m.transform.position, TextType.Heal);
-            ParticleSystem go = Instantiate(HealEffect, m.transform.position + Vector3.up * 0.5f, Quaternion.identity, m.transform).GetComponent<ParticleSystem>(); ;
-            Destroy(go.gameObject, go.main.duration);
+            Effect healEffect = ObjectPoolManager.Instance.UseObj(HealEffect).GetComponent<Effect>();
+            healEffect.transform.SetParent(m.transform, true);
+            healEffect.transform.position = m.transform.position + Vector3.up * 0.5f;
+            healEffect.transform.rotation = Quaternion.identity;
         }
         UIManager.Instance.battleInfoUI.UpdateUI();
     }

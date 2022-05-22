@@ -7,7 +7,7 @@ public enum ProjectileMoveType
     Direct,
     Indirect,
 }
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPoolable
 {
     [Header("Projectile")]
     public GameObject hit;
@@ -26,7 +26,8 @@ public class Projectile : MonoBehaviour
         this.owner = owner;
         this.target = target;
         this.duration = duration;
-        Destroy(gameObject, duration + 0.5f);
+        Invoke("ReturnPool", duration + 0.5f);
+        //Destroy(gameObject, duration + 0.5f);
 
         switch(pmt)
         {
@@ -46,9 +47,9 @@ public class Projectile : MonoBehaviour
         float curTime = 0f;
         while (true)
         {
-            if(owner == null || target == null)
+            if(owner == null || target == null || target.isDead)
             {
-                Destroy(gameObject);
+                ReturnPool();
                 yield break;
             }
                 
@@ -73,7 +74,7 @@ public class Projectile : MonoBehaviour
         CreateHit();
         target.Hit(owner.Attack());
         UIManager.Instance.battleInfoUI.UpdateUI();
-        Destroy(gameObject);
+        ReturnPool();
 
     }
 
@@ -102,19 +103,17 @@ public class Projectile : MonoBehaviour
     {
         if (hit != null)
         {
-            var hitInstance = Instantiate(hit, transform.position, Quaternion.identity);
+            GameObject hitInstance = ObjectPoolManager.Instance.UseObj(hit);
+            hitInstance.transform.position = transform.position;
             hitInstance.transform.rotation = Quaternion.LookRotation(-(transform.position - target.transform.position + Vector3.up).normalized);
 
-            var hitPs = hitInstance.GetComponent<ParticleSystem>();
-            if (hitPs != null)
-            {
-                Destroy(hitInstance, hitPs.main.duration);
-            }
-            else
-            {
-                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-                Destroy(hitInstance, hitPsParts.main.duration);
-            }
         }
+    }
+
+    public void ReturnPool()
+    {
+        StopAllCoroutines();
+        gameObject.SetActive(false);
+        ObjectPoolManager.Instance.ReturnObj(gameObject);
     }
 }

@@ -20,10 +20,10 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - Reward
+  - Ally
   - InGameUI
   - BattleTile
-  - 
+  - Reward
   - 
   - 
   - 

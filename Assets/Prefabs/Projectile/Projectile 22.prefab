@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4036995283409360}
   - component: {fileID: 198134207313987930}
   - component: {fileID: 199626401336443300}
-  - component: {fileID: 114460598514863804}
   - component: {fileID: 5172274974076794545}
   m_Layer: 0
   m_Name: Projectile 22
@@ -4833,18 +4832,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &114460598514863804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034045548656336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5172274974076794545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4858,9 +4845,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: {fileID: 0}
+  moveType: 0
   owner: {fileID: 0}
   target: {fileID: 0}
   duration: 0
+  projHeight: 0
 --- !u!1 &1512875676520532
 GameObject:
   m_ObjectHideFlags: 0

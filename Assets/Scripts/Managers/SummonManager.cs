@@ -15,12 +15,25 @@ public class SummonManager : Singleton<SummonManager>
     public Monster SummonMonster(MonsterData md, BattleTile bt, MonsterOwner owner)
     {
         Vector3 dir;
+        int layerNum = 0;
         if (owner == MonsterOwner.Player)
+        {
             dir = Vector3.right;
+            layerNum = LayerMask.NameToLayer("Ally");
+        }
         else
+        {
             dir = Vector3.left;
+            layerNum = LayerMask.NameToLayer("Enemy");
+        }
+            
+            
         Monster monster = null;
-        monster = Instantiate(md.monster, bt.transform.position, Quaternion.LookRotation(dir)).GetComponent<Monster>();
+        monster = ObjectPoolManager.Instance.UseObj(md.monster).GetComponent<Monster>();
+        monster.transform.position = bt.transform.position;
+        monster.transform.rotation = Quaternion.LookRotation(dir);
+        monster.transform.localScale = Vector3.one;
+        monster.gameObject.layer = layerNum;
         monster.transform.SetParent(GameManager.Instance.worldCanvas.transform, true);
         if (monster != null)
         {

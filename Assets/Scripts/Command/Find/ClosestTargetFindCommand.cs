@@ -11,25 +11,29 @@ public class ClosestTargetFindCommand : FindCommand
     }
     public override void Excute()
     {
-        if (monster.target != null)
-            return;
-        monster.target = Find();
+        if (monster.target == null || monster.target.isDead)
+        {
+            monster.target = Find();
+        }
     }
 
     public Monster Find()
     {
         Monster target = null;
         MonsterOwner targetOwner = MonsterOwner.Player;
+        string targetLayer = null;
         switch(monster.owner)
         {
             case MonsterOwner.Player:
                 targetOwner = MonsterOwner.Enemy;
+                targetLayer = "Enemy";
                 break;
             case MonsterOwner.Enemy:
                 targetOwner = MonsterOwner.Player;
+                targetLayer = "Ally";
                 break;
         }
-        Collider[] hits = Physics.OverlapBox(transform.position, Vector3.one * 50, Quaternion.identity,LayerMask.GetMask("Enemy"));
+        Collider[] hits = Physics.OverlapBox(transform.position, Vector3.one * 50, Quaternion.identity,LayerMask.GetMask(targetLayer));
         if(hits.Length > 0)
         {
             float minDist = 500;

@@ -111,8 +111,10 @@ public class StageManager : Singleton<StageManager>
             {
                 monList[i].curTile.state = TileState.NONE;
                 monList[i].curTile.monster = null;
-                Destroy(monList[i].gameObject);
+                monList[i].ReturnPool();
                 monList.RemoveAt(i);
+                
+                
             }
             else
             {
@@ -144,23 +146,25 @@ public class StageManager : Singleton<StageManager>
         foreach(Monster monster in AllyMonster)
         {
             CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monster.monsterData);
-            Destroy(monster.gameObject);
+            monster.ReturnPool();
+            //Destroy(monster.gameObject);
         }
         foreach(Monster monster in EnemyMonster)
         {
-            Destroy(monster.gameObject);
+            monster.ReturnPool();
+            //Destroy(monster.gameObject);
         }
 
         // 적 몬스터가 아군 몬스터보다 적을 때 -> 플레이어가 승리했을때
         if(EnemyMonster.Count < AllyMonster.Count)
         {
-            enemy.Hit(player.Attack());
+            enemy.Hit(player);
             enemy.waveCount++;
         }
         // 적 몬스터가 아군 몬스터보다 많을 때 -> 적이 승리했을때
         else
         {
-            player.Hit(enemy.Attack());
+            player.Hit(enemy);
         }
 
         ResetStage();

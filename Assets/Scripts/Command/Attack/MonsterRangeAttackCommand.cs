@@ -33,7 +33,10 @@ public class MonsterRangeAttackCommand : MonsterAttackCommand
     }
     public void Shoting(Monster my, Monster target, float duration)
     {
-        Projectile proj = Instantiate(projectile, projectile.transform.position + monster.transform.position, Quaternion.identity).GetComponent<Projectile>();
+        Projectile proj = ObjectPoolManager.Instance.UseObj(projectile).GetComponent<Projectile>();
+        proj.transform.SetParent(null, true);
+        proj.transform.position = projectile.transform.position + monster.transform.position;
+        proj.transform.rotation = Quaternion.identity;
         proj.SetUp(my, target, 0.5f, ProjectileMoveType.Direct);
     }
 

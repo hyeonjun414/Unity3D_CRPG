@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Skill : MonoBehaviour
+public abstract class Skill : MonoBehaviour, IPoolable
 {
     public Monster monster;         // 스킬의 사용하는 몬스터
     public int skillLevel;          // 스킬의 레벨 = 몬스터의 레벨
@@ -15,6 +15,7 @@ public abstract class Skill : MonoBehaviour
         effectInterval = sd.effectInterval;
         effectCount = sd.effectCount;
         skillLevel = (int)monster.level;
+        monster.skill = this;
         StartCoroutine("CastingRoutine");
     }
     public virtual IEnumerator CastingRoutine()
@@ -27,7 +28,18 @@ public abstract class Skill : MonoBehaviour
             yield return new WaitForSeconds(effectInterval);
         }
         monster.isCasting = false;
-        Destroy(gameObject);
+        ReturnPool();
     }
     public abstract void Casting();
+
+    protected virtual void OnDisable() { }
+
+    public void ReturnPool()
+    {
+        StopAllCoroutines();
+        monster.skill = null;
+        gameObject.SetActive(false);
+        ObjectPoolManager.Instance.ReturnObj(gameObject);
+    }
+    
 }

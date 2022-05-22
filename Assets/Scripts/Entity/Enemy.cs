@@ -41,16 +41,16 @@ public class Enemy : LivingEntity
         }
     }
 
-    public override int Attack()
+    public override LivingEntity Attack()
     {
         anim.SetTrigger("Attack");
-        return damage;
+        return this;
     }
 
-    public override void Hit(int damage)
+    public override void Hit(LivingEntity entity)
     {
-        HP -= damage;
+        HP -= entity.damage;
         anim.SetTrigger("Hit");
-        GameManager.Instance.CreateText((int)damage, transform.position, TextType.Damage);
+        GameManager.Instance.CreateText(entity.damage, transform.position, TextType.Damage);
     }
 }

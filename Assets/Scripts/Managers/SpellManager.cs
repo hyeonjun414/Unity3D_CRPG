@@ -48,7 +48,7 @@ public class SpellManager : Singleton<SpellManager>
                     StageManager.Instance.EnemyMonster.Remove(monster);
                     break;
             }
-            Destroy(monster.gameObject);
+            monster.ReturnPool();
             
             bt.monster = SummonManager.Instance.SummonMonster(md, bt, MonsterOwner.Player);
         }

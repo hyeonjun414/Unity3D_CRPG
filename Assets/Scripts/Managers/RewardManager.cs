@@ -16,7 +16,9 @@ public class RewardManager : Singleton<RewardManager>
 
     public void StageReward(Vector3 pos)
     {
-        RewardItem reward = Instantiate(rewardPrefab, pos+rewardPrefab.transform.position, Quaternion.identity);
+        RewardItem reward = ObjectPoolManager.Instance.UseObj(rewardPrefab.gameObject).GetComponent<RewardItem>();
+        reward.transform.position = pos + rewardPrefab.transform.position;
+        reward.transform.rotation = Quaternion.identity;
         reward.rewardData = cardDatas[Random.Range(0, cardDatas.Length)];
     }
 

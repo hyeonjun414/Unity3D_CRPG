@@ -33,7 +33,7 @@ public enum TargetStrategy
     Random
     
 }
-public class Monster : LivingEntity
+public class Monster : LivingEntity, IPoolable
 {
     [Header("Monster Status")]
     public float attackSpeed;
@@ -66,9 +66,11 @@ public class Monster : LivingEntity
     public bool isCasting = false;
 
     [Header("Action")]
-    public UnityAction<int> OnAttack;
+    public UnityAction<Monster> OnAttack;
     public UnityAction<Monster> OnHit;
-    
+
+    [Header("Skill")]
+    public Skill skill;
 
 
     [Header("UI")]
@@ -81,6 +83,11 @@ public class Monster : LivingEntity
     public override void SetUp()
     {
         base.SetUp();
+        isAttacking = false;
+        isMoving = false;
+        isCasting = false;
+
+
         anim = GetComponentInChildren<Animator>();
         cc = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
@@ -96,27 +103,37 @@ public class Monster : LivingEntity
             enemyEffect.gameObject.SetActive(true);
         }
 
-        findCommand = anim.gameObject.AddComponent<ClosestTargetFindCommand>();
-        findCommand.Setup(this);
-
-        moveCommand = anim.gameObject.AddComponent<MonsterMoveCommand>();
-        moveCommand.Setup(this);
-        if(range > 1)
+        if(findCommand == null)
         {
-            attackCommand = anim.gameObject.AddComponent<MonsterRangeAttackCommand>();
-            attackCommand.Setup(this);
+            findCommand = anim.gameObject.AddComponent<ClosestTargetFindCommand>();
+            findCommand.Setup(this);
         }
-        else
+    
+        if(moveCommand == null)
         {
-            attackCommand = anim.gameObject.AddComponent<MonsterMeleeAttackCommand>();
-            attackCommand.Setup(this);
-        }
-        if(monsterData.skillData != null)
-        {
-            skillCommand = anim.gameObject.AddComponent<MonsterSkillCommand>();
-            skillCommand.Setup(this);
+            moveCommand = anim.gameObject.AddComponent<MonsterMoveCommand>();
+            moveCommand.Setup(this);
         }
 
+        if(attackCommand == null)
+        {
+            if (range > 1)
+            {
+                attackCommand = anim.gameObject.AddComponent<MonsterRangeAttackCommand>();
+                attackCommand.Setup(this);
+            }
+            else
+            {
+                attackCommand = anim.gameObject.AddComponent<MonsterMeleeAttackCommand>();
+                attackCommand.Setup(this);
+            }
+            if (monsterData.skillData != null)
+            {
+                skillCommand = anim.gameObject.AddComponent<MonsterSkillCommand>();
+                skillCommand.Setup(this);
+            }
+        }
+        
 
         statusBar?.AddMonster(this);
         statusBar?.UpdateUI();
@@ -136,20 +153,22 @@ public class Monster : LivingEntity
         attackSpeed = data.attackSpeed;
         moveSpeed = data.moveSpeed;
 
+
         SetUp();
     }
 
-    public override int Attack()
+    public override LivingEntity Attack()
     {
-        return damage;
+        OnAttack?.Invoke(this);
+        return this;
     }
 
-    public override void Hit(int damage)
+    public override void Hit(LivingEntity enemy)
     {
-        HP -= damage;
-        OnHit?.Invoke(target);
+        HP -= enemy.damage;
+        OnHit?.Invoke((Monster)enemy);
         statusBar?.UpdateUI();
-        GameManager.Instance.CreateText(damage, transform.position, TextType.Damage);
+        GameManager.Instance.CreateText(enemy.damage, transform.position, TextType.Damage);
     }
     public void FindTurn()
     {
@@ -183,5 +202,22 @@ public class Monster : LivingEntity
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, Vector3.one * range);
+    }
+
+    public void ReturnPool()
+    {
+        ResetMonster();
+        gameObject.SetActive(false);
+        if (skill != null)
+            skill.ReturnPool();
+        ObjectPoolManager.Instance.ReturnObj(gameObject);
+    }
+
+    public void ResetMonster()
+    {
+        target = null;
+        allyEffect.gameObject.SetActive(false);
+        enemyEffect.gameObject.SetActive(false);
+        statusBar.gameObject.SetActive(false);
     }
 }

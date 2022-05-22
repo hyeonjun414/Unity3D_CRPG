@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CounterShield
   m_EditorClassIdentifier: 
   skillType: 2
-  effectInterval: 3
+  effectInterval: 10
   effectCount: 1
   skillPrefab: {fileID: 4168569814852088502, guid: b89ad30e25a83c14a871c7f7e51ff3da,
     type: 3}

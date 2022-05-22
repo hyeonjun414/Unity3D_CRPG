@@ -55,26 +55,26 @@ public class GameManager : Singleton<GameManager>
         }
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            Time.timeScale = 0.5f;
+            Time.timeScale = 1f;
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            Time.timeScale = 2f;
+            Time.timeScale *= 0.5f;
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            Time.timeScale = 4f;
+            Time.timeScale *= 2f;
         }
     }
 
     // 데미지 텍스트를 띄우는 함수
     public void CreateText(int damage, Vector3 pos, TextType tt)
     {
-        DamageText dt = Instantiate(damageText, Vector3.zero, Quaternion.identity);
+        DamageText dt = ObjectPoolManager.Instance.UseObj(damageText.gameObject).GetComponent<DamageText>();
         dt.transform.SetParent(worldCanvas.transform, false); // 월드캔버스의 자식으로 만든다.
         dt.Enable(damage, pos, tt);
     }

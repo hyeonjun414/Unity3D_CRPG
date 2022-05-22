@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f3fb116b301d347b73b600599cd1e1, type: 3}
+  m_Name: ChainAttack
+  m_EditorClassIdentifier: 
+  skillType: 5
+  effectInterval: 10
+  effectCount: 1
+  skillPrefab: {fileID: 3287607155031008807, guid: ce38a12d641cf2141881944a0935508b,
+    type: 3}

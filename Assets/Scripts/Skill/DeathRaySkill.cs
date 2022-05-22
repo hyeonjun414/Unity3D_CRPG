@@ -38,7 +38,9 @@ public class DeathRaySkill : Skill
 
         target = targetList[Random.Range(0, targetList.Count)];
 
-        Projectile proj = Instantiate(ray, transform.position + Vector3.up * 2, Quaternion.identity).GetComponent<Projectile>();
+        Projectile proj = ObjectPoolManager.Instance.UseObj(ray).GetComponent<Projectile>();
+        proj.transform.position = transform.position + Vector3.up * 2;
+        proj.transform.rotation = Quaternion.identity;
         proj.SetUp(monster, target, 2, ProjectileMoveType.Indirect);
         proj.projHeight = 20;
     }

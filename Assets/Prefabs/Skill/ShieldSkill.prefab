@@ -51,7 +51,7 @@ MonoBehaviour:
   effectCount: 1
   shieldLoop: {fileID: 5326727767918704158}
   shieldHit: {fileID: 7543872320079496910}
-  counterEffect: {fileID: 1914345040822934, guid: 3a3ebdd477adb6444969752e68f9e55e,
+  counterEffect: {fileID: 1036333269638840, guid: ef851a7a2a1635a4f926a0fbafa44b5d,
     type: 3}
 --- !u!1001 &1301144490747477808
 PrefabInstance:

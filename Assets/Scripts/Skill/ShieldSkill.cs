@@ -27,14 +27,15 @@ public class ShieldSkill : Skill
         monster.HP += damage;
         target.HP -= damage;
         GameManager.Instance.CreateText(damage, target.transform.position, TextType.Counter);
-        GameObject go = Instantiate(counterEffect, Vector3.zero, Quaternion.identity);
-        shieldHit.Play();
+        Effect go = ObjectPoolManager.Instance.UseObj(counterEffect.gameObject).GetComponent<Effect>();
+        go.transform.position = Vector3.zero;
+        go.transform.rotation = Quaternion.identity;
         go.transform.SetParent(target.transform, true);
+        shieldHit.Play();
         go.transform.position += Vector3.up;
-        Destroy(go, 2f);
     }
 
-    private void OnDestroy()
+    protected override void OnDisable()
     {
         monster.OnHit -= HitCounter;
     }
