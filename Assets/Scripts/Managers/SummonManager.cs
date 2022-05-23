@@ -41,11 +41,11 @@ public class SummonManager : Singleton<SummonManager>
             {
                 case MonsterOwner.Player:
                     dir = Vector3.right;
-                    StageManager.Instance.AllyMonster.Add(monster);
+                    BattleManager.Instance.AllyMonster.Add(monster);
                     break;
                 case MonsterOwner.Enemy:
                     dir = Vector3.left;
-                    StageManager.Instance.EnemyMonster.Add(monster);
+                    BattleManager.Instance.EnemyMonster.Add(monster);
                     break;
             }
             monster.transform.rotation = Quaternion.LookRotation(dir);

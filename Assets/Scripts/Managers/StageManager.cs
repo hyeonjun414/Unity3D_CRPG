@@ -1,210 +1,186 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
 
 public class StageManager : Singleton<StageManager>
 {
+    public Stage stageObj;
+    public int stageWidth;
+    public int stageHeight;
+    public List<Stage> stages;
+    public Stage endStage;
 
-    public BattleStage stage;
-    public Enemy enemy;
-    public Player player;
+    public int curStageLevel; // y 좌표
+    public int curStagePos; // x 좌표
 
-    public List<Monster> EnemyMonster;
-    public List<Monster> AllyMonster;
+    public StageData[] stageDatas;
+    public Transform stageMapUIPos;
 
-    private PathFinder pf;
-
-    private bool isStage = false;
-    private bool isPrepared = false;
     private void Awake()
     {
         if (_instance == null)
             _instance = this;
-
-        pf = gameObject.AddComponent<PathFinder>();
     }
-
     private void Start()
     {
-        FindingEnemyAndStage();
+        stages = new List<Stage>();
     }
-    public List<Vector2> PathFinding(Monster start, Monster end)
-    {
-        return pf.ExcutePathFind(start.curTile.tilePos, end.curTile.tilePos, stage);
-    }
-
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.M))
         {
-            CardManager.Instance.ActiveReroll();
+            GenerateStage();
+            DetectAndMerge();
         }
-    }
-    public void FindingEnemyAndStage()
-    {
-        stage = FindObjectOfType<BattleStage>();
-        enemy = FindObjectOfType<Enemy>();
-        player = FindObjectOfType<Player>();
-        isStage = true;
-    }
-    public void BattlePrepare()
-    {
-        if (isPrepared || !isStage) return;
-
-        isPrepared = true;
-        
-        enemy.SummonMonster();
-        CardManager.Instance.ActiveReroll();
-    }
-    IEnumerator BattleLogic()
-    {
-        while(true)
-        {
-            FindTurn(EnemyMonster);
-            FindTurn(AllyMonster);
-            //yield return new WaitForSeconds(0.1f);
-            MoveTurn(EnemyMonster);
-            MoveTurn(AllyMonster);
-            AttackTurn(EnemyMonster);
-            AttackTurn(AllyMonster);
-            //yield return new WaitForSeconds(0.1f);
-            
-            //yield return new WaitForSeconds(0.1f);
-            ResultTurn(EnemyMonster);
-            ResultTurn(AllyMonster);
-            EndTurn();
-            //yield return new WaitForSeconds(0.1f);
-            yield return null;
-        }
-
-
-        
     }
 
-    private void FindTurn(List<Monster> monList)
+    public void GenerateStage()
     {
-        foreach (Monster monster in monList)
+        if(stages != null)
+            ResetStage();
+
+        Stage tempStage = null;
+        for(int i = 0; i < stageHeight; i++)
         {
-            monster.FindTurn();
-        }
-    }
-    private void AttackTurn(List<Monster> monList)
-    {
-        foreach (Monster monster in monList)
-        {
-            monster.AttackTurn();
-        }
-    }
-    private void MoveTurn(List<Monster> monList)
-    {
-        foreach (Monster monster in monList)
-        {
-            monster.MoveTurn();
-        }
-    }
-    private void ResultTurn(List<Monster> monList)
-    {
-        for(int i = 0; i< monList.Count;)
-        {
-            if(monList[i].isDead)
+            for(int j = 0; j < stageWidth; j++)
             {
-                monList[i].curTile.state = TileState.NONE;
-                monList[i].curTile.monster = null;
-                monList[i].ReturnPool();
-                monList.RemoveAt(i);
-                
-                
-            }
-            else
-            {
-                i++;
+                tempStage = Instantiate(stageObj);
+                tempStage.transform.SetParent(stageMapUIPos.transform, false);
+                tempStage.yPos = i;
+                tempStage.xPos = j;
+                stages.Add(tempStage);
             }
         }
+
+        // 보스 노드 만들기
+        tempStage = Instantiate(stageObj);
+        tempStage.transform.SetParent(stageMapUIPos.transform, false);
+        tempStage.yPos = stageHeight;
+        tempStage.xPos = stageWidth/2;
+        tempStage.transform.localScale = Vector3.one * 2f;
+        tempStage.lr.enabled = false;
+        endStage = tempStage;
+
+        for (int j = 0; j < stageWidth; j++)
+        {
+            int offsetX = 0;
+            Color color = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
+            for (int i = 0; i < stageHeight; i++)
+            {
+                offsetX += Random.Range(-1, 2);
+                if (j + offsetX < 0)
+                {
+                    stages[stageWidth * i + j].xPos = 0;
+                }
+                else if (j + offsetX > stageWidth - 1)
+                {
+                    stages[stageWidth * i + j].xPos = stageWidth - 1;
+                }
+                else
+                {
+                    stages[stageWidth * i + j].xPos = j + offsetX;
+                }
+                stages[stageWidth * i + j].gameObject.GetComponent<LineRenderer>().startColor = color;
+                stages[stageWidth * i + j].gameObject.GetComponent<LineRenderer>().endColor = color;
+            }
+        }
+
+        for (int j = 0; j < stageWidth; j++)
+        {
+            for (int i = 0; i < stageHeight; i++)
+            {
+                if (i + 1 < stageHeight)
+                {
+                    stages[stageWidth * i + j].stageNode.nextNode.Add(stages[stageWidth * (i+1) + j]);
+                    stages[stageWidth * (i + 1) + j].stageNode.prevNode.Add(stages[stageWidth * i + j]);
+                }
+            }
+            stages[stageWidth * (stageHeight - 1) + j].stageNode.nextNode.Add(endStage);
+            endStage.stageNode.prevNode.Add(stages[stageWidth * (stageHeight - 1) + j]);
+        }
+
+        MoveStage();
+
     }
-    private void EndTurn()
+    public void DetectAndMerge()
     {
-        if(AllyMonster.Count == 0 || EnemyMonster.Count == 0)
+        List<Stage> tempList = null;
+        int count = 0;
+        for (int i = 0; i < stageHeight; i++)
         {
-            BattleStageEnd();
+            for (int j = 0; j < stageWidth; j++)
+            {
+                tempList = stages.FindAll((stage) => stage.xPos == j && stage.yPos == i);
+                if(tempList.Count > 0)
+                {
+                    count++;
+                    print($"Merge Count : {count}");
+                    StageData targetData = RandomStageType(tempList[0].yPos);
+                    for (int k = 0; k < tempList.Count; k++)
+                    {
+                        tempList[k].SetUp(targetData);
+                        //tempList[k].transform.Translate(Vector3.forward * k);
+                    } 
+                }
+            }
         }
     }
-
-
-    public void BattleStageStart()
+    public void MoveStage()
     {
-        if (!isPrepared) return;
-        //MapSearch();
-        if (AllyMonster.Count == 0) return;
-        StartCoroutine("BattleLogic");
-
-    }
-    public void BattleStageEnd()
-    {
-        StopCoroutine("BattleLogic");
-
-        foreach(Monster monster in AllyMonster)
+        foreach (Stage stage in stages)
         {
-            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monster.monsterData);
-            monster.ReturnPool();
-            //Destroy(monster.gameObject);
+            stage.transform.localPosition = new Vector3(stage.yPos * 100f, stage.xPos* 100f, 0);
         }
-        foreach(Monster monster in EnemyMonster)
+        endStage.transform.localPosition = new Vector3(endStage.yPos * 100f + 50, endStage.xPos * 100f, 0);
+        for (int j = 0; j < stageWidth; j++)
         {
-            monster.ReturnPool();
-            //Destroy(monster.gameObject);
+            for (int i = 0; i < stageHeight; i++)
+            {
+                if (i + 1 < stageHeight)
+                {
+                    stages[stageWidth * i + j].lr.SetPosition(0, stages[stageWidth * i + j].transform.position);
+                    stages[stageWidth * i + j].lr.SetPosition(1, stages[stageWidth * (i+1) + j].transform.position);
+                    
+                }
+            }
+            stages[stageWidth * (stageHeight - 1) + j].lr.SetPosition(0, stages[stageWidth * (stageHeight - 1) + j].transform.position);
+            stages[stageWidth * (stageHeight - 1) + j].lr.SetPosition(1, endStage.transform.position);
         }
-
-        // 적 몬스터가 아군 몬스터보다 적을 때 -> 플레이어가 승리했을때
-        if(EnemyMonster.Count < AllyMonster.Count)
-        {
-            enemy.Hit(player);
-            enemy.waveCount++;
-        }
-        // 적 몬스터가 아군 몬스터보다 많을 때 -> 적이 승리했을때
-        else
-        {
-            player.Hit(enemy);
-        }
-
-        ResetStage();
-
-        if(enemy.HP == 0)
-        {
-           StageClear();
-           Destroy(enemy.gameObject);
-        }
-        else if(player.HP == 0)
-        {
-           // GameOver();
-        }
-        else
-        {
-            Invoke("BattlePrepare",1f);
-        }
-        
-    }
-    public void StageClear()
-    {
-        CameraManager.Instance.SwitchCam(0);
-        RewardManager.Instance.StageReward(enemy.gameObject.transform.position);
-        UIManager.Instance.battleInfoUI.StageEnd();
-        stage.StageOut();
-        
-        isStage = false;
-
     }
     public void ResetStage()
     {
-        AllyMonster.Clear();
-        EnemyMonster.Clear();
-
-        foreach(BattleTile bt in stage.battleTiles)
+        foreach (Stage stage in stages)
         {
-            bt.state = TileState.NONE;
-            bt.monster = null;
+            Destroy(stage.gameObject);
         }
-        isPrepared = false;
+        stages.Clear();
     }
 
+    public StageData RandomStageType(int level)
+    {
+        // 만약 첫 단계면 몬스터랑 배틀 확정
+        if (level == 0)
+            return stageDatas[(int)StageType.Enemy];
+        else if (level == stageHeight - 1)
+            return stageDatas[(int)StageType.Rest];
+        else if (level == stageHeight)
+            return stageDatas[(int)StageType.Boss];
+
+        StageData randomData = null;
+        // 이후에는 랜덤 인카운트
+        // 
+        int rand = Random.Range(0, 101);
+        if(rand < 75)
+            randomData = stageDatas[(int)StageType.Enemy];
+        else if (rand < 82)
+            randomData = stageDatas[(int)StageType.Shop];
+        else if (rand < 89)
+            randomData = stageDatas[(int)StageType.Rest];
+        else
+            randomData = stageDatas[(int)StageType.Event];
+
+        return randomData;
+    }
 }

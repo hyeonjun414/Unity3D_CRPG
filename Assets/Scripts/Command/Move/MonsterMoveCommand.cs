@@ -29,10 +29,10 @@ public class MonsterMoveCommand : MoveCommand
     public IEnumerator MoveRoutine()
     {
         
-        BattleStage bs = StageManager.Instance.stage;
+        BattleStage bs = BattleManager.Instance.stage;
         monster.state = MonsterState.Move;
 
-        List<Vector2> moveList = StageManager.Instance.PathFinding(monster, monster.target);
+        List<Vector2> moveList = BattleManager.Instance.PathFinding(monster, monster.target);
         if (moveList.Count == 0)
         {
             lr.positionCount = 0;
@@ -72,7 +72,7 @@ public class MonsterMoveCommand : MoveCommand
     IEnumerator moveTile(List<Vector2> tiles)
     {
 
-        BattleTile nextTile = StageManager.Instance.stage.battleMap[(int)tiles[1].x, (int)tiles[1].y];
+        BattleTile nextTile = BattleManager.Instance.stage.battleMap[(int)tiles[1].x, (int)tiles[1].y];
 
 
         Vector3 curPos = monster.transform.position;

@@ -42,10 +42,10 @@ public class SpellManager : Singleton<SpellManager>
             switch(monster.owner)
             {
                 case MonsterOwner.Player:
-                    StageManager.Instance.AllyMonster.Remove(monster);
+                    BattleManager.Instance.AllyMonster.Remove(monster);
                     break;
                 case MonsterOwner.Enemy:
-                    StageManager.Instance.EnemyMonster.Remove(monster);
+                    BattleManager.Instance.EnemyMonster.Remove(monster);
                     break;
             }
             monster.ReturnPool();

@@ -29,10 +29,10 @@ public class DeathRaySkill : Skill
         switch (monster.owner)
         {
             case MonsterOwner.Player:
-                targetList = StageManager.Instance.EnemyMonster;
+                targetList = BattleManager.Instance.EnemyMonster;
                 break;
             case MonsterOwner.Enemy:
-                targetList = StageManager.Instance.AllyMonster;
+                targetList = BattleManager.Instance.AllyMonster;
                 break;
         }
 

@@ -127,13 +127,13 @@ public class Monster : LivingEntity, IPoolable
                 attackCommand = anim.gameObject.AddComponent<MonsterMeleeAttackCommand>();
                 attackCommand.Setup(this);
             }
-            if (monsterData.skillData != null)
-            {
-                skillCommand = anim.gameObject.AddComponent<MonsterSkillCommand>();
-                skillCommand.Setup(this);
-            }
+            
         }
-        
+        if (monsterData.skillData != null)
+        {
+            skillCommand = anim.gameObject.AddComponent<MonsterSkillCommand>();
+            skillCommand.Setup(this);
+        }
 
         statusBar?.AddMonster(this);
         statusBar?.UpdateUI();

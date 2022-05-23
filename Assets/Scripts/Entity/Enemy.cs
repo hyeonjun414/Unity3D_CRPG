@@ -17,7 +17,7 @@ public class Enemy : LivingEntity
     public void SummonMonster()
     {
         // 현재 배틀스테이지를 가져온다.
-        BattleStage bs = StageManager.Instance.stage;
+        BattleStage bs = BattleManager.Instance.stage;
         List<int> wave = null;
 
         // 적의 웨이브 카운트에 해당하는 리스트를 넣어준다.
