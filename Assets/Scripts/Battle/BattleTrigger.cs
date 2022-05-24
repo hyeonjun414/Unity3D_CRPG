@@ -24,6 +24,7 @@ public class BattleTrigger : MonoBehaviour
                     break;
                 case CameraType.Map:
                     CameraManager.Instance.SwitchCam(2);
+                    UIManager.Instance.stageUI.ActiveMap();
                     break;
             }
         }
@@ -40,6 +41,7 @@ public class BattleTrigger : MonoBehaviour
                     break;
                 case CameraType.Map:
                     CameraManager.Instance.SwitchCam(0);
+                    UIManager.Instance.stageUI.InactiveMap();
                     break;
             }
         }

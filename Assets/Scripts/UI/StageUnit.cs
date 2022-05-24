@@ -8,10 +8,13 @@ public class StageUnit : MonoBehaviour
     public Image icon;
 
     public StageData stageData;
+    public Stage stage;
 
-    public void UpdateUI()
+    public void UpdateUI(Stage stage)
     {
-        icon.sprite = stageData.icon;
+        this.stage = stage;
+        icon.sprite = stage.stageData.icon;
+        stage.lr.enabled = true;
     }
 
     public void ResetUI()

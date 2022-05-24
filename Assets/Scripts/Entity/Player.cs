@@ -12,8 +12,6 @@ public class Player : LivingEntity
     public float moveSpeed;
     public float roteSpeed;
 
-    private Camera mainCamera; // 메인 카메라
-
     private Animator anim;
     public Vector3 rayPos;
 
@@ -31,9 +29,10 @@ public class Player : LivingEntity
         else
         {
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += ResetPosition;
             instance = this;
         }
-        SceneManager.sceneLoaded += FindingMainCam;
+        
 
         
     }
@@ -52,9 +51,9 @@ public class Player : LivingEntity
 
     }
 
-    public void FindingMainCam(Scene scene, LoadSceneMode mode)
+    public void ResetPosition(Scene scene, LoadSceneMode mode)
     {
-        mainCamera = Camera.main;
+        transform.position = new Vector3(-12, 0.5f, 0);
     }
 
     void Update()

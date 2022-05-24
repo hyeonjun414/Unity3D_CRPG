@@ -17,6 +17,9 @@ public class UIManager : Singleton<UIManager>
     public MonsterInfoUI monsterInfoUI;
     public BattleInfoUI battleInfoUI;
 
+    [Header("Stage UI")]
+    public StageUI stageUI;
+
     [Header("설정")]
     public GameObject optionUI;
 

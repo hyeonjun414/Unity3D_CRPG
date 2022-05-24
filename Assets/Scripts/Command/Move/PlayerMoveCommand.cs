@@ -33,8 +33,7 @@ public class PlayerMoveCommand : MoveCommand
         {
             dir += Vector3.right;
         }
-
-        dir = Quaternion.Euler(0, 45, 0) * dir.normalized;
+        dir = Quaternion.AngleAxis(45, Vector3.up) * dir.normalized;
 
         transform.Translate(dir * onwer.moveSpeed * Time.deltaTime, Space.World);
 

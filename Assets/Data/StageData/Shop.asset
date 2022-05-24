@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   icon: {fileID: 21300000, guid: 6421817949c7842eab7efcfe889a1f98, type: 3}
+  mapObj: {fileID: 297991736924290559, guid: 8163c00155735d74f95e9d37f0b1425a, type: 3}
+  stageObj: {fileID: 100012, guid: a4ee79879bcb54db3881e67b31628302, type: 3}
+  Enemy: {fileID: 0}

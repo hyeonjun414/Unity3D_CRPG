@@ -5,14 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class StageNode
 {
-    public List<Stage> nextNode;
-    public List<Stage> prevNode;
+    public Stage nextNode;
+    public Stage prevNode;
 
-    public StageNode()
-    {
-        nextNode = new List<Stage>();
-        prevNode = new List<Stage>();
-    }
 }
 
 public class Stage : MonoBehaviour
@@ -20,22 +15,27 @@ public class Stage : MonoBehaviour
     [Header("Stage Node")]
     [SerializeField]
     public StageNode stageNode = new StageNode();
-    public int yPos;
     public int xPos;
+    public int yPos;
 
     public LineRenderer lr;
 
     [Header("Stage Data")]
     public StageData stageData;
 
-    [Header("Stage Unit")]
-    public StageUnit stageUnit;
 
     public void SetUp(StageData data)
     {
         stageData = data;
-        stageUnit.stageData = data;
-        stageUnit.UpdateUI();
     }
 
+    private void Update()
+    {
+        if(stageNode.nextNode != null)
+        {
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, stageNode.nextNode.transform.position);
+        }
+
+    }
 }
