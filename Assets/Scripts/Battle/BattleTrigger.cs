@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CameraType
+public enum TriggerType
 {
     Player,
     BattleStage,
@@ -10,19 +10,19 @@ public enum CameraType
 }
 public class BattleTrigger : MonoBehaviour
 {
-    public CameraType type;
+    public TriggerType type;
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
             switch(type)
             {
-                case CameraType.BattleStage:
+                case TriggerType.BattleStage:
                     CameraManager.Instance.SwitchCam(1);
                     UIManager.Instance.battleInfoUI.StageStart();
                     BattleManager.Instance.BattlePrepare();
                     break;
-                case CameraType.Map:
+                case TriggerType.Map:
                     CameraManager.Instance.SwitchCam(2);
                     UIManager.Instance.stageUI.ActiveMap();
                     break;
@@ -35,11 +35,11 @@ public class BattleTrigger : MonoBehaviour
         {
             switch (type)
             {
-                case CameraType.BattleStage:
+                case TriggerType.BattleStage:
                     CameraManager.Instance.SwitchCam(0);
                     UIManager.Instance.battleInfoUI.StageEnd();
                     break;
-                case CameraType.Map:
+                case TriggerType.Map:
                     CameraManager.Instance.SwitchCam(0);
                     UIManager.Instance.stageUI.InactiveMap();
                     break;

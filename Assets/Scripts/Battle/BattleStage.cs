@@ -31,6 +31,8 @@ public class BattleStage : MonoBehaviour
         {
             for(int j = 0; j < mapSize; j++)
             {
+                battleTiles[count].tileIndex = count;
+                battleTiles[count].maxTileIndex = battleTiles.Length;
                 battleMap[i,j] = battleTiles[count++];
                 battleMap[i, j].tilePos = new Vector2(i, j);
             }

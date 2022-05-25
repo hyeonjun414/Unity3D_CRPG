@@ -30,7 +30,7 @@ public class ShieldSkill : Skill
         Effect go = ObjectPoolManager.Instance.UseObj(counterEffect.gameObject).GetComponent<Effect>();
         go.transform.position = Vector3.zero;
         go.transform.rotation = Quaternion.identity;
-        go.transform.SetParent(target.transform, true);
+        go.transform.SetParent(target.transform, false);
         shieldHit.Play();
         go.transform.position += Vector3.up;
     }

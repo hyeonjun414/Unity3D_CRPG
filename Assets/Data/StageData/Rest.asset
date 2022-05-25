@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4f855f4362a7f4f834de3a7209d90c, type: 3}
   m_Name: Rest
   m_EditorClassIdentifier: 
-  type: 3
+  type: 1
   icon: {fileID: 21300000, guid: 2a33c06e9a848e94aa9b4f443d3484f5, type: 3}
-  mapObj: {fileID: 297991736924290559, guid: 8163c00155735d74f95e9d37f0b1425a, type: 3}
-  stageObj: {fileID: 100000, guid: 029ba32bf37b0da4da2db590ea924a44, type: 3}
+  optionalMap: {fileID: 4257340364529490292, guid: 6f60a371aac41c6439cdf6c472329dac,
+    type: 3}
+  enemyMaps:
+  - {fileID: 6332360275178309494, guid: ea472cd040e98a943ad17d04a9841f6e, type: 3}
+  - {fileID: 607547154522598183, guid: 0a976914f52de8545b00c6fdfa3687bd, type: 3}
+  - {fileID: 8128077362824131298, guid: d8a3c2ee59a671e4da9c033e5b67d1d9, type: 3}
+  - {fileID: 7088162139123928985, guid: 8163c00155735d74f95e9d37f0b1425a, type: 3}
+  enemyBattleStages:
+  - {fileID: 4703414355441739998, guid: ce01fb31f348e47449195cacf53574df, type: 3}
+  - {fileID: 3816465035999272730, guid: 5a3655186f711c64d83aa7466ed9e6b8, type: 3}
+  - {fileID: 6136241530296000258, guid: 97fc39d940bd8484c8328da024c0c0ca, type: 3}
+  - {fileID: 923254113450533771, guid: 9cf590bf92aa9fc44acdd65754072a4d, type: 3}
   Enemy: {fileID: 0}

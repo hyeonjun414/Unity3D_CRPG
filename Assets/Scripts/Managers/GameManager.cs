@@ -44,6 +44,10 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+    private void Start()
+    {
+        ApplySceneLoadedFunc();
+    }
     public GameObject mouseVfx;
     private void Update()
     {
@@ -79,4 +83,9 @@ public class GameManager : Singleton<GameManager>
         dt.Enable(damage, pos, tt);
     }
 
+    public void ApplySceneLoadedFunc()
+    {
+        SceneManager.sceneLoaded += StageManager.Instance.GenerateScene;
+        SceneManager.sceneLoaded += BattleManager.Instance.FindingEnemyAndStage;
+    }
 }

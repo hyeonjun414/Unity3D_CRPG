@@ -22,8 +22,8 @@ public class RewardItem : MonoBehaviour
     {
         coll.enabled = false;
         anim.SetTrigger("Get");
-        CardManager.Instance.AddCard(rewardData);
-        Destroy(gameObject, 1f);
+        //CardManager.Instance.AddCard(rewardData);
+        //Destroy(gameObject, 1f);
     }
 
 }

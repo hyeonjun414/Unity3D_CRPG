@@ -19,7 +19,5 @@ public class StageData : ScriptableObject
     public Sprite icon;
 
     [Header("Stage Prefabs")]
-    public GameObject mapObj;
-    public GameObject stageObj;
-    public GameObject Enemy;
+    public GameObject optionalMap;
 }

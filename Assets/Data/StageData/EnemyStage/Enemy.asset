@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74111b178d62da645bd9e25563f75a8f, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  type: 0
+  icon: {fileID: 21300000, guid: 0e997383644a9694b9ceb7a78047d73b, type: 3}
+  optionalMap: {fileID: 0}
+  enemyMaps:
+  - {fileID: 607547154522598183, guid: 0a976914f52de8545b00c6fdfa3687bd, type: 3}
+  - {fileID: 7088162139123928985, guid: 8163c00155735d74f95e9d37f0b1425a, type: 3}
+  - {fileID: 6332360275178309494, guid: ea472cd040e98a943ad17d04a9841f6e, type: 3}
+  - {fileID: 8128077362824131298, guid: d8a3c2ee59a671e4da9c033e5b67d1d9, type: 3}
+  enemyBattleStages:
+  - {fileID: 3816465035999272730, guid: 5a3655186f711c64d83aa7466ed9e6b8, type: 3}
+  - {fileID: 923254113450533771, guid: 9cf590bf92aa9fc44acdd65754072a4d, type: 3}
+  - {fileID: 4703414355441739998, guid: ce01fb31f348e47449195cacf53574df, type: 3}
+  - {fileID: 6136241530296000258, guid: 97fc39d940bd8484c8328da024c0c0ca, type: 3}
+  Enemy: {fileID: 1796178817942925910, guid: 53a112b95b9065b469a7eccb8484623b, type: 3}

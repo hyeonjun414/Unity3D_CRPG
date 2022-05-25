@@ -18,7 +18,6 @@ public abstract class LivingEntity : MonoBehaviour, IAttackable, IDamageable
             {
                 isDead = true;
                 curHp = 0;
-                Die();
             }
             else if(curHp >= maxHp)
             {

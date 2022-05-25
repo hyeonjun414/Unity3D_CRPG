@@ -45,10 +45,6 @@ public class StageManager : Singleton<StageManager>
         {
             GenerateGate();
         }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            SceneManager.sceneLoaded += GenerateScene;
-        }
     }
     public void GenerateGate()
     {
@@ -70,7 +66,7 @@ public class StageManager : Singleton<StageManager>
                 }
             }
             );
-        Vector3 gatePos = new Vector3(12, 0.5f, 0);
+        Vector3 gatePos = new Vector3(14, 0.5f, 0);
         for(int i = 0; i < nextStages.Count; i++)
         {
             Gate gate = Instantiate(gatePrefab, gatePos + Vector3.forward * (nextStages[i].stageNode.nextNode.yPos - curStage.yPos) * 5f, gatePrefab.transform.rotation);
@@ -81,13 +77,48 @@ public class StageManager : Singleton<StageManager>
     public void GenerateScene(Scene scene, LoadSceneMode mode)
     {
         print("Scene Making...");
-        if(curStage.stageData.mapObj != null)
+        int rand = 0;
+        switch (curStage.stageData.type)
         {
-            Instantiate(curStage.stageData.mapObj);
-        }
-        if (curStage.stageData.stageObj != null)
-        {
-            Instantiate(curStage.stageData.stageObj);
+            case StageType.Enemy:
+                {
+                    EnemyStageData data = (EnemyStageData)curStage.stageData;
+                    rand = Random.Range(0, data.enemyMaps.Length);
+                    Instantiate(data.enemyMaps[rand]);
+                    Instantiate(data.enemyBattleStages[rand]);
+                    Instantiate(data.Enemy, new Vector3(10, 0.5f, 0), data.Enemy.transform.rotation);
+                }
+                break;
+            case StageType.Rest:
+                if (curStage.stageData.optionalMap != null)
+                {
+                    Instantiate(curStage.stageData.optionalMap);
+                    GenerateGate();
+                }
+                break;
+            case StageType.Event:
+                if (curStage.stageData.optionalMap != null)
+                {
+                    Instantiate(curStage.stageData.optionalMap);
+                    GenerateGate();
+                }
+                break;
+            case StageType.Shop:
+                if (curStage.stageData.optionalMap != null)
+                {
+                    Instantiate(curStage.stageData.optionalMap);
+                    GenerateGate();
+                }
+                break;
+            case StageType.Boss:
+                {
+                    EnemyStageData data = (EnemyStageData)curStage.stageData;
+                    rand = Random.Range(0, data.enemyMaps.Length);
+                    Instantiate(data.enemyMaps[rand]);
+                    Instantiate(data.enemyBattleStages[rand]);
+                    Instantiate(data.Enemy, new Vector3(0, 0, 10), data.Enemy.transform.rotation);
+                }
+                break;
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : Singleton<BattleManager>
 {
@@ -25,10 +26,6 @@ public class BattleManager : Singleton<BattleManager>
         pf = gameObject.AddComponent<PathFinder>();
     }
 
-    private void Start()
-    {
-        FindingEnemyAndStage();
-    }
     public List<Vector2> PathFinding(Monster start, Monster end)
     {
         return pf.ExcutePathFind(start.curTile.tilePos, end.curTile.tilePos, stage);
@@ -41,7 +38,7 @@ public class BattleManager : Singleton<BattleManager>
             CardManager.Instance.ActiveReroll();
         }
     }
-    public void FindingEnemyAndStage()
+    public void FindingEnemyAndStage(Scene scene, LoadSceneMode mode)
     {
         stage = FindObjectOfType<BattleStage>();
         enemy = FindObjectOfType<Enemy>();
@@ -192,6 +189,7 @@ public class BattleManager : Singleton<BattleManager>
         stage.StageOut();
         
         isStage = false;
+        StageManager.Instance.GenerateGate();
 
     }
     public void ResetStage()

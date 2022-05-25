@@ -165,8 +165,10 @@ public class Monster : LivingEntity, IPoolable
 
     public override void Hit(LivingEntity enemy)
     {
-        HP -= enemy.damage;
         OnHit?.Invoke((Monster)enemy);
+        HP -= enemy.damage;
+        MP += 3;
+        
         statusBar?.UpdateUI();
         GameManager.Instance.CreateText(enemy.damage, transform.position, TextType.Damage);
     }
@@ -201,7 +203,7 @@ public class Monster : LivingEntity, IPoolable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, Vector3.one * range);
+        Gizmos.DrawWireCube(transform.position, new Vector3(1f, 0.1f, 1f)* (range * 2 +1));
     }
 
     public void ReturnPool()

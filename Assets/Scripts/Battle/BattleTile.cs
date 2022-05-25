@@ -13,6 +13,8 @@ public class BattleTile : MonoBehaviour
     /// <summary>
     /// 몬스터 소환, 주문 적용 등의 기능을 하는 타일이다.
     /// </summary>
+    public int tileIndex;
+    public int maxTileIndex;
 
     public MeshRenderer mr;
     public TileState state = TileState.NONE;
@@ -67,6 +69,7 @@ public class BattleTile : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        if (tileIndex < maxTileIndex / 2) return;
         // 만약 선택된 카드가 없다면 패스.
         if (CardManager.Instance.holder.selectedCardIndex == -1) return;
 
