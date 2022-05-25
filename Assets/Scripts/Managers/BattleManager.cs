@@ -11,13 +11,13 @@ public class BattleManager : Singleton<BattleManager>
     public Enemy enemy;
     public Player player;
 
-    public List<Monster> EnemyMonster;
-    public List<Monster> AllyMonster;
+    public List<Monster> enemyMonster;
+    public List<Monster> allyMonster;
 
     private PathFinder pf;
 
     private bool isStage = false;
-    private bool isPrepared = false;
+    public bool isPrepared = false;
     private void Awake()
     {
         if (_instance == null)
@@ -33,9 +33,9 @@ public class BattleManager : Singleton<BattleManager>
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R))
         {
-            CardManager.Instance.ActiveReroll();
+            CardManager.Instance.TurnEndReroll();
         }
     }
     public void FindingEnemyAndStage(Scene scene, LoadSceneMode mode)
@@ -52,24 +52,25 @@ public class BattleManager : Singleton<BattleManager>
         isPrepared = true;
         
         enemy.SummonMonster();
-        CardManager.Instance.ActiveReroll();
+        CardManager.Instance.TurnEndReroll();
+        player.RegenMp();
     }
     IEnumerator BattleLogic()
     {
         while(true)
         {
-            FindTurn(EnemyMonster);
-            FindTurn(AllyMonster);
+            FindTurn(enemyMonster);
+            FindTurn(allyMonster);
             //yield return new WaitForSeconds(0.1f);
-            MoveTurn(EnemyMonster);
-            MoveTurn(AllyMonster);
-            AttackTurn(EnemyMonster);
-            AttackTurn(AllyMonster);
+            MoveTurn(enemyMonster);
+            MoveTurn(allyMonster);
+            AttackTurn(enemyMonster);
+            AttackTurn(allyMonster);
             //yield return new WaitForSeconds(0.1f);
             
             //yield return new WaitForSeconds(0.1f);
-            ResultTurn(EnemyMonster);
-            ResultTurn(AllyMonster);
+            ResultTurn(enemyMonster);
+            ResultTurn(allyMonster);
             EndTurn();
             //yield return new WaitForSeconds(0.1f);
             yield return null;
@@ -121,7 +122,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     private void EndTurn()
     {
-        if(AllyMonster.Count == 0 || EnemyMonster.Count == 0)
+        if(allyMonster.Count == 0 || enemyMonster.Count == 0)
         {
             BattleStageEnd();
         }
@@ -132,7 +133,7 @@ public class BattleManager : Singleton<BattleManager>
     {
         if (!isPrepared) return;
         //MapSearch();
-        if (AllyMonster.Count == 0) return;
+        if (allyMonster.Count == 0) return;
         StartCoroutine("BattleLogic");
 
     }
@@ -140,20 +141,20 @@ public class BattleManager : Singleton<BattleManager>
     {
         StopCoroutine("BattleLogic");
 
-        foreach(Monster monster in AllyMonster)
+        foreach(Monster monster in allyMonster)
         {
-            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monster.monsterData);
+            //CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Graveyard, monster.monsterData);
             monster.ReturnPool();
             //Destroy(monster.gameObject);
         }
-        foreach(Monster monster in EnemyMonster)
+        foreach(Monster monster in enemyMonster)
         {
             monster.ReturnPool();
             //Destroy(monster.gameObject);
         }
 
         // 적 몬스터가 아군 몬스터보다 적을 때 -> 플레이어가 승리했을때
-        if(EnemyMonster.Count < AllyMonster.Count)
+        if(enemyMonster.Count < allyMonster.Count)
         {
             enemy.Hit(player);
             enemy.waveCount++;
@@ -194,8 +195,8 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void ResetStage()
     {
-        AllyMonster.Clear();
-        EnemyMonster.Clear();
+        allyMonster.Clear();
+        enemyMonster.Clear();
 
         foreach(BattleTile bt in stage.battleTiles)
         {

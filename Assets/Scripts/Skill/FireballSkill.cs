@@ -50,7 +50,6 @@ public class FireballSkill : Skill
                     proj.transform.position = transform.position;
                     proj.transform.rotation = Quaternion.identity;
                     proj.SetUp(monster, target, 3, ProjectileMoveType.Indirect);
-                    proj.projHeight = 5;
                 }
             }
         }

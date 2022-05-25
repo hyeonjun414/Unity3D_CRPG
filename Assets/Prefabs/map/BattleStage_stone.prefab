@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 265181078454994834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 2}
+  m_LocalScale: {x: 2, y: 0.5, z: 2}
   m_Children: []
   m_Father: {fileID: 5162765244554404214}
   m_RootOrder: 0
@@ -105,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590889569343691573}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: -11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7284705895663689762}
@@ -124,7 +124,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 2}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &3719717558852664893
 MonoBehaviour:
@@ -245,6 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987322427121}
   state: 0
   monster: {fileID: 0}
@@ -357,6 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987335572697}
   state: 0
   monster: {fileID: 0}
@@ -469,6 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987429554922}
   state: 0
   monster: {fileID: 0}
@@ -581,6 +587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987453185009}
   state: 0
   monster: {fileID: 0}
@@ -693,6 +701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987456480319}
   state: 0
   monster: {fileID: 0}
@@ -805,6 +815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987476268708}
   state: 0
   monster: {fileID: 0}
@@ -917,6 +929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987487389233}
   state: 0
   monster: {fileID: 0}
@@ -1029,6 +1043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987508527592}
   state: 0
   monster: {fileID: 0}
@@ -1141,6 +1157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987512183955}
   state: 0
   monster: {fileID: 0}
@@ -1253,6 +1271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987621264203}
   state: 0
   monster: {fileID: 0}
@@ -1365,6 +1385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987637800591}
   state: 0
   monster: {fileID: 0}
@@ -1477,6 +1499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987687835820}
   state: 0
   monster: {fileID: 0}
@@ -1589,6 +1613,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987688763505}
   state: 0
   monster: {fileID: 0}
@@ -1701,6 +1727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987720862687}
   state: 0
   monster: {fileID: 0}
@@ -1813,6 +1841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987821798385}
   state: 0
   monster: {fileID: 0}
@@ -1925,6 +1955,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987831246199}
   state: 0
   monster: {fileID: 0}
@@ -2037,6 +2069,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542987960976219}
   state: 0
   monster: {fileID: 0}
@@ -2149,6 +2183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988005914416}
   state: 0
   monster: {fileID: 0}
@@ -2261,6 +2297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988009673610}
   state: 0
   monster: {fileID: 0}
@@ -2373,6 +2411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988117200627}
   state: 0
   monster: {fileID: 0}
@@ -2485,6 +2525,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988168984306}
   state: 0
   monster: {fileID: 0}
@@ -2597,6 +2639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988187512321}
   state: 0
   monster: {fileID: 0}
@@ -2709,6 +2753,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988203165057}
   state: 0
   monster: {fileID: 0}
@@ -2821,6 +2867,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988266223106}
   state: 0
   monster: {fileID: 0}
@@ -2933,6 +2981,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988296658495}
   state: 0
   monster: {fileID: 0}
@@ -3045,6 +3095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988306175662}
   state: 0
   monster: {fileID: 0}
@@ -3157,6 +3209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988309951327}
   state: 0
   monster: {fileID: 0}
@@ -3269,6 +3323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988316906795}
   state: 0
   monster: {fileID: 0}
@@ -3381,6 +3437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988388431006}
   state: 0
   monster: {fileID: 0}
@@ -3493,6 +3551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988428411660}
   state: 0
   monster: {fileID: 0}
@@ -3605,6 +3665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988430717754}
   state: 0
   monster: {fileID: 0}
@@ -3717,6 +3779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988543064469}
   state: 0
   monster: {fileID: 0}
@@ -3829,6 +3893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988546667874}
   state: 0
   monster: {fileID: 0}
@@ -3941,6 +4007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988560216937}
   state: 0
   monster: {fileID: 0}
@@ -4053,6 +4121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988704224950}
   state: 0
   monster: {fileID: 0}
@@ -4165,6 +4235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988710724481}
   state: 0
   monster: {fileID: 0}
@@ -4277,6 +4349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988746891054}
   state: 0
   monster: {fileID: 0}
@@ -4389,6 +4463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988751377015}
   state: 0
   monster: {fileID: 0}
@@ -4501,6 +4577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988764910617}
   state: 0
   monster: {fileID: 0}
@@ -4613,6 +4691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988779187545}
   state: 0
   monster: {fileID: 0}
@@ -4725,6 +4805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988880471831}
   state: 0
   monster: {fileID: 0}
@@ -4837,6 +4919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542988977856060}
   state: 0
   monster: {fileID: 0}
@@ -4949,6 +5033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989043014671}
   state: 0
   monster: {fileID: 0}
@@ -5061,6 +5147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989071688022}
   state: 0
   monster: {fileID: 0}
@@ -5173,6 +5261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989076253547}
   state: 0
   monster: {fileID: 0}
@@ -5285,6 +5375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989077546654}
   state: 0
   monster: {fileID: 0}
@@ -5397,6 +5489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989097562153}
   state: 0
   monster: {fileID: 0}
@@ -5509,6 +5603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989113500764}
   state: 0
   monster: {fileID: 0}
@@ -5621,6 +5717,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989114420375}
   state: 0
   monster: {fileID: 0}
@@ -5733,6 +5831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989143469287}
   state: 0
   monster: {fileID: 0}
@@ -5845,6 +5945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989161791369}
   state: 0
   monster: {fileID: 0}
@@ -5957,6 +6059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989188208410}
   state: 0
   monster: {fileID: 0}
@@ -6069,6 +6173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989206626550}
   state: 0
   monster: {fileID: 0}
@@ -6181,6 +6287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989209694608}
   state: 0
   monster: {fileID: 0}
@@ -6293,6 +6401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989212676542}
   state: 0
   monster: {fileID: 0}
@@ -6405,6 +6515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989249383721}
   state: 0
   monster: {fileID: 0}
@@ -6517,6 +6629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989290514758}
   state: 0
   monster: {fileID: 0}
@@ -6629,6 +6743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989297303555}
   state: 0
   monster: {fileID: 0}
@@ -6741,6 +6857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989335301662}
   state: 0
   monster: {fileID: 0}
@@ -6853,6 +6971,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989365211209}
   state: 0
   monster: {fileID: 0}
@@ -6965,6 +7085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989372562575}
   state: 0
   monster: {fileID: 0}
@@ -7077,6 +7199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989400682563}
   state: 0
   monster: {fileID: 0}
@@ -7189,6 +7313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 3487542989417086312}
   state: 0
   monster: {fileID: 0}
@@ -7222,7 +7348,7 @@ Transform:
   m_GameObject: {fileID: 6049513827445159921}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 2}
+  m_LocalScale: {x: 2, y: 0.5, z: 2}
   m_Children: []
   m_Father: {fileID: 8231467239350890716}
   m_RootOrder: 0
@@ -7380,6 +7506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e974559bf8db499e61495eb76dadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileIndex: 0
+  maxTileIndex: 0
   mr: {fileID: 6136241530105195985}
   state: 0
   monster: {fileID: 0}
@@ -7769,7 +7897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6324187874825594568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5144771867906037169}
@@ -7788,7 +7916,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 2}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7801077071810929543
 MonoBehaviour:

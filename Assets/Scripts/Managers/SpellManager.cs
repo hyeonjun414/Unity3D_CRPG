@@ -23,6 +23,7 @@ public class SpellManager : Singleton<SpellManager>
                 Evolution(monster);
                 break;
         }
+        BattleManager.Instance.player.UseMp(spell.cost);
     }
 
     public void Meditation(Monster monster)
@@ -42,15 +43,17 @@ public class SpellManager : Singleton<SpellManager>
             switch(monster.owner)
             {
                 case MonsterOwner.Player:
-                    BattleManager.Instance.AllyMonster.Remove(monster);
+                    BattleManager.Instance.allyMonster.Remove(monster);
                     break;
                 case MonsterOwner.Enemy:
-                    BattleManager.Instance.EnemyMonster.Remove(monster);
+                    BattleManager.Instance.enemyMonster.Remove(monster);
                     break;
             }
             monster.ReturnPool();
-            
+            CardManager.Instance.graveyard.Remove(monster.monsterData);
+            CardManager.Instance.graveyard.Add(md);
             bt.monster = SummonManager.Instance.SummonMonster(md, bt, MonsterOwner.Player);
+            
         }
     }
 }

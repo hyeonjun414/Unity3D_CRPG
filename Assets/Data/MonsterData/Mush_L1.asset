@@ -18,14 +18,16 @@ MonoBehaviour:
   desc: "\uBAAC\uC2A4\uD130 \uC124\uBA85"
   cost: 2
   level: 0
-  hp: 50
-  mp: 10
-  damage: 5
-  armor: 1
+  hp: 700
+  mp: 70
+  damage: 30
+  armor: 10
   range: 1
-  attackSpeed: 1
-  moveSpeed: 5
+  attackSpeed: 0.75
+  moveSpeed: 0
   evolutionCost: 0
   prevMonster: {fileID: 0}
   nextMonster: {fileID: 11400000, guid: 5761c06ec81b2fd429a343cdba252306, type: 2}
   monster: {fileID: 2228107677865392764, guid: 8ad04e9a5e76a4349a06afd46ff857d5, type: 3}
+  projectile: {fileID: 0}
+  skillData: {fileID: 0}

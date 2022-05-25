@@ -8,7 +8,8 @@ public class Player : LivingEntity
 {
     private static Player instance = null;
     [Header("Player")]
-
+    public int mpRegen = 10;
+    public int rerollCost = 5;
     public float moveSpeed;
     public float roteSpeed;
 
@@ -40,10 +41,17 @@ public class Player : LivingEntity
     {
         anim = GetComponentInChildren<Animator>();
         AddCommand();
-        statusUI = UIManager.Instance.statusUI;
+        
         SetUp();
+        statusUI = UIManager.Instance.statusUI;
+        statusUI.SetUp(this);
     }
 
+    public override void SetUp()
+    {
+        base.SetUp();
+        curMp = maxMp;
+    }
     public void AddCommand()
     {
         moveCmd = gameObject.AddComponent<PlayerMoveCommand>();
@@ -53,7 +61,7 @@ public class Player : LivingEntity
 
     public void ResetPosition(Scene scene, LoadSceneMode mode)
     {
-        transform.position = new Vector3(-12, 0.5f, 0);
+        transform.position = new Vector3(-14, 0.5f, 0);
     }
 
     void Update()
@@ -62,7 +70,6 @@ public class Player : LivingEntity
         Move();
 
         Looting();
-
     }
 
     public void Move()
@@ -92,10 +99,21 @@ public class Player : LivingEntity
             }
         }
     }
+    public void UseMp(int cost)
+    {
+        MP -= cost;
+        statusUI.UpdateUI();
+    }
+    public void RegenMp()
+    {
+        MP += mpRegen;
+        statusUI.UpdateUI();
+    }
     public override void Hit(LivingEntity entity)
     {
         HP -= entity.damage;
         anim.SetTrigger("Hit");
+        statusUI.UpdateUI();
         GameManager.Instance.CreateText(entity.damage, transform.position, TextType.Damage);
     }
 }

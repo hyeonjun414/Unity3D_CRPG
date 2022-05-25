@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour, IPoolable
         this.owner = owner;
         this.target = target;
         this.duration = duration;
-        Invoke("ReturnPool", duration + 0.5f);
+        //Invoke("ReturnPool", duration + 0.5f);
         //Destroy(gameObject, duration + 0.5f);
 
         switch(pmt)
@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour, IPoolable
         float curTime = 0f;
         while (true)
         {
-            if(owner == null || target == null || target.isDead)
+            if(!owner.gameObject.activeSelf || !target.gameObject.activeSelf || target.isDead)
             {
                 ReturnPool();
                 yield break;

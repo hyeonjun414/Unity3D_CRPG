@@ -12,9 +12,9 @@ public class ChainAttackSkill : Skill
     public override void SetUp(Monster monster, SkillData sd)
     {
         lr = GetComponent<LineRenderer>();
+        lr.enabled = true;
         base.SetUp(monster, sd);
         monster.OnAttack += ChainAttack;
-
 
     }
 
@@ -53,17 +53,18 @@ public class ChainAttackSkill : Skill
         });
         if (hits.Count > 0)
         {
-            lr.positionCount = 0;
+            lr.positionCount = 1;
+            lr.SetPosition(0, transform.position + Vector3.up);
             for (int i = 0; i < hits.Count; i++)
             {
                 lr.positionCount++;
                 target = hits[i].gameObject.GetComponent<Monster>();
-                lr.SetPosition(i, target.transform.position + Vector3.up);
+                lr.SetPosition(i+1, target.transform.position + Vector3.up);
                 target.Hit(monster);
                 Effect hit = ObjectPoolManager.Instance.UseObj(hitEffect).GetComponent<Effect>();
                 hit.transform.SetParent(target.transform, true);
                 hit.transform.position = target.transform.position + Vector3.up;
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.1f);
             }
             lr.positionCount = 0;
         }
@@ -72,5 +73,6 @@ public class ChainAttackSkill : Skill
     protected override void OnDisable()
     {
         monster.OnAttack -= ChainAttack;
+        lr.enabled = false;
     }
 }

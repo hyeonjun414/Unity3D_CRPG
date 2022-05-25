@@ -22,11 +22,11 @@ public class HealSkill : Skill
         List<Monster> list;
         if(monster.owner == MonsterOwner.Player)
         {
-            list = BattleManager.Instance.AllyMonster;
+            list = BattleManager.Instance.allyMonster;
         }
         else
         {
-            list = BattleManager.Instance.EnemyMonster;
+            list = BattleManager.Instance.enemyMonster;
         }
         foreach(Monster m in list)
         {

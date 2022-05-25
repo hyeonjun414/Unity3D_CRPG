@@ -24,7 +24,7 @@ public class ShieldSkill : Skill
     public void HitCounter(Monster target)
     {
         int damage = target.damage;
-        monster.HP += damage;
+        //monster.HP += damage;
         target.HP -= damage;
         GameManager.Instance.CreateText(damage, target.transform.position, TextType.Counter);
         Effect go = ObjectPoolManager.Instance.UseObj(counterEffect.gameObject).GetComponent<Effect>();

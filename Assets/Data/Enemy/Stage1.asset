@@ -16,5 +16,7 @@ MonoBehaviour:
   wave2: 020000000400000006000000
   wave3: 030000000600000009000000
   monsters:
-  - {fileID: 11400000, guid: edddfac1e83d84a4cba4d9dad060ea9b, type: 2}
+  - {fileID: 11400000, guid: d2a3c0adcf838774caeede09e6ad09c8, type: 2}
   - {fileID: 11400000, guid: 3fa14736486e63643891976b55b557e3, type: 2}
+  - {fileID: 11400000, guid: 60adebf015bf0294b8b0f553735385b9, type: 2}
+  - {fileID: 11400000, guid: edddfac1e83d84a4cba4d9dad060ea9b, type: 2}

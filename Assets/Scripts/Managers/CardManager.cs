@@ -48,6 +48,8 @@ public class CardManager : Singleton<CardManager>
         deckUI = UIManager.Instance.deckUI;
         holder = UIManager.Instance.cardHolder;
         graveyardUI = UIManager.Instance.graveyardUI;
+        deckUI.UpdateUI();
+        graveyardUI.UpdateUI();
 
         holder.handList = hands; // 카드 홀더에 매니저의 핸드 카드 리스트를 연결
 
@@ -114,8 +116,15 @@ public class CardManager : Singleton<CardManager>
                 break;
         }
     }
-    public void ActiveReroll()
+    public void TurnEndReroll()
     {
+        StartCoroutine(RerollRoutine());
+    }
+    public void UseRerollBtn()
+    {
+        if (player.MP < player.rerollCost || !BattleManager.Instance.isPrepared) 
+            return;
+        player.UseMp(player.rerollCost);
         StartCoroutine(RerollRoutine());
     }
     IEnumerator RerollRoutine()

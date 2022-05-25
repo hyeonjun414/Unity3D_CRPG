@@ -86,7 +86,7 @@ public class StageManager : Singleton<StageManager>
                     rand = Random.Range(0, data.enemyMaps.Length);
                     Instantiate(data.enemyMaps[rand]);
                     Instantiate(data.enemyBattleStages[rand]);
-                    Instantiate(data.Enemy, new Vector3(10, 0.5f, 0), data.Enemy.transform.rotation);
+                    Instantiate(data.Enemy, new Vector3(11, 0.5f, 0), data.Enemy.transform.rotation);
                 }
                 break;
             case StageType.Rest:
@@ -116,7 +116,7 @@ public class StageManager : Singleton<StageManager>
                     rand = Random.Range(0, data.enemyMaps.Length);
                     Instantiate(data.enemyMaps[rand]);
                     Instantiate(data.enemyBattleStages[rand]);
-                    Instantiate(data.Enemy, new Vector3(0, 0, 10), data.Enemy.transform.rotation);
+                    Instantiate(data.Enemy, new Vector3(11, 0.5f, 0), data.Enemy.transform.rotation);
                 }
                 break;
         }
@@ -146,6 +146,7 @@ public class StageManager : Singleton<StageManager>
         tempStage.yPos = stageHeight/2;
         tempStage.transform.localScale = Vector3.one * 2f;
         tempStage.lr.enabled = false;
+        tempStage.SetUp(RandomStageType(tempStage.xPos));
         endStage = tempStage;
 
         // 노드 경로와 색상 지정

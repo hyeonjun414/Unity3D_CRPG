@@ -27,6 +27,7 @@ public class StageUI : MonoBehaviour
                 stageUnits[i].ResetUI();
             }
         }
+        stageUnits[stageUnits.Length - 1].UpdateUI(StageManager.Instance.endStage);
         int level = StageManager.Instance.curStageLevel;
         int pos = StageManager.Instance.curStagePos;
         curStageIndicator.transform.position = stageList.Find((x) => x.xPos == level && x.yPos == pos).transform.position;

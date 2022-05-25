@@ -7,6 +7,7 @@ public class UIManager : Singleton<UIManager>
 {
     [Header("플레이어")]
     public StatusUI statusUI;
+    public RerollUI rerollUI;
 
     [Header("카드")]
     public CardHolder cardHolder;

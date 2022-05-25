@@ -70,15 +70,19 @@ public class BattleTile : MonoBehaviour
     private void OnMouseUp()
     {
         if (tileIndex < maxTileIndex / 2) return;
+
         // 만약 선택된 카드가 없다면 패스.
         if (CardManager.Instance.holder.selectedCardIndex == -1) return;
+
 
         // 선택된 카드가 있다면 선택된 카드 인덱스에 해당하는 카드 데이터를 가져온다.
         CardManager cm = CardManager.Instance;
         CardData cd = cm.hands[cm.holder.selectedCardIndex];
 
+        if (BattleManager.Instance.player.MP < cd.cost) return;
+
         // 가져온 카드 데이터의 타입에 따라 기능을 수행한다.
-        switch(cd.cardType)
+        switch (cd.cardType)
         {
             case CardType.Monster:
                 SummonMonster(cd);
@@ -104,13 +108,14 @@ public class BattleTile : MonoBehaviour
         if (monster == null)
             return;
         // 사용된 카드를 무덤으로 이동시키고, 카드 선택을 초기화한다.
-        CardManager.Instance.MoveCard(CardSpace.Hands, CardSpace.Field, md);
+        CardManager.Instance.MoveCard(CardSpace.Hands, CardSpace.Graveyard, md);
         CardManager.Instance.ResetSelectedCard();
+        BattleManager.Instance.player.UseMp(md.cost);
 
     }
     public void CastSpell(CardData data)
     {
-        if (monster == null)
+        if (monster == null || BattleManager.Instance.player.MP < data.cost)
         {
             // 조건에 안맞는 경우 카드 선택 해제.
             CardManager.Instance.ResetSelectedCard();

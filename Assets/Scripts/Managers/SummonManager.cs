@@ -41,11 +41,11 @@ public class SummonManager : Singleton<SummonManager>
             {
                 case MonsterOwner.Player:
                     dir = Vector3.right;
-                    BattleManager.Instance.AllyMonster.Add(monster);
+                    BattleManager.Instance.allyMonster.Add(monster);
                     break;
                 case MonsterOwner.Enemy:
                     dir = Vector3.left;
-                    BattleManager.Instance.EnemyMonster.Add(monster);
+                    BattleManager.Instance.enemyMonster.Add(monster);
                     break;
             }
             monster.transform.rotation = Quaternion.LookRotation(dir);
@@ -56,6 +56,7 @@ public class SummonManager : Singleton<SummonManager>
             monster.anim.SetTrigger("Spawn");
             bt.state = TileState.STAY;
             UIManager.Instance.battleInfoUI.UpdateUI();
+            
             return monster;
         }
         else

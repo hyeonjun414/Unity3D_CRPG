@@ -17,11 +17,11 @@ public class BattleInfoPanel : MonoBehaviour
         }
         if (owner == MonsterOwner.Player)
         {
-            monList = BattleManager.Instance.AllyMonster;
+            monList = BattleManager.Instance.allyMonster;
         }
         else if(owner == MonsterOwner.Enemy)
         {
-            monList = BattleManager.Instance.EnemyMonster;
+            monList = BattleManager.Instance.enemyMonster;
         }
     }
 
