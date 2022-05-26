@@ -16,6 +16,7 @@ public class RelicData : ScriptableObject
     public Sprite image;
     public RelicType relicType;
     public string relicName;
+    [TextArea]
     public string relicDesc;
 
     [Header("Relic Prefab")]

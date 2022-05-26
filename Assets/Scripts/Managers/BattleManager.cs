@@ -134,6 +134,7 @@ public class BattleManager : Singleton<BattleManager>
         if (!isPrepared) return;
         //MapSearch();
         if (allyMonster.Count == 0) return;
+        GameManager.Instance.UseAction(ActionType.OnBattleStart);
         StartCoroutine("BattleLogic");
 
     }
@@ -184,13 +185,19 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void StageClear()
     {
+        List<CardData> cardList = CardManager.Instance.graveyard;
+        foreach(CardData card in cardList)
+        {
+            CardManager.Instance.MoveCard(CardSpace.Graveyard, CardSpace.Deck, card);
+        }
         CameraManager.Instance.SwitchCam(0);
-        RewardManager.Instance.StageReward(enemy.gameObject.transform.position);
+        RewardManager.Instance.StageReward(Vector3.zero);
         UIManager.Instance.battleInfoUI.StageEnd();
         stage.StageOut();
         
         isStage = false;
         StageManager.Instance.GenerateGate();
+        GameManager.Instance.UseAction(ActionType.OnStageEnd);
 
     }
     public void ResetStage()

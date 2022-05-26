@@ -206,7 +206,7 @@ public class StageManager : Singleton<StageManager>
                 if(tempList.Count > 0)
                 {
                     count++;
-                    print($"Merge Count : {count}");
+                    //print($"Merge Count : {count}");
                     StageData targetData = RandomStageType(tempList[0].xPos);
                     for (int k = 0; k < tempList.Count; k++)
                     {

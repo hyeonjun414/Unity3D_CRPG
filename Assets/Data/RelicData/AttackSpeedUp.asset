@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17d8a8c97fb87a9458ae223a0b488c7f, type: 3}
-  m_Name: MpRegenUp
+  m_Name: AttackSpeedUp
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: d8c69f67bbf92c640b671a7a1d9f4b3c, type: 3}
-  relicType: 1
-  relicName: "\uBA85\uC0C1\uC758 \uBB3C\uC57D"
-  relicDesc: "\uD134\uC774 \uB05D\uB0A0\uB54C \uCD94\uAC00\uB85C 3\uC758 \uB9C8\uB098\uB97C
-    \uD68C\uBCF5\uD55C\uB2E4."
+  image: {fileID: 21300000, guid: cbe766873db2d694e9f41ad2ac2b4ca0, type: 3}
+  relicType: 3
+  relicName: "\uC2E0\uC18D\uC758 \uB2E8\uAC80"
+  relicDesc: "\uBAAC\uC2A4\uD130\uC758 \uACF5\uACA9\uC18D\uB3C4\uAC00 10% \uC0C1\uC2B9\uD55C\uB2E4."
   relicPrefab: {fileID: 0}

@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17d8a8c97fb87a9458ae223a0b488c7f, type: 3}
-  m_Name: MpRegenUp
+  m_Name: RandomEvo
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: d8c69f67bbf92c640b671a7a1d9f4b3c, type: 3}
-  relicType: 1
-  relicName: "\uBA85\uC0C1\uC758 \uBB3C\uC57D"
-  relicDesc: "\uD134\uC774 \uB05D\uB0A0\uB54C \uCD94\uAC00\uB85C 3\uC758 \uB9C8\uB098\uB97C
-    \uD68C\uBCF5\uD55C\uB2E4."
+  image: {fileID: 21300000, guid: 4367b7998ca8b89488cd8a8c6f8f04cc, type: 3}
+  relicType: 2
+  relicName: "\uC9C4\uD654\uC758 \uC11C"
+  relicDesc: "\uC2A4\uD14C\uC774\uC9C0\uB97C \uD074\uB9AC\uC5B4\uD560\uB54C\uB9C8\uB2E4
+    \uB371\uC758 \uCE74\uB4DC\uC911 \uB79C\uB364\uD558\uAC8C \uD55C\uB9C8\uB9AC\uB97C
+    \uC9C4\uD654\uC2DC\uD0A8\uB2E4."
   relicPrefab: {fileID: 0}

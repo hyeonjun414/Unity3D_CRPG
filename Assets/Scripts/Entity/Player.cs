@@ -21,7 +21,7 @@ public class Player : LivingEntity
     [Header("Command")]
     public PlayerMoveCommand moveCmd;
 
-    private StatusUI statusUI;
+    public StatusUI statusUI;
 
     private void Awake()
     {
@@ -45,6 +45,8 @@ public class Player : LivingEntity
         SetUp();
         statusUI = UIManager.Instance.statusUI;
         statusUI.SetUp(this);
+
+        GameManager.Instance.player = this;
     }
 
     public override void SetUp()

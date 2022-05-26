@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RewardItem : MonoBehaviour
+public enum RewardType
 {
+    Card,
+    Relic,
+    Count,
+}
 
-    public CardData rewardData;
-
-    public ParticleSystem getEffect;
-
+public abstract class RewardItem : MonoBehaviour
+{
+    public RewardType type;
     private Animator anim;
     private Collider coll;
 
-    private void Start()
+    protected virtual void Start()
     {
         anim = GetComponentInChildren<Animator>();
         coll = GetComponent<Collider>();
     }
 
-    public void RewardGet()
+    public virtual void RewardGet()
     {
         coll.enabled = false;
         anim.SetTrigger("Get");
-        //CardManager.Instance.AddCard(rewardData);
-        //Destroy(gameObject, 1f);
     }
 
 }

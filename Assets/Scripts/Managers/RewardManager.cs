@@ -5,8 +5,12 @@ using UnityEngine;
 public class RewardManager : Singleton<RewardManager>
 {
     [Header("Reward")]
-    public RewardItem rewardPrefab;
+    public CardItem cardPrefab;
+    public RelicItem relicPrefab;
+
+    [Header("Database")]
     public CardData[] cardDatas;
+    public RelicData[] relicDatas;
 
     private void Awake()
     {
@@ -16,10 +20,23 @@ public class RewardManager : Singleton<RewardManager>
 
     public void StageReward(Vector3 pos)
     {
-        RewardItem reward = ObjectPoolManager.Instance.UseObj(rewardPrefab.gameObject).GetComponent<RewardItem>();
-        reward.transform.position = pos + rewardPrefab.transform.position;
+        int rand = Random.Range(0, (int)RewardType.Count);
+        RewardItem reward = null;
+        switch ((RewardType)rand)
+        {
+            case RewardType.Card:
+                reward = ObjectPoolManager.Instance.UseObj(cardPrefab.gameObject).GetComponent<RewardItem>();
+                ((CardItem)reward).cardData = cardDatas[Random.Range(0, cardDatas.Length)];
+                reward.transform.position = cardPrefab.transform.position;
+                break;
+            case RewardType.Relic:
+                reward = ObjectPoolManager.Instance.UseObj(relicPrefab.gameObject).GetComponent<RewardItem>();
+                ((RelicItem)reward).relicdata = relicDatas[Random.Range(0, relicDatas.Length)];
+                reward.transform.position = relicPrefab.transform.position;
+                break;
+        }
+        reward.transform.position += pos;
         reward.transform.rotation = Quaternion.identity;
-        reward.rewardData = cardDatas[Random.Range(0, cardDatas.Length)];
     }
 
     private void Update()
