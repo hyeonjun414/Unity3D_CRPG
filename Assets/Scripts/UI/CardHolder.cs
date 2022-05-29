@@ -42,7 +42,7 @@ public class CardHolder : MonoBehaviour
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            if(i <handList.Count)
+            if(i <handList.Count && handList[i] != null)
             {
                 cards[i].AddCard(handList[i]);
             }

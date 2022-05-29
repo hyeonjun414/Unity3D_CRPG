@@ -22,6 +22,10 @@ public class UIManager : Singleton<UIManager>
 
     [Header("Relic UI")]
     public RelicUI relicUI;
+    public RelicInfoUI relicInfoUI;
+
+    [Header("Message Box")]
+    public MessagePopUpUI messagePopUpUI;
 
     [Header("설정")]
     public GameObject optionUI;

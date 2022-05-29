@@ -23,4 +23,14 @@ public class RelicItem : RewardItem
         RelicManager.Instance.AddRelic(relicdata);
         Destroy(gameObject, 1f);
     }
+
+    private void OnMouseEnter()
+    {
+        print("유물 드랍 아이템 손댐");
+        UIManager.Instance.relicInfoUI.InfoEnter(relicdata);
+    }
+    private void OnMouseExit()
+    {
+        UIManager.Instance.relicInfoUI.InfoExit();
+    }
 }

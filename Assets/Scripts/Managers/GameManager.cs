@@ -104,6 +104,16 @@ public class GameManager : Singleton<GameManager>
         {
             Time.timeScale *= 2f;
         }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            MessageBoxText();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            MessageBoxText2();
+        }
+
     }
 
     // 데미지 텍스트를 띄우는 함수
@@ -118,5 +128,14 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.sceneLoaded += StageManager.Instance.GenerateScene;
         SceneManager.sceneLoaded += BattleManager.Instance.FindingEnemyAndStage;
+    }
+
+    public void MessageBoxText()
+    {
+        UIManager.Instance.messagePopUpUI.PopUp("메세지 테스트입니다.", MessagePopUpUI.DialogType.NOTICE);
+    }
+    public void MessageBoxText2()
+    {
+        UIManager.Instance.messagePopUpUI.YesOrNoPopUp("메세지 테스트입니다.2", MessagePopUpUI.DialogType.NOTICE, null, null);
     }
 }

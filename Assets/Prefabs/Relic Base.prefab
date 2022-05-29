@@ -407,8 +407,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 8
+  m_Radius: 1.2
+  m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7630527156271610396
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  data: {fileID: 11400000, guid: d5687afcb9ab43f4db22eab93e49d148, type: 2}
+  relicdata: {fileID: 0}
   frontImg: {fileID: 2457662389716355421}
   backImg: {fileID: 2457662390017564942}
 --- !u!1 &7630527156384849416

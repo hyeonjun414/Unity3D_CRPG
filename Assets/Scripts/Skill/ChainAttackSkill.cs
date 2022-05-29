@@ -12,7 +12,7 @@ public class ChainAttackSkill : Skill
     public override void SetUp(Monster monster, SkillData sd)
     {
         lr = GetComponent<LineRenderer>();
-        lr.enabled = true;
+        
         base.SetUp(monster, sd);
         monster.OnAttack += ChainAttack;
 
@@ -29,6 +29,7 @@ public class ChainAttackSkill : Skill
     }
     public IEnumerator ChainAttackRoutine(Monster owner)
     {
+        lr.enabled = true;
         Monster target = null;
         string targetLayer = null;
         switch (monster.owner)
@@ -53,6 +54,7 @@ public class ChainAttackSkill : Skill
         });
         if (hits.Count > 0)
         {
+            
             lr.positionCount = 1;
             lr.SetPosition(0, transform.position + Vector3.up);
             for (int i = 0; i < hits.Count; i++)
@@ -64,14 +66,17 @@ public class ChainAttackSkill : Skill
                 Effect hit = ObjectPoolManager.Instance.UseObj(hitEffect).GetComponent<Effect>();
                 hit.transform.SetParent(target.transform, true);
                 hit.transform.position = target.transform.position + Vector3.up;
-                yield return new WaitForSeconds(0.1f);
+                yield return null;
+
             }
-            lr.positionCount = 0;
+
         }
+        lr.enabled = false;
 
     }
     protected override void OnDisable()
     {
+        StopCoroutine("ChainAttackRoutine");
         monster.OnAttack -= ChainAttack;
         lr.enabled = false;
     }

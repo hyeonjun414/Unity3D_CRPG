@@ -63,8 +63,7 @@ public class BattleTile : MonoBehaviour
     }
     private void OnMouseExit()
     {
-        if (monster != null)
-            UIManager.Instance.monsterInfoUI.InfoExit();
+        UIManager.Instance.monsterInfoUI.InfoExit();
         mr.material.color = originColor;
     }
     private void OnMouseUp()
@@ -79,7 +78,7 @@ public class BattleTile : MonoBehaviour
         CardManager cm = CardManager.Instance;
         CardData cd = cm.hands[cm.holder.selectedCardIndex];
 
-        if (BattleManager.Instance.player.MP < cd.cost) return;
+        if (GameManager.Instance.player.MP < cd.cost) return;
 
         // 가져온 카드 데이터의 타입에 따라 기능을 수행한다.
         switch (cd.cardType)

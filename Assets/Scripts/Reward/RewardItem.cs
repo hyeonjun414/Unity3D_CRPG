@@ -26,5 +26,4 @@ public abstract class RewardItem : MonoBehaviour
         coll.enabled = false;
         anim.SetTrigger("Get");
     }
-
 }

@@ -151,6 +151,18 @@ public class CardManager : Singleton<CardManager>
         }
         isDraw = false;
     }
+    public void MoveAlltoDeck()
+    {
+        deck.AddRange(hands);
+        deck.AddRange(graveyard);
+        hands.Clear();
+        graveyard.Clear();
+        holder.handList.Clear();
+
+        holder.UpdateUI();
+        deckUI.UpdateUI();
+        graveyardUI.UpdateUI();
+    }
     IEnumerator FromAtoB(CardSpace a, CardSpace b)
     {
         List<CardData> aList = null;
@@ -173,7 +185,7 @@ public class CardManager : Singleton<CardManager>
         for(int i = 0; i < aCount; i++)
         {
             MoveCard(a, b, aList[0]);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
     public void ShuffleCard(CardSpace space)

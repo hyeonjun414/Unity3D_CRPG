@@ -92,8 +92,8 @@ public class RelicManager : Singleton<RelicManager>
         while (cd == null)
         {
             cd = deck[Random.Range(0, deck.Count)];
-            md = (MonsterData)cd;
-            if (md.cardType == CardType.Monster && md.level != MonsterLevel.LV3)
+            md = cd.cardType == CardType.Monster ? (MonsterData)cd : null;
+            if (md != null && md.level != MonsterLevel.LV3)
                 break;
         }
         md = ((MonsterData)cd).nextMonster;

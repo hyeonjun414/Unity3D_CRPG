@@ -185,11 +185,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void StageClear()
     {
-        List<CardData> cardList = CardManager.Instance.graveyard;
-        foreach(CardData card in cardList)
-        {
-            CardManager.Instance.MoveCard(CardSpace.Graveyard, CardSpace.Deck, card);
-        }
+        CardManager.Instance.MoveAlltoDeck();
         CameraManager.Instance.SwitchCam(0);
         RewardManager.Instance.StageReward(Vector3.zero);
         UIManager.Instance.battleInfoUI.StageEnd();
