@@ -12,7 +12,6 @@ public class MessagePopUpUI : MonoBehaviour
     private Callback callbackNO;
 
     // Define
-    public enum DialogType { NOTICE = 0, WARNING = 1, CAUTION = 2 }
     public enum DialogResponse { OK, YES, NO, ERROR }
 
     public GameObject OneButton;
@@ -46,10 +45,10 @@ public class MessagePopUpUI : MonoBehaviour
 
     }
 
-    public void PopUp(string message, DialogType type, Callback Function)
+    public void PopUp(string message, Callback Function)
     {
         gameObject.SetActive(true);
-        SetCallback(null, DialogResponse.OK);
+        SetCallback(Function, DialogResponse.OK);
 
         messageText.text = message;
 
@@ -59,7 +58,7 @@ public class MessagePopUpUI : MonoBehaviour
 
     }
 
-    public void YesOrNoPopUp(string message, DialogType type, Callback yesButtonFuncion, Callback noButtonFuntion)
+    public void YesOrNoPopUp(string message, Callback yesButtonFuncion, Callback noButtonFuntion)
     {
         gameObject.SetActive(true);
         SetCallback(yesButtonFuncion, DialogResponse.YES);
@@ -79,7 +78,7 @@ public class MessagePopUpUI : MonoBehaviour
     {
         switch (EventSystem.current.currentSelectedGameObject.name)
         {
-            case "OKButton":
+            case "OkButton":
                 thisResult = DialogResponse.OK;
                 callbackOK?.Invoke();
                 callbackOK = null;

@@ -104,11 +104,34 @@ public class Player : LivingEntity
             hits = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Shop"));
             if (hits.Length > 0)
             {
-                Shop item = null;
+                Shop shop = null;
                 foreach (Collider hit in hits)
                 {
-                    item = hit.gameObject.GetComponent<Shop>();
-                    item.OpenShop();
+                    shop = hit.gameObject.GetComponent<Shop>();
+                    shop.OpenShop();
+                    return;
+                }
+            }
+            hits = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Event"));
+            if (hits.Length > 0)
+            {
+                EventObj obj = null;
+                foreach (Collider hit in hits)
+                {
+                    obj = hit.gameObject.GetComponent<EventObj>();
+                    obj.PlayEvent();
+                    return;
+                }
+            }
+
+            hits = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Rest"));
+            if (hits.Length > 0)
+            {
+                RestObj obj = null;
+                foreach (Collider hit in hits)
+                {
+                    obj = hit.gameObject.GetComponent<RestObj>();
+                    obj.Resting(this);
                     return;
                 }
             }
@@ -130,5 +153,18 @@ public class Player : LivingEntity
         anim.SetTrigger("Hit");
         statusUI.UpdateUI();
         GameManager.Instance.CreateText(entity.damage, transform.position, TextType.Damage);
+    }
+    public void Hit(int damage)
+    {
+        HP -= damage;
+        anim.SetTrigger("Hit");
+        statusUI.UpdateUI();
+        GameManager.Instance.CreateText(damage, transform.position, TextType.Damage);
+    }
+    public void Heal(int value)
+    {
+        HP += value;
+        statusUI.UpdateUI();
+        GameManager.Instance.CreateText(value, transform.position, TextType.Heal);
     }
 }

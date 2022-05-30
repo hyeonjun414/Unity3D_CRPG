@@ -123,6 +123,12 @@ public class GameManager : Singleton<GameManager>
         dt.transform.SetParent(worldCanvas.transform, false); // 월드캔버스의 자식으로 만든다.
         dt.Enable(damage, pos, tt);
     }
+    public void CreateText(string text, Vector3 pos, TextType tt)
+    {
+        DamageText dt = ObjectPoolManager.Instance.UseObj(damageText.gameObject).GetComponent<DamageText>();
+        dt.transform.SetParent(worldCanvas.transform, false); // 월드캔버스의 자식으로 만든다.
+        dt.Enable(text, pos, tt);
+    }
 
     public void ApplySceneLoadedFunc()
     {
@@ -136,6 +142,6 @@ public class GameManager : Singleton<GameManager>
     }
     public void MessageBoxText2()
     {
-        UIManager.Instance.messagePopUpUI.YesOrNoPopUp("메세지 테스트입니다.2", MessagePopUpUI.DialogType.NOTICE, null, null);
+        UIManager.Instance.messagePopUpUI.YesOrNoPopUp("메세지 테스트입니다.2", null, null);
     }
 }

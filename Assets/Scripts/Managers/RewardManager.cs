@@ -9,6 +9,13 @@ public class RewardManager : Singleton<RewardManager>
     public RelicItem relicPrefab;
     public RewardItem rewardPrefab;
 
+
+    [Header("Gold")]
+    public Coin coinPrefab;
+    public int minGold;
+    public int maxGold;
+
+
     [Header("Database")]
     public CardData[] cardDatas;
     public RelicData[] relicDatas;
@@ -37,11 +44,28 @@ public class RewardManager : Singleton<RewardManager>
         reward.transform.rotation = Quaternion.identity;
     }
 
+    public void GenerateGold(int count, Vector3 pos)
+    {
+        Coin coin = null;
+        for(int i = 0; i < count; i++)
+        {
+            coin = ObjectPoolManager.Instance.UseObj(coinPrefab.gameObject).GetComponent<Coin>();
+            
+            coin.transform.position += pos;
+            coin.transform.rotation = Quaternion.identity;
+            coin.SetUp(Random.Range(minGold, maxGold));
+        }
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.G))
         {
             StartText();
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GenerateGold(10, Vector3.zero);
         }
     }
     public void StartText()

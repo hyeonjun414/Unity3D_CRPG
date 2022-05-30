@@ -13,7 +13,7 @@ public enum TextType
 
 public class DamageText : MonoBehaviour, IPoolable
 {
-    [SerializeField] private Text text;
+    [SerializeField] private Text floatingText;
 
     public float duration;
 
@@ -32,9 +32,39 @@ public class DamageText : MonoBehaviour, IPoolable
         float randY = Random.Range(-0.25f, 0.25f);
         transform.Translate(Vector3.up*1.5f + new Vector3(randX, randY, 0));
         // 데미지 텍스트 설정
-        text.text = damage.ToString();
+        floatingText.text = damage.ToString();
 
         switch(tt)
+        {
+            case TextType.Damage:
+                textColor = damageColor;
+                break;
+            case TextType.Heal:
+                textColor = healColor;
+                break;
+            case TextType.Mana:
+                textColor = manaColor;
+                break;
+            case TextType.Counter:
+                textColor = counterColor;
+                break;
+        }
+
+        StartCoroutine(FloatingRoutine());
+    }
+
+    public void Enable(string text, Vector3 position, TextType tt)
+    {
+        // 위치 설정
+        transform.position = position;
+        transform.LookAt(-Camera.main.transform.position);
+        float randX = Random.Range(-0.5f, 0.5f);
+        float randY = Random.Range(-0.25f, 0.25f);
+        transform.Translate(Vector3.up * 1.5f + new Vector3(randX, randY, 0));
+        // 데미지 텍스트 설정
+        floatingText.text = text;
+
+        switch (tt)
         {
             case TextType.Damage:
                 textColor = damageColor;
@@ -64,7 +94,7 @@ public class DamageText : MonoBehaviour, IPoolable
             alpha = 1 - curTime / duration;
             textColor.a = alpha;
             transform.Translate(Vector3.up * Time.deltaTime);
-            text.color = textColor;
+            floatingText.color = textColor;
             yield return null;
         }
 

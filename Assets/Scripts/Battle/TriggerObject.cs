@@ -8,9 +8,11 @@ public enum TriggerType
     BattleStage,
     Map,
 }
-public class BattleTrigger : MonoBehaviour
+public class TriggerObject : MonoBehaviour
 {
+    // 플레이어가 접근하여 특정 이벤트를 발동시키는 오브젝트이다.
     public TriggerType type;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
