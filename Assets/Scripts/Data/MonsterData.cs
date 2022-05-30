@@ -14,6 +14,7 @@ public class MonsterData : CardData
     public int range;
     public float attackSpeed;
     public float moveSpeed;
+    public int monsterSize;
 
     [Header("Monster Evolution")]
     public int evolutionCost;

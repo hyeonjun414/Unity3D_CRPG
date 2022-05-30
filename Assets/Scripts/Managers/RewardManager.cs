@@ -7,6 +7,7 @@ public class RewardManager : Singleton<RewardManager>
     [Header("Reward")]
     public CardItem cardPrefab;
     public RelicItem relicPrefab;
+    public RewardItem rewardPrefab;
 
     [Header("Database")]
     public CardData[] cardDatas;
@@ -20,19 +21,16 @@ public class RewardManager : Singleton<RewardManager>
 
     public void StageReward(Vector3 pos)
     {
-        int rand = Random.Range(0, (int)RewardType.Count);
-        RewardItem reward = null;
-        switch ((RewardType)rand)
+        int rand = Random.Range(0, (int)ItemType.Count);
+        //Item reward = null;
+        RewardItem reward = ObjectPoolManager.Instance.UseObj(rewardPrefab.gameObject).GetComponent<RewardItem>();
+        switch ((ItemType)rand)
         {
-            case RewardType.Card:
-                reward = ObjectPoolManager.Instance.UseObj(cardPrefab.gameObject).GetComponent<RewardItem>();
-                ((CardItem)reward).cardData = cardDatas[Random.Range(0, cardDatas.Length)];
-                reward.transform.position = cardPrefab.transform.position;
+            case ItemType.Card:
+                reward.ActivateCard(cardDatas[Random.Range(0, cardDatas.Length)]);
                 break;
-            case RewardType.Relic:
-                reward = ObjectPoolManager.Instance.UseObj(relicPrefab.gameObject).GetComponent<RewardItem>();
-                ((RelicItem)reward).relicdata = relicDatas[Random.Range(0, relicDatas.Length)];
-                reward.transform.position = relicPrefab.transform.position;
+            case ItemType.Relic:
+                reward.ActivateRelic(relicDatas[Random.Range(0, relicDatas.Length)]);
                 break;
         }
         reward.transform.position += pos;

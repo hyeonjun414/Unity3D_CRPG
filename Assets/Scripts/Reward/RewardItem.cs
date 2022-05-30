@@ -2,28 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RewardType
+public class RewardItem : MonoBehaviour
 {
-    Card,
-    Relic,
-    Count,
-}
+    [Header("Item Data")]
+    public ItemData itemData;
 
-public abstract class RewardItem : MonoBehaviour
-{
-    public RewardType type;
-    private Animator anim;
-    private Collider coll;
+    [Header("Relic Item")]
+    public RelicItem relicItem;
 
-    protected virtual void Start()
+    [Header("Card Item")]
+    public CardItem cardItem;
+    public void SetUp(ItemData data)
     {
-        anim = GetComponentInChildren<Animator>();
-        coll = GetComponent<Collider>();
+        itemData = data;
+        switch(itemData.itemType)
+        {
+            case ItemType.Card:
+                ActivateCard((CardData)itemData);
+                break;
+            case ItemType.Relic:
+                ActivateRelic((RelicData)itemData);
+                break;
+        }
     }
 
-    public virtual void RewardGet()
+    public void ActivateCard(CardData data)
     {
-        coll.enabled = false;
-        anim.SetTrigger("Get");
+        cardItem.gameObject.SetActive(true);
+        relicItem.gameObject.SetActive(false);
+
+        cardItem.SetUp(data);
+    }
+    public void ActivateRelic(RelicData data)
+    {
+        cardItem.gameObject.SetActive(false);
+        relicItem.gameObject.SetActive(true);
+
+        relicItem.SetUp(data);
     }
 }

@@ -9,7 +9,7 @@ public enum CardType
 }
 
 [CreateAssetMenu(fileName = "Card Data", menuName = "Card/Card Data")]
-public class CardData : ScriptableObject
+public class CardData : ItemData
 {
     [Header("Card")]
     public CardType cardType;

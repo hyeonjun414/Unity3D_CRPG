@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d8a8c97fb87a9458ae223a0b488c7f, type: 3}
   m_Name: MpUp
   m_EditorClassIdentifier: 
+  itemType: 1
   image: {fileID: 21300000, guid: 806dda8917e696b4e94c318658feb5a1, type: 3}
   relicType: 0
   relicName: "\uB9C8\uB825 \uC870\uAC01"

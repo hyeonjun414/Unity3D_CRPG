@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d8a8c97fb87a9458ae223a0b488c7f, type: 3}
   m_Name: RandomEvo
   m_EditorClassIdentifier: 
+  itemType: 1
   image: {fileID: 21300000, guid: 4367b7998ca8b89488cd8a8c6f8f04cc, type: 3}
   relicType: 2
   relicName: "\uC9C4\uD654\uC758 \uC11C"

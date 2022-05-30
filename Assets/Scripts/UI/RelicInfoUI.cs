@@ -7,12 +7,16 @@ public class RelicInfoUI : MonoBehaviour
     public Text relicName;
     public Text relicDesc;
 
-    public float offsetY;
+    
+    
 
     [Header("Position")]
     public RectTransform canvas;
     public Camera cam;
     private Vector2 mousePos;
+    public float offsetX;
+    public float offsetY;
+
     private void Start()
     {
         cam = Camera.main;
@@ -27,10 +31,17 @@ public class RelicInfoUI : MonoBehaviour
         Vector3 originMouse = Input.mousePosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, originMouse, cam, out mousePos);
         Vector3 offset = Vector2.zero;
+        if (originMouse.x < Screen.width / 2)
+            offset += Vector3.right * offsetX;
+        else
+            offset += Vector3.left * offsetX;
 
-        offset += Vector3.down * offsetY;
+        if (originMouse.y < Screen.height / 2)
+            offset += Vector3.up * offsetY;
+        else
+            offset += Vector3.down * offsetY;
 
-        transform.localPosition = (Vector3)mousePos + offset + new Vector3(0, 0, -10);
+        transform.localPosition = (Vector3)mousePos + offset + new Vector3(0, 0, -50);
     }
 
     public void InfoEnter(RelicData data)

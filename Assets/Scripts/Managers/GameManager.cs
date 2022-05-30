@@ -132,7 +132,7 @@ public class GameManager : Singleton<GameManager>
 
     public void MessageBoxText()
     {
-        UIManager.Instance.messagePopUpUI.PopUp("메세지 테스트입니다.", MessagePopUpUI.DialogType.NOTICE);
+        UIManager.Instance.messagePopUpUI.PopUp("메세지 테스트입니다.");
     }
     public void MessageBoxText2()
     {

@@ -254,7 +254,7 @@ public class StageManager : Singleton<StageManager>
         // 
         int rand = Random.Range(0, 101);
         if(rand < 75)
-            randomData = stageDatas[(int)StageType.Enemy];
+            randomData = stageDatas[(int)StageType.Shop];
         else if (rand < 82)
             randomData = stageDatas[(int)StageType.Shop];
         else if (rand < 89)

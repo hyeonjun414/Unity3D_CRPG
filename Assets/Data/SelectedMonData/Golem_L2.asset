@@ -25,6 +25,7 @@ MonoBehaviour:
   range: 1
   attackSpeed: 0.7
   moveSpeed: 1
+  monsterSize: 1
   evolutionCost: 0
   prevMonster: {fileID: 11400000, guid: 3fa14736486e63643891976b55b557e3, type: 2}
   nextMonster: {fileID: 11400000, guid: fd2b8c514b05ed74d92690e78970ff6b, type: 2}

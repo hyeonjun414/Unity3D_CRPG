@@ -71,7 +71,7 @@ public class Player : LivingEntity
 
         Move();
 
-        Looting();
+        Interaction();
     }
 
     public void Move()
@@ -85,18 +85,31 @@ public class Player : LivingEntity
         return this;
     }
 
-    public void Looting()
+    public void Interaction()
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Reward"));
             if(hits.Length > 0)
             {
-                RewardItem item = null;
+                Item item = null;
                 foreach (Collider hit in hits)
                 {
-                    item = hit.gameObject.GetComponent<RewardItem>();
+                    item = hit.gameObject.GetComponent<Item>();
                     item.RewardGet();
+                    return;
+                }
+            }
+
+            hits = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Shop"));
+            if (hits.Length > 0)
+            {
+                Shop item = null;
+                foreach (Collider hit in hits)
+                {
+                    item = hit.gameObject.GetComponent<Shop>();
+                    item.OpenShop();
+                    return;
                 }
             }
         }

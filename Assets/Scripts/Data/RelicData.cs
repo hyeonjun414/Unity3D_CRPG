@@ -10,7 +10,7 @@ public enum RelicType
     StartMpUp,
 }
 [CreateAssetMenu(fileName = "Relic Data", menuName = "Data/Relic Data")]
-public class RelicData : ScriptableObject
+public class RelicData : ItemData
 {
     [Header("Relic Data")]
     public Sprite image;

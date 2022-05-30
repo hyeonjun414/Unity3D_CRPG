@@ -44,4 +44,13 @@ public class CardUI : MonoBehaviour
         gameObject.SetActive(false);
 
     }
+    
+    public void ResetCard()
+    {
+        cardData = null;
+        monsterCard.DeleteCard();
+        buffCard.DeleteCard();
+
+        gameObject.SetActive(false);
+    }
 }

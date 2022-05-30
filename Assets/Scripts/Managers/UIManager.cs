@@ -16,13 +16,20 @@ public class UIManager : Singleton<UIManager>
     [Header("Info UI")]
     public MonsterInfoUI monsterInfoUI;
     public BattleInfoUI battleInfoUI;
+    public RelicInfoUI relicInfoUI;
+    public CardInfoUI cardInfoUI;
+    public DeckInfoUI deckInfoUI;
 
     [Header("Stage UI")]
     public StageUI stageUI;
 
     [Header("Relic UI")]
     public RelicUI relicUI;
-    public RelicInfoUI relicInfoUI;
+
+    [Header("Shop UI")]
+    public ShopUI shopUI;
+    public GoldUI goldUI;
+    
 
     [Header("Message Box")]
     public MessagePopUpUI messagePopUpUI;

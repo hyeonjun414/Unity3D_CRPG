@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardItem : RewardItem
+public class CardItem : Item
 {
     public CardData cardData;
     public CardUI[] cards;
 
-    protected override void Start()
+/*    protected override void Start()
     {
         base.Start();
-        type = RewardType.Card;
+        type = ItemType.Card;
+        foreach (CardUI cardUI in cards)
+        {
+            cardUI.AddCard(cardData);
+        }
+    }*/
+
+    public void SetUp(CardData data)
+    {
+        cardData = data;
+        type = ItemType.Card;
         foreach (CardUI cardUI in cards)
         {
             cardUI.AddCard(cardData);
@@ -22,5 +32,14 @@ public class CardItem : RewardItem
         base.RewardGet();
         CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Deck, cardData);
         Destroy(gameObject, 1f);
+    }
+
+    private void OnMouseEnter()
+    {
+        UIManager.Instance.cardInfoUI.InfoEnter(cardData);
+    }
+    private void OnMouseExit()
+    {
+        UIManager.Instance.cardInfoUI.InfoExit();
     }
 }

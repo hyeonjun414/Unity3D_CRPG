@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d8a8c97fb87a9458ae223a0b488c7f, type: 3}
   m_Name: MonsterStartMpUp
   m_EditorClassIdentifier: 
+  itemType: 1
   image: {fileID: 21300000, guid: 7af335638ca6cab40a69e317b2fb8a77, type: 3}
   relicType: 4
   relicName: "\uC2DC\uC791\uC758 \uC0AC\uACFC"

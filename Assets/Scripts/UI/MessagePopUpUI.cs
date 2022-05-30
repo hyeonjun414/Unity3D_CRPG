@@ -34,10 +34,9 @@ public class MessagePopUpUI : MonoBehaviour
         NoButton.onClick.AddListener(PopUpClose);
     }
 
-    public void PopUp(string message, DialogType type)
+    public void PopUp(string message)
     {
         gameObject.SetActive(true);
-        SetCallback(null, DialogResponse.OK);
 
         messageText.text = message;
 
@@ -45,7 +44,6 @@ public class MessagePopUpUI : MonoBehaviour
         OneButton.SetActive(true);
         OkButton.interactable = true;
 
-        //GetComponent<Animator>().SetTrigger("PopupOpen");
     }
 
     public void PopUp(string message, DialogType type, Callback Function)
@@ -59,7 +57,6 @@ public class MessagePopUpUI : MonoBehaviour
         OneButton.SetActive(true);
         OkButton.interactable = true;
 
-        //GetComponent<Animator>().SetTrigger("PopupOpen");
     }
 
     public void YesOrNoPopUp(string message, DialogType type, Callback yesButtonFuncion, Callback noButtonFuntion)
@@ -75,7 +72,6 @@ public class MessagePopUpUI : MonoBehaviour
         YesButton.interactable = true;
         NoButton.interactable = true;
         
-        //GetComponent<Animator>().SetTrigger("PopupOpen");
     }
 
     // 팝업이 닫힐 때, 지정해 둔 콜백 실행
@@ -110,7 +106,6 @@ public class MessagePopUpUI : MonoBehaviour
         YesButton.interactable = false;
         NoButton.interactable = false;
         gameObject.SetActive(false);
-        //GetComponent<Animator>().SetTrigger("PopupClose");
     }
 
     // Callback 관련

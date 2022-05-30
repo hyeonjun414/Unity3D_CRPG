@@ -40,7 +40,7 @@ public class MonsterCardUnit : CardUnit
         {
             monster = ObjectPoolManager.Instance.UseObj(md.monster).GetComponent<Monster>();
             monster.transform.SetParent(monsterPos, true);
-            monster.transform.localScale = new Vector3(1,1,0.1f);
+            monster.transform.localScale = Vector3.one * (1 - 0.2f * md.monsterSize);
             monster.transform.position = monsterPos.position;
             monster.transform.rotation = Quaternion.LookRotation(-monsterPos.transform.forward);
             monster.monsterData = md;

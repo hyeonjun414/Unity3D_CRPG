@@ -89,14 +89,14 @@ public class RelicManager : Singleton<RelicManager>
         List<CardData> deck = CardManager.Instance.deck;
         CardData cd = null;
         MonsterData md = null;
-        while (cd == null)
+        while (true)
         {
             cd = deck[Random.Range(0, deck.Count)];
             md = cd.cardType == CardType.Monster ? (MonsterData)cd : null;
             if (md != null && md.level != MonsterLevel.LV3)
                 break;
         }
-        md = ((MonsterData)cd).nextMonster;
+        md = md.nextMonster;
         deck.Add(md);
         deck.Remove(cd);
         UIManager.Instance.deckUI.UpdateUI();
