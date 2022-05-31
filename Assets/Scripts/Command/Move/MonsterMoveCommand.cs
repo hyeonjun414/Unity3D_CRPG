@@ -19,7 +19,8 @@ public class MonsterMoveCommand : MoveCommand
     }
     public override void Excute()
     {
-        if(monster.target == null || monster.isMoving || monster.isAttacking)
+        if(monster.target == null || monster.target.isVanished || monster.isMoving || monster.isAttacking ||
+            monster.isCC || monster.isCasting)
         {
             return;
         }

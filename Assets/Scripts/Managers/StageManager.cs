@@ -253,11 +253,11 @@ public class StageManager : Singleton<StageManager>
         // 이후에는 랜덤 인카운트
         // 
         int rand = Random.Range(0, 101);
-        if(rand < 30)
-            randomData = stageDatas[(int)StageType.Event];
+        if(rand < 60)
+            randomData = stageDatas[(int)StageType.Enemy];
         else if (rand < 70)
             randomData = stageDatas[(int)StageType.Shop];
-        else if (rand < 89)
+        else if (rand < 85)
             randomData = stageDatas[(int)StageType.Rest];
         else
             randomData = stageDatas[(int)StageType.Event];

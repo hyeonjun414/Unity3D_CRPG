@@ -14,7 +14,8 @@ public class MonsterAttackCommand : AttackCommand
     }
     public override void Excute()
     {
-        if (monster.target == null || monster.isAttacking || monster.isCasting || monster.target.nextTile != null)
+        if (monster.target == null || monster.target.isVanished || monster.isAttacking || monster.isCasting 
+            || monster.target.nextTile != null || monster.isCC)
         {
             return;
         }

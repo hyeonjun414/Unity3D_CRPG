@@ -30,7 +30,7 @@ public class Enemy : LivingEntity
         int randCount = Random.Range(3, 6);
         for(int i = 0; i < randCount;)
         {
-            BattleTile bt = bs.battleTiles[Random.Range(0, bs.battleTiles.Length/2)];
+            BattleTile bt = bs.battleTiles[Random.Range(0, bs.battleTiles.Count/2)];
             if(bt.monster == null)
             {
                 MonsterData md = (MonsterData)summonData.monsters[Random.Range(0, summonData.monsters.Count)];

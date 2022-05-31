@@ -12,16 +12,18 @@ public class MessagePopUpUI : MonoBehaviour
     private Callback callbackNO;
 
     // Define
-    public enum DialogResponse { OK, YES, NO, ERROR }
+   
 
     public GameObject OneButton;
     public GameObject YesOrNoButton;
 
+    public Text titleText;
     public Text messageText;
     public Button OkButton;
     public Button YesButton;
     public Button NoButton;
 
+    private enum DialogResponse { OK, YES, NO, ERROR }
     private DialogResponse thisResult;
 
     private void Awake()
@@ -33,10 +35,11 @@ public class MessagePopUpUI : MonoBehaviour
         NoButton.onClick.AddListener(PopUpClose);
     }
 
-    public void PopUp(string message)
+    public void PopUp(string title, string message)
     {
         gameObject.SetActive(true);
 
+        titleText.text = title;
         messageText.text = message;
 
         YesOrNoButton.SetActive(false);
@@ -45,11 +48,12 @@ public class MessagePopUpUI : MonoBehaviour
 
     }
 
-    public void PopUp(string message, Callback Function)
+    public void PopUp(string title, string message, Callback Function)
     {
         gameObject.SetActive(true);
         SetCallback(Function, DialogResponse.OK);
 
+        titleText.text = title;
         messageText.text = message;
 
         YesOrNoButton.SetActive(false);
@@ -58,12 +62,13 @@ public class MessagePopUpUI : MonoBehaviour
 
     }
 
-    public void YesOrNoPopUp(string message, Callback yesButtonFuncion, Callback noButtonFuntion)
+    public void YesOrNoPopUp(string title, string message, Callback yesButtonFuncion, Callback noButtonFuntion)
     {
         gameObject.SetActive(true);
         SetCallback(yesButtonFuncion, DialogResponse.YES);
         SetCallback(noButtonFuntion, DialogResponse.NO);
 
+        titleText.text = title;
         messageText.text = message;
 
         OneButton.SetActive(false);
@@ -108,7 +113,7 @@ public class MessagePopUpUI : MonoBehaviour
     }
 
     // Callback 관련
-    public void SetCallback(Callback call, DialogResponse buttontype)
+    private void SetCallback(Callback call, DialogResponse buttontype)
     {
         switch (buttontype)
         {

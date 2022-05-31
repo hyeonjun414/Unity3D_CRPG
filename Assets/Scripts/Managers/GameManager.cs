@@ -104,14 +104,15 @@ public class GameManager : Singleton<GameManager>
         {
             Time.timeScale *= 2f;
         }
-
-        if (Input.GetKeyDown(KeyCode.V))
+        if(Input.GetKeyDown(KeyCode.K))
         {
-            MessageBoxText();
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            MessageBoxText2();
+            BattleTile targetBt = BattleManager.Instance.stage.battleTiles[33];
+            print($"Target tiles: {targetBt}, {targetBt.tilePos}");
+            List<BattleTile> tiles = BattleManager.Instance.stage.FindAroundTile(targetBt);
+            for(int i = 0; i < tiles.Count; i++)
+            {
+                print($"{i} tiles: {tiles[i]}, {tiles[i].tilePos}");
+            }
         }
 
     }
@@ -136,12 +137,4 @@ public class GameManager : Singleton<GameManager>
         SceneManager.sceneLoaded += BattleManager.Instance.FindingEnemyAndStage;
     }
 
-    public void MessageBoxText()
-    {
-        UIManager.Instance.messagePopUpUI.PopUp("메세지 테스트입니다.");
-    }
-    public void MessageBoxText2()
-    {
-        UIManager.Instance.messagePopUpUI.YesOrNoPopUp("메세지 테스트입니다.2", null, null);
-    }
 }

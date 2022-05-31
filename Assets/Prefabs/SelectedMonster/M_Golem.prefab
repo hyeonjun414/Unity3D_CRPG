@@ -137,6 +137,7 @@ MonoBehaviour:
   isAttacking: 0
   isMoving: 0
   isCasting: 0
+  skill: {fileID: 0}
   statusBar: {fileID: 5713664402310781218}
   anim: {fileID: 0}
   cc: {fileID: 0}
@@ -587,6 +588,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8f14ead35d154734bbd8667e10dc0020, type: 2}
+    - target: {fileID: 5866666021909216657, guid: bfe92606348df634fb607686bbb0ca33,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe92606348df634fb607686bbb0ca33, type: 3}
 --- !u!4 &7503936230870093353 stripped

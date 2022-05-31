@@ -64,6 +64,8 @@ public class Monster : LivingEntity, IPoolable
     public bool isAttacking = false;
     public bool isMoving= false;
     public bool isCasting = false;
+    public bool isCC = false;
+    public bool isVanished = false;
 
     [Header("Action")]
     public UnityAction<Monster> OnAttack;
@@ -86,12 +88,12 @@ public class Monster : LivingEntity, IPoolable
         isAttacking = false;
         isMoving = false;
         isCasting = false;
-
+        isCC = false;
+        isVanished = false;
 
         anim = GetComponentInChildren<Animator>();
         cc = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
-
 
         // 소유자에 따라 이펙트를 활성화한다.
         if (owner == MonsterOwner.Player)
@@ -172,6 +174,14 @@ public class Monster : LivingEntity, IPoolable
         statusBar?.UpdateUI();
         GameManager.Instance.CreateText(enemy.damage, transform.position, TextType.Damage);
     }
+    public void Hit(int damage)
+    {
+        HP -= damage;
+        MP += 3;
+
+        statusBar?.UpdateUI();
+        GameManager.Instance.CreateText(damage, transform.position, TextType.Damage);
+    }
     public void FindTurn()
     {
         findCommand.Excute();
@@ -208,10 +218,13 @@ public class Monster : LivingEntity, IPoolable
 
     public void ReturnPool()
     {
+        if (skill != null)
+        {
+            skill.ReturnPool();
+            skill = null;
+        }
         ResetMonster();
         gameObject.SetActive(false);
-        if (skill != null)
-            skill.ReturnPool();
         ObjectPoolManager.Instance.ReturnObj(gameObject);
     }
 
@@ -221,5 +234,16 @@ public class Monster : LivingEntity, IPoolable
         allyEffect.gameObject.SetActive(false);
         enemyEffect.gameObject.SetActive(false);
         statusBar.gameObject.SetActive(false);
+    }
+    public void ApplyCC(float duration)
+    {
+        StopCoroutine("CCRoutine");
+        StartCoroutine("CCRoutine", duration);
+    }
+    IEnumerator CCRoutine(float duration)
+    {
+        isCC = true;
+        yield return new WaitForSeconds(duration);
+        isCC = false;
     }
 }

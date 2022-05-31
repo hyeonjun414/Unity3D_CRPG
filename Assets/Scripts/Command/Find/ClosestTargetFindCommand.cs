@@ -11,7 +11,7 @@ public class ClosestTargetFindCommand : FindCommand
     }
     public override void Excute()
     {
-        if (monster.target == null || monster.target.isDead)
+        if (monster.target == null || monster.target.isVanished || monster.target.isDead || monster.isCC)
         {
             monster.target = Find();
         }

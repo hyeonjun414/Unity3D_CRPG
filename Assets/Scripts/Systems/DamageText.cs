@@ -28,9 +28,9 @@ public class DamageText : MonoBehaviour, IPoolable
         // 위치 설정
         transform.position = position;
         transform.LookAt(-Camera.main.transform.position);
-        float randX = Random.Range(-0.5f, 0.5f);
+        float randX = Random.Range(-0.25f, 0.25f);
         float randY = Random.Range(-0.25f, 0.25f);
-        transform.Translate(Vector3.up*1.5f + new Vector3(randX, randY, 0));
+        transform.Translate(Vector3.up*1.5f + new Vector3(randX, randY, -10));
         // 데미지 텍스트 설정
         floatingText.text = damage.ToString();
 
@@ -58,9 +58,10 @@ public class DamageText : MonoBehaviour, IPoolable
         // 위치 설정
         transform.position = position;
         transform.LookAt(-Camera.main.transform.position);
-        float randX = Random.Range(-0.5f, 0.5f);
+        float randX = Random.Range(-0.25f, 0.25f);
         float randY = Random.Range(-0.25f, 0.25f);
-        transform.Translate(Vector3.up * 1.5f + new Vector3(randX, randY, 0));
+        transform.Translate(Vector3.up * 1.5f + new Vector3(randX, randY, -10), Space.World);
+        
         // 데미지 텍스트 설정
         floatingText.text = text;
 

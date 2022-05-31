@@ -16,7 +16,7 @@ public class BattleManager : Singleton<BattleManager>
 
     private PathFinder pf;
 
-    private bool isStage = false;
+    public bool isStage = false;
     public bool isPrepared = false;
     private void Awake()
     {
@@ -59,20 +59,21 @@ public class BattleManager : Singleton<BattleManager>
     {
         while(true)
         {
+
             FindTurn(enemyMonster);
             FindTurn(allyMonster);
-            //yield return new WaitForSeconds(0.1f);
+
             MoveTurn(enemyMonster);
             MoveTurn(allyMonster);
+
             AttackTurn(enemyMonster);
             AttackTurn(allyMonster);
-            //yield return new WaitForSeconds(0.1f);
             
-            //yield return new WaitForSeconds(0.1f);
             ResultTurn(enemyMonster);
             ResultTurn(allyMonster);
+
             EndTurn();
-            //yield return new WaitForSeconds(0.1f);
+
             yield return null;
         }
 

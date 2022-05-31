@@ -9,7 +9,10 @@ public enum SkillType
     CounterShield,
     EnergyDrain,
     DeathRay,
-    ChainAttack
+    ChainAttack,
+    Throwing,
+    Tornado,
+    DropDown
 }
 
 [CreateAssetMenu(fileName = "Skill Data", menuName = "Skill/Skill Data")]

@@ -156,7 +156,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -60, y: 200}
+  m_SizeDelta: {x: -100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25753
 MonoBehaviour:
@@ -179,25 +179,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1a34e32c6254b34479eda5f76786cfc7, type: 3}
-    m_FontSize: 18
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: "\uC54C\uB9BC\uC758 \uB0B4\uC6A9\uC774 \uB4E4\uC5B4\uAC00\uB294 \uBD80\uBD84\uC785\uB2C8\uB2E4.
     \uC774\uB7F0 \uC800\uB7F0 \uB0B4\uC6A9\uC774 \uB4E4\uC5B4\uAC08 \uC218 \uC788\uC73C\uB2C8
-    \uC774\uB807\uAC8C \uAE38\uAC8C \uD14C\uC2A4\uD2B8 \uBB38\uC7A5\uC744 \uC801\uC5B4
-    \uBD05\uB2C8\uB2E4. \uC774 \uC544\uB798\uB294 \uC774 \uB0B4\uC6A9\uC744 \uAE30\uBC18\uC73C\uB85C
-    \uD50C\uB808\uC774\uC5B4\uAC00 \uC6D0\uD558\uB294 \uC120\uD0DD\uC9C0\uB97C \uACE0\uB97C\uC218
-    \uC788\uB3C4\uB85D \uBC84\uD2BC\uC744 \uB9CC\uB4E4\uC5B4 \uB458\uAC83\uC785\uB2C8\uB2E4.\uC54C\uB9BC\uC758
-    \uB0B4\uC6A9\uC774 \uB4E4\uC5B4\uAC00\uB294 \uBD80\uBD84\uC785\uB2C8\uB2E4. \uC774\uB7F0
-    \uC800\uB7F0 \uB0B4\uC6A9\uC774 \uB4E4\uC5B4\uAC08 \uC218 \uC788\uC73C\uB2C8
     \uC774\uB807\uAC8C \uAE38\uAC8C \uD14C\uC2A4\uD2B8 \uBB38\uC7A5\uC744 \uC801\uC5B4
     \uBD05\uB2C8\uB2E4. \uC774 \uC544\uB798\uB294 \uC774 \uB0B4\uC6A9\uC744 \uAE30\uBC18\uC73C\uB85C
     \uD50C\uB808\uC774\uC5B4\uAC00 \uC6D0\uD558\uB294 \uC120\uD0DD\uC9C0\uB97C \uACE0\uB97C\uC218
@@ -5107,7 +5101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: -35}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &221476287
@@ -5131,11 +5125,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1a34e32c6254b34479eda5f76786cfc7, type: 3}
-    m_FontSize: 24
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 300
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -8608,7 +8602,7 @@ MonoBehaviour:
   isDead: 1
   mpRegen: 10
   rerollCost: 5
-  moveSpeed: 5
+  moveSpeed: 10
   roteSpeed: 5
   rayPos: {x: 0, y: 0, z: 0}
   linePos: {fileID: 1204034756}
@@ -18576,6 +18570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OneButton: {fileID: 2066361576}
   YesOrNoButton: {fileID: 1312309718}
+  titleText: {fileID: 221476287}
   messageText: {fileID: 25753}
   OkButton: {fileID: 1335941289}
   YesButton: {fileID: 351696349}

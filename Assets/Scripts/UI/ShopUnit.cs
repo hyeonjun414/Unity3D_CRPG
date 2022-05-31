@@ -49,7 +49,7 @@ public class ShopUnit : MonoBehaviour
         }
         else
         {
-            UIManager.Instance.messagePopUpUI.PopUp("가지고 있는 돈이 부족합니다.");
+            UIManager.Instance.messagePopUpUI.PopUp("알 림","가지고 있는 돈이 부족합니다.");
         }
     }
 }

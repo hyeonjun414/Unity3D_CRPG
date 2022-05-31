@@ -16,7 +16,7 @@ public class MonsterSkillCommand : SkillCommand
     }
     public override void Excute()
     {
-        if (monster.target == null || monster.isMoving)
+        if (monster.target == null || monster.target.isVanished || monster.isMoving || monster.isCC || monster.isCasting)
         {
             return;
         }
