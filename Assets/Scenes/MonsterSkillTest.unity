@@ -1861,9 +1861,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15be9463667aeef44844c021261d48c6, type: 2}
   - {fileID: 11400000, guid: d2a3c0adcf838774caeede09e6ad09c8, type: 2}
   - {fileID: 11400000, guid: 60adebf015bf0294b8b0f553735385b9, type: 2}
+  - {fileID: 11400000, guid: ebfc7a12f15838c469244af3122251a3, type: 2}
+  - {fileID: 11400000, guid: c663fa6a9fbfd9949ab70cbde5882225, type: 2}
+  - {fileID: 11400000, guid: ac4076bb04e02d644bb6d7379e31f49e, type: 2}
   - {fileID: 11400000, guid: ced30615c15439c4cae58bb18a8a27da, type: 2}
-  - {fileID: 11400000, guid: a54c5f4104bede84a9ca1261aa314164, type: 2}
-  - {fileID: 11400000, guid: c1fab0087936b7749a08fd1767df07d9, type: 2}
   relicDatas:
   - {fileID: 11400000, guid: 2895a7947d2e16d4a8ed48902d749f5a, type: 2}
   - {fileID: 11400000, guid: 765e728d089213f48a1930c961805c4c, type: 2}
@@ -5298,7 +5299,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 3
+  m_DynamicPixelsPerUnit: 16
 --- !u!223 &232029306
 Canvas:
   m_ObjectHideFlags: 0
@@ -30597,6 +30598,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1796178816992647290, guid: 53a112b95b9065b469a7eccb8484623b,
+        type: 3}
+      propertyPath: summonData
+      value: 
+      objectReference: {fileID: 11400000, guid: 43fc1d4cd4b96654ba42e91eb1ebd164,
+        type: 2}
     - target: {fileID: 1796178817942925910, guid: 53a112b95b9065b469a7eccb8484623b,
         type: 3}
       propertyPath: m_Name

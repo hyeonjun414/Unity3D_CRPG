@@ -38,7 +38,7 @@ public class DropDownSkill : Skill
         curTime = 0;
         Vector3 curPos = monster.transform.position;
         BattleTile targetTile = null;
-        if(monster.target.curTile == null)
+        if(monster.target == null)
         {
             targetTile = BattleManager.Instance.stage.RandomNoneTile();
         }

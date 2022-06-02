@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c95e1f76069484a9f40698e89e3ed2, type: 3}
   m_Name: Golem_L2
   m_EditorClassIdentifier: 
+  itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 39f337341056230469456b2036df88dc, type: 3}
   name: Ice Golem

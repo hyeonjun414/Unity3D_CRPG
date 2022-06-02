@@ -108,8 +108,12 @@ public class BattleManager : Singleton<BattleManager>
         {
             if(monList[i].isDead)
             {
-                monList[i].curTile.state = TileState.NONE;
-                monList[i].curTile.monster = null;
+                if(monList[i].curTile != null)
+                {
+                    monList[i].curTile.state = TileState.NONE;
+                    monList[i].curTile.monster = null;
+                }
+
                 monList[i].ReturnPool();
                 monList.RemoveAt(i);
                 
