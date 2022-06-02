@@ -11,9 +11,26 @@ public class ShieldSkill : Skill
     [Header("Counter Effect")]
     public GameObject counterEffect;
 
+    [Header("Level Variable")]
+    public int counterDamage;
+
     public override void SetUp(Monster monster, SkillData sd)
     {
         base.SetUp(monster, sd);
+
+        switch (skillLevel)
+        {
+            case 0:
+                counterDamage = 50;
+                break;
+            case 1:
+                counterDamage = 100;
+                break;
+            case 2:
+                counterDamage = 200;
+                break;
+        }
+
         monster.OnHit += HitCounter;
     }
     public override void Casting()
@@ -23,16 +40,14 @@ public class ShieldSkill : Skill
 
     public void HitCounter(Monster target)
     {
-        int damage = target.damage;
         //monster.HP += damage;
-        target.HP -= damage;
-        GameManager.Instance.CreateText(damage, target.transform.position, TextType.Counter);
+        target.HP -= counterDamage;
+        GameManager.Instance.CreateText(counterDamage, target.transform.position, TextType.Counter);
         Effect go = ObjectPoolManager.Instance.UseObj(counterEffect.gameObject).GetComponent<Effect>();
-        go.transform.position = Vector3.zero;
         go.transform.rotation = Quaternion.identity;
-        go.transform.SetParent(target.transform, false);
+        go.transform.SetParent(null, true);
+        go.transform.position = target.transform.position + Vector3.up;
         shieldHit.Play();
-        go.transform.position += Vector3.up;
     }
 
     protected override void OnDisable()

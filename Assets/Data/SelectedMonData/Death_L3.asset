@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: cdc2fcc817739674fa0b0e1d3a4813bd, type: 3}
-  name: Death Mage
-  desc: "\uB370\uC2A4 LV3"
+  name: "\uB370\uC2A4 \uBA54\uC774\uC9C0"
+  desc: "\uC8FD\uC74C\uC744 \uD0D0\uAD6C\uD558\uB294 \uC874\uC7AC. \uC218\uB9CE\uC740
+    \uC601\uD63C\uC744 \uC218\uD655\uD574\uAC04\uB2E4."
   cost: 11
   level: 2
   hp: 1600

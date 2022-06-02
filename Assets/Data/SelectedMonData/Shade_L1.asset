@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 0ad2a8cd0d4888141b65abd26b09005b, type: 3}
-  name: Egglet
-  desc: "\uC170\uC774\uB4DC LV1"
+  name: "\uC5D0\uADF8\uB81B"
+  desc: "\uAE68\uC9C4 \uB2EC\uAC40\uC774\uB2E4. \uC548\uC5D0 \uBB54\uAC00 \uC228\uC5B4
+    \uC788\uB294 \uAC83 \uAC19\uB2E4."
   cost: 2
   level: 0
   hp: 800

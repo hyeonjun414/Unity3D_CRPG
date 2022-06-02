@@ -63,19 +63,30 @@ public class BattleStage : MonoBehaviour
         }
         return bt;
     }
+    public BattleTile RandomAllyTile()
+    {
+        BattleTile bt = null;
+        while (true)
+        {
+            bt = battleTiles[Random.Range(battleTiles.Count / 2, battleTiles.Count)];
+            if (bt.state == TileState.NONE)
+                break;
+        }
+        return bt;
+    }
 
     public BattleTile FindTileFromPoint(Vector2 tilePos)
     {
         return battleTiles.Find((x) => x.tilePos == tilePos);
     }
 
-    public List<BattleTile> FindAroundTile(BattleTile tile)
+    public List<BattleTile> FindAroundTile(BattleTile tile, int range = 1)
     {
         float posX = tile.tilePos.x;
         float posY = tile.tilePos.y;
         return battleTiles.FindAll((bt)=>
-            (posX - 1 <= bt.tilePos.x && bt.tilePos.x <= posX + 1) &&
-            (posY - 1 <= bt.tilePos.y && bt.tilePos.y <= posY + 1) &&
+            (posX - range <= bt.tilePos.x && bt.tilePos.x <= posX + range) &&
+            (posY - range <= bt.tilePos.y && bt.tilePos.y <= posY + range) &&
             bt != tile);
     }
 

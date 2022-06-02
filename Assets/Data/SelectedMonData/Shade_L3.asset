@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 0ad2a8cd0d4888141b65abd26b09005b, type: 3}
-  name: Shadow
-  desc: "\uC170\uC774\uB4DC LV3"
+  name: "\uC100\uB3C4\uC6B0"
+  desc: "\uADF8\uB9BC\uC790\uC640 \uAC19\uC774 \uC5B4\uB450\uC6B4 \uC678\uD615 \uC0AC\uC774\uC5D0
+    \uBD88\uAF43\uC774 \uD0C0\uC624\uB978\uB2E4."
   cost: 9
   level: 2
   hp: 1600

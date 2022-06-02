@@ -8,8 +8,10 @@ using Cinemachine;
 
 public enum ActionType
 {
+
     OnStageEnd,
     OnDraw,
+    OnBattlePrepare,
     OnBattleStart,
     OnBattleEnd,
     Count,
@@ -19,6 +21,7 @@ public enum ActionType
 public class GameManager : Singleton<GameManager>
 {
     public Player player;
+    public Transform objectSpace;
     private CinemachineVirtualCamera mainCam;
 
     
@@ -88,22 +91,6 @@ public class GameManager : Singleton<GameManager>
             OptionManager.Instance.OptionBtn();
             IsPause = !IsPause;
         }
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            Time.timeScale = 0f;
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Time.timeScale = 1f;
-        }
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            Time.timeScale *= 0.5f;
-        }
-        if (Input.GetKeyDown(KeyCode.F4))
-        {
-            Time.timeScale *= 2f;
-        }
         if(Input.GetKeyDown(KeyCode.K))
         {
             BattleTile targetBt = BattleManager.Instance.stage.battleTiles[33];
@@ -129,6 +116,12 @@ public class GameManager : Singleton<GameManager>
         DamageText dt = ObjectPoolManager.Instance.UseObj(damageText.gameObject).GetComponent<DamageText>();
         dt.transform.SetParent(worldCanvas.transform, false); // 월드캔버스의 자식으로 만든다.
         dt.Enable(text, pos, tt);
+    }
+
+    public int ApplyRandomValue(int value)
+    {
+        int rand = (int)Random.Range(-value*0.2f, value * 0.2f);
+        return value + rand;
     }
 
     public void ApplySceneLoadedFunc()

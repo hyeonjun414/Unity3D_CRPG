@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: cdc2fcc817739674fa0b0e1d3a4813bd, type: 3}
-  name: Nightmare
-  desc: "\uB370\uC2A4 LV2"
+  name: "\uB098\uC774\uD2B8\uBA54\uC5B4"
+  desc: "\uC545\uBABD\uC744 \uAFBC\uB2E4\uBA74 \uC8FC\uBCC0\uC5D0 \uB098\uC774\uD2B8\uBA54\uC5B4\uAC00
+    \uC788\uB2E4\uB294 \uAC83\uC774\uB2E4."
   cost: 7
   level: 1
   hp: 1300

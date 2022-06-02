@@ -15,8 +15,8 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 54325af2fc0ebb54aa7ab57446c3178f, type: 3}
-  name: Phantom
-  desc: "\uACE0\uC2A4\uD2B8 LV3"
+  name: "\uD32C\uD140"
+  desc: "\uC18C\uB2C9\uC774 \uC8FD\uC73C\uBA74 \uC774\uB7F0 \uBAA8\uC2B5\uC77C\uC9C0\uB3C4?"
   cost: 5
   level: 2
   hp: 800

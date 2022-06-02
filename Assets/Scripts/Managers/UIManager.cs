@@ -36,6 +36,7 @@ public class UIManager : Singleton<UIManager>
 
     [Header("설정")]
     public GameObject optionUI;
+    public SpeedControlUI speedUI;
 
     private void Awake()
     {

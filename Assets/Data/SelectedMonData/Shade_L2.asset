@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 0ad2a8cd0d4888141b65abd26b09005b, type: 3}
-  name: Shade
-  desc: "\uC170\uC774\uB4DC LV2"
+  name: "\uC170\uC774\uB4DC"
+  desc: "\uC7A5\uB09C\uAE30\uAC00 \uB118\uCCD0\uBCF4\uC778\uB2E4. \uC544\uC9C1 \uC54C\uAECD\uC9C8\uC774
+    \uB0A8\uC544\uC788\uB2E4."
   cost: 5
   level: 1
   hp: 1600

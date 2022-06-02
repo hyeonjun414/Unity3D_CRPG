@@ -15,7 +15,13 @@ public class RelicManager : Singleton<RelicManager>
         if (_instance == null)
             _instance = this;
     }
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            AddRelic(RewardManager.Instance.RandomRelic());
+        }
+    }
     public void AddRelic(RelicData relic)
     {
         SetRelicEffect(relic.relicType);
@@ -47,6 +53,15 @@ public class RelicManager : Singleton<RelicManager>
             case RelicType.StartMpUp:
                 GameManager.Instance.AddAction(ActionType.OnBattleStart, StartMpUp);
                 break;
+            case RelicType.RerollCostDown:
+                RerollCostDown(-1);
+                break;
+            case RelicType.DamageUp:
+                GameManager.Instance.AddAction(ActionType.OnBattleStart, DamageUp);
+                break;
+            case RelicType.RandomSummon:
+                GameManager.Instance.AddAction(ActionType.OnBattlePrepare, RandomSummon);
+                break;
         }
     }
     public void UnsetRelicEffect(RelicType type)
@@ -68,22 +83,34 @@ public class RelicManager : Singleton<RelicManager>
             case RelicType.StartMpUp:
                 GameManager.Instance.AddAction(ActionType.OnBattleStart, StartMpUp);
                 break;
+            case RelicType.RerollCostDown:
+                RerollCostDown(-1);
+                break;
+            case RelicType.DamageUp:
+                GameManager.Instance.AddAction(ActionType.OnBattleStart, DamageUp);
+                break;
+            case RelicType.RandomSummon:
+                GameManager.Instance.AddAction(ActionType.OnBattlePrepare, RandomSummon);
+                break;
         }
     }
 
     public void MpUp(int value)
     {
+        // 즉시 적용
         GameManager.Instance.player.maxMp += value;
         GameManager.Instance.player.statusUI.UpdateUI();
     }
     public void MpRegenUp(int value)
     {
+        // 즉시 적용
         GameManager.Instance.player.mpRegen += value;
         GameManager.Instance.player.statusUI.UpdateUI();
 
     }
     public void RandomEvolution()
     {
+        // 스테이지 종료 시
         print("랜덤 진화 유물 사용");
 
         List<CardData> deck = CardManager.Instance.deck;
@@ -103,6 +130,7 @@ public class RelicManager : Singleton<RelicManager>
     }
     public void AttackSpeedUp()
     {
+        // 전투시작 시
         print("아군 몬스터 공속 증가");
         List<Monster> monList = BattleManager.Instance.allyMonster;
         foreach (Monster mon in monList)
@@ -113,6 +141,7 @@ public class RelicManager : Singleton<RelicManager>
     }
     public void StartMpUp()
     {
+        // 전투시작 시
         print("아군 몬스터 시작 MP 40%");
 
         List<Monster> monList = BattleManager.Instance.allyMonster;
@@ -123,5 +152,28 @@ public class RelicManager : Singleton<RelicManager>
         }
         
         UIManager.Instance.battleInfoUI.UpdateUI();
+    }
+
+    public void RerollCostDown(int value)
+    {
+        // 즉시 적용
+        GameManager.Instance.player.rerollCost += value;
+        GameManager.Instance.player.statusUI.UpdateUI();
+    }
+    public void DamageUp()
+    {
+        // 전투시작 시
+        List<Monster> monList = BattleManager.Instance.allyMonster;
+        foreach (Monster mon in monList)
+        {
+            mon.damage += 30;
+        }
+    }
+    public void RandomSummon()
+    {
+        // 전투준비 시
+        MonsterData md = RewardManager.Instance.RandomMonsterData();
+        BattleTile bt = BattleManager.Instance.stage.RandomAllyTile();
+        SummonManager.Instance.SummonMonster(md, bt, MonsterOwner.Player);
     }
 }

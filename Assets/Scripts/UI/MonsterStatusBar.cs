@@ -13,7 +13,7 @@ public class MonsterStatusBar : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(-Camera.main.transform.position);
+        transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
     }
     public void AddMonster(Monster monster)
     {

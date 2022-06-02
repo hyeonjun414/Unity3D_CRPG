@@ -14,6 +14,7 @@ public class Effect : MonoBehaviour, IPoolable
 
     public void ReturnPool()
     {
+        //print(gameObject.name);
         gameObject.SetActive(false);
         ObjectPoolManager.Instance.ReturnObj(gameObject);
     }

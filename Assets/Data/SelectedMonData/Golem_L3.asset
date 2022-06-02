@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 39f337341056230469456b2036df88dc, type: 3}
-  name: Fire Golem
-  desc: "\uACE8\uB818 LV3"
+  name: "\uD30C\uC774\uC5B4 \uACE8\uB818"
+  desc: "\uD654\uC0B0\uC9C0\uB300\uC5D0\uC11C \uD0DC\uC5B4\uB09C \uACE8\uB818. \uB9CE\uC774
+    \uB728\uAC81\uB2E4."
   cost: 8
   level: 2
   hp: 2000

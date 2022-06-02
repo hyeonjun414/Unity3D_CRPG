@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour, IPoolable
     [Header("Projectile")]
     public GameObject hit;
     public ProjectileMoveType moveType;
+    public int damage;
 
     [Header("Monster")]
     public Monster owner;
@@ -20,13 +21,35 @@ public class Projectile : MonoBehaviour, IPoolable
 
     [Header("Indirect Option")]
     public float projHeight;
+    public void SetUp(Monster owner, Monster target, int damage,float duration, ProjectileMoveType pmt = ProjectileMoveType.Direct)
+    {
+        this.owner = owner;
+        this.damage = damage;
+        this.target = target;
+        this.duration = duration;
+        Invoke("ReturnPool", duration + 0.5f);
+        //Destroy(gameObject, duration + 0.5f);
 
+        switch (pmt)
+        {
+            case ProjectileMoveType.Direct:
+                moveType = ProjectileMoveType.Direct;
+                break;
+            case ProjectileMoveType.Indirect:
+                moveType = ProjectileMoveType.Indirect;
+                projHeight = 2;
+                break;
+        }
+
+        StartCoroutine(ShotRoutine());
+    }
     public void SetUp(Monster owner, Monster target, float duration, ProjectileMoveType pmt = ProjectileMoveType.Direct)
     {
         this.owner = owner;
+        damage = owner.damage;
         this.target = target;
         this.duration = duration;
-        //Invoke("ReturnPool", duration + 0.5f);
+        Invoke("ReturnPool", duration + 0.5f);
         //Destroy(gameObject, duration + 0.5f);
 
         switch(pmt)
@@ -47,7 +70,7 @@ public class Projectile : MonoBehaviour, IPoolable
         float curTime = 0f;
         while (true)
         {
-            if(!owner.gameObject.activeSelf || !target.gameObject.activeSelf || target.isDead)
+            if(!owner.gameObject.activeSelf || target == null || !target.gameObject.activeSelf || target.isDead)
             {
                 ReturnPool();
                 yield break;
@@ -112,6 +135,7 @@ public class Projectile : MonoBehaviour, IPoolable
 
     public void ReturnPool()
     {
+        CancelInvoke("ReturnPool");
         StopAllCoroutines();
         gameObject.SetActive(false);
         ObjectPoolManager.Instance.ReturnObj(gameObject);

@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17d8a8c97fb87a9458ae223a0b488c7f, type: 3}
-  m_Name: MpUp
+  m_Name: RandomSummon
   m_EditorClassIdentifier: 
   itemType: 1
-  image: {fileID: 21300000, guid: 806dda8917e696b4e94c318658feb5a1, type: 3}
-  relicType: 0
-  relicName: "\uC218\uC815 \uC870\uAC01"
-  relicDesc: "\uD50C\uB808\uC774\uC5B4\uC758 \uCD5C\uB300 \uB9C8\uB098\uB97C 5 \uC62C\uB824\uC900\uB2E4."
+  image: {fileID: 21300000, guid: 4918a3cd4ca88cf44a9e6a6ae4748dd4, type: 3}
+  relicType: 7
+  relicName: "\uB204\uAD70\uAC00\uC758 \uD574\uACE8"
+  relicDesc: "\uC804\uD22C\uAC00 \uC2DC\uC791\uB420 \uB54C 1\uB808\uBCA8 \uBAAC\uC2A4\uD130
+    \uD55C\uB9C8\uB9AC\uB97C \uB79C\uB364\uC73C\uB85C \uC18C\uD658\uD55C\uB2E4."
   relicPrefab: {fileID: 0}

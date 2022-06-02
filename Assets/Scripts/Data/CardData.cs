@@ -15,6 +15,7 @@ public class CardData : ItemData
     public CardType cardType;
     public Sprite icon;
     public new string name;
+    [TextArea]
     public string desc;
     public int cost;
 }

@@ -78,4 +78,23 @@ public class RewardManager : Singleton<RewardManager>
         }
         
     }
+    public MonsterData RandomMonsterData()
+    {
+        CardData md = null;
+        int rand = 0;
+        while(true)
+        {
+            rand = Random.Range(0, cardDatas.Length);
+            if(cardDatas[rand] is MonsterData)
+            {
+                md = cardDatas[rand];
+                break;
+            }
+        }
+        return (MonsterData)md;
+    }
+    public RelicData RandomRelic()
+    {
+        return relicDatas[Random.Range(0, relicDatas.Length)];
+    }
 }

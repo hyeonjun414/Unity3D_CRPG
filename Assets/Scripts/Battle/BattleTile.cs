@@ -58,12 +58,12 @@ public class BattleTile : MonoBehaviour
     private void OnMouseEnter()
     {
         if (monster != null)
-            UIManager.Instance.monsterInfoUI.InfoEnter(monster.monsterData);
+            UIManager.Instance.cardInfoUI.InfoEnter(monster.monsterData);
         mr.material.color = overColor;
     }
     private void OnMouseExit()
     {
-        UIManager.Instance.monsterInfoUI.InfoExit();
+        UIManager.Instance.cardInfoUI.InfoExit();
         mr.material.color = originColor;
     }
     private void OnMouseUp()

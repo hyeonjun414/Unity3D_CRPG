@@ -98,3 +98,4 @@ MonoBehaviour:
   damageColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 0}
   manaColor: {r: 0.18062477, g: 0.65025103, b: 0.9339623, a: 0}
   counterColor: {r: 1, g: 0.8066038, b: 0.8066038, a: 0}
+  skillColor: {r: 0.8578325, g: 0.3254717, b: 1, a: 0}

@@ -20,8 +20,15 @@ public class SkillData : ScriptableObject
 {
     [Header("Skill status")]
     public SkillType skillType;
+    public string skillName;
+    [TextArea]
+    public string skillDesc;
     public float effectInterval;
     public float effectCount;
+
+    [Header("Skill value")]
+    public int skillValue;
+
 
 
     [Header("Skill Prefab")]

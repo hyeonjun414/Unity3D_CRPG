@@ -50,7 +50,7 @@ public class BattleManager : Singleton<BattleManager>
         if (isPrepared || !isStage) return;
 
         isPrepared = true;
-        
+        GameManager.Instance.UseAction(ActionType.OnBattlePrepare);
         enemy.SummonMonster();
         CardManager.Instance.TurnEndReroll();
         player.RegenMp();

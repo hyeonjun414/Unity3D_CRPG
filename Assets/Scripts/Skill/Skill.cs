@@ -32,6 +32,7 @@ public abstract class Skill : MonoBehaviour, IPoolable
     }
     public abstract void Casting();
 
+
     protected virtual void OnDisable() { }
 
     public void ReturnPool()

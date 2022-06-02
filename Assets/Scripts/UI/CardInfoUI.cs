@@ -21,6 +21,8 @@ public class CardInfoUI : MonoBehaviour
     [Header("Monster Card")]
     public GameObject monsterObj;
     public Text monDescText;
+    public Text monSkillNameText;
+    public Text monSkillDescText;
     public Text monPreEvoText;
     public Text monCurEvoText;
     public Text monNextEvoText;
@@ -94,6 +96,8 @@ public class CardInfoUI : MonoBehaviour
         spellObj.SetActive(false);
 
         monDescText.text = data.desc;
+        monSkillNameText.text = data.skillData != null ? data.skillData.skillName : "X";
+        monSkillDescText.text = data.skillData != null ? data.skillData.skillDesc : "해당 몬스터는 스킬이 없습니다";
         monPreEvoText.text = data.prevMonster != null ? data.prevMonster.name : "X";
         monCurEvoText.text = data.name;
         monNextEvoText.text = data.nextMonster != null ? data.nextMonster.name : "X";

@@ -9,12 +9,32 @@ public class ChainAttackSkill : Skill
     public GameObject hitEffect;
     public LineRenderer lr;
 
+    [Header("Level Variable")]
+    public int chainCount;
+    public int chainDamage;
+
     public override void SetUp(Monster monster, SkillData sd)
     {
         lr = GetComponent<LineRenderer>();
         
         base.SetUp(monster, sd);
         monster.OnAttack += ChainAttack;
+
+        switch(skillLevel)
+        {
+            case 0:
+                chainCount = 2;
+                chainDamage = 20;
+                break;
+            case 1:
+                chainCount = 3;
+                chainDamage = 40;
+                break;
+            case 2:
+                chainCount = 4;
+                chainDamage = 60;
+                break;
+        }
 
     }
 
@@ -59,12 +79,14 @@ public class ChainAttackSkill : Skill
             lr.SetPosition(0, transform.position + Vector3.up);
             for (int i = 0; i < hits.Count; i++)
             {
+                if (i > chainCount) break;
+
                 lr.positionCount++;
                 target = hits[i].gameObject.GetComponent<Monster>();
                 lr.SetPosition(i+1, target.transform.position + Vector3.up);
-                target.Hit(monster);
+                target.Hit(chainDamage);
                 Effect hit = ObjectPoolManager.Instance.UseObj(hitEffect).GetComponent<Effect>();
-                hit.transform.SetParent(target.transform, true);
+                hit.transform.SetParent(null, true);
                 hit.transform.position = target.transform.position + Vector3.up;
                 yield return null;
 
@@ -80,4 +102,5 @@ public class ChainAttackSkill : Skill
         monster.OnAttack -= ChainAttack;
         lr.enabled = false;
     }
+
 }

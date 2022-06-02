@@ -23,6 +23,8 @@ public class MonsterMeleeAttackCommand : MonsterAttackCommand
     public override void Attack()
     {
         base.Attack();
+        if (monster.target == null) return;
+
         monster.target.Hit(monster.Attack());
         
         UIManager.Instance.battleInfoUI.UpdateUI();

@@ -26,7 +26,7 @@ public class MonsterSkillCommand : SkillCommand
     public virtual void Casting() 
     {
         monster.MP = 0;
-
+        GameManager.Instance.CreateText(skillData.skillName, transform.position, TextType.Skill);
         Skill skill = ObjectPoolManager.Instance.UseObj(skillData.skillPrefab).GetComponent<Skill>();
         skill.transform.position = transform.position;
         skill.transform.rotation = Quaternion.identity;

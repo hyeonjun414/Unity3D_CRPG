@@ -6,9 +6,33 @@ public class DropDownSkill : Skill
 {
     [Header("DropDown")]
     public Effect downHitEffect;
+
+    [Header("Level Variable")]
+    public int dropRange;
+    public int dropDamage;
+    public float effectSize;
     public override void SetUp(Monster monster, SkillData sd)
     {
         base.SetUp(monster, sd);
+
+        switch (skillLevel)
+        {
+            case 0:
+                dropRange = 0;
+                dropDamage = 100;
+                effectSize = 0.5f;
+                break;
+            case 1:
+                dropRange = 1;
+                dropDamage = 200;
+                effectSize = 1f;
+                break;
+            case 2:
+                dropRange = 2;
+                dropDamage = 300;
+                effectSize = 1.5f;
+                break;
+        }
     }
     public override void Casting()
     {
@@ -50,7 +74,15 @@ public class DropDownSkill : Skill
         BattleTile targetBt = aroundTiles.Find((x)=> x.state == TileState.NONE);
         GameObject dropDownEft = ObjectPoolManager.Instance.UseObj(downHitEffect.gameObject);
         dropDownEft.transform.SetParent(null, false);
+        dropDownEft.transform.localScale = Vector3.one * effectSize;
+
+        if(targetBt == null)
+        {
+            targetBt = BattleManager.Instance.stage.RandomNoneTile();
+        }
+
         dropDownEft.transform.position = targetBt.transform.position;
+        
 
         monster.curTile = targetBt;
         targetBt.monster = monster;
@@ -63,13 +95,19 @@ public class DropDownSkill : Skill
             monster.transform.position = Vector3.Lerp(curPos, targetBt.transform.position, curTime/Droptime);
             yield return null;
         }
-        aroundTiles = BattleManager.Instance.stage.FindAroundTile(monster.curTile);
+        if(dropRange == 0)
+        {
+            monster.target.Hit(dropDamage);
+            monster.isVanished = false;
+            yield break;
+        }
+        aroundTiles = BattleManager.Instance.stage.FindAroundTile(monster.curTile, dropRange);
         if(monster.owner == MonsterOwner.Player)
         {
             aroundTiles = aroundTiles.FindAll((x)=> x.monster != null && x.monster.owner == MonsterOwner.Enemy);
             foreach(BattleTile tile in aroundTiles)
             {
-                tile.monster.Hit(50);
+                tile.monster.Hit(dropDamage);
             }
         }
         else

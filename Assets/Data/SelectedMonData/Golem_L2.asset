@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 39f337341056230469456b2036df88dc, type: 3}
-  name: Ice Golem
-  desc: "\uACE8\uB818 LV2"
+  name: "\uC544\uC774\uC2A4 \uACE8\uB818"
+  desc: "\uBD81\uCABD\uC5D0\uC11C \uB0B4\uB824\uC628 \uACE8\uB818. \uCD94\uC6B4 \uC9C0\uBC29\uC5D0\uC11C
+    \uB0B4\uB824\uC654\uB2E4."
   cost: 5
   level: 1
   hp: 1500

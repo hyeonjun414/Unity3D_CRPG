@@ -9,6 +9,7 @@ public enum TextType
     Heal,
     Mana,
     Counter,
+    Skill
 }
 
 public class DamageText : MonoBehaviour, IPoolable
@@ -22,12 +23,13 @@ public class DamageText : MonoBehaviour, IPoolable
     public Color damageColor;
     public Color manaColor;
     public Color counterColor;
+    public Color skillColor;
 
     public void Enable(int damage, Vector3 position, TextType tt)
     {
         // 위치 설정
         transform.position = position;
-        transform.LookAt(-Camera.main.transform.position);
+        transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
         float randX = Random.Range(-0.25f, 0.25f);
         float randY = Random.Range(-0.25f, 0.25f);
         transform.Translate(Vector3.up*1.5f + new Vector3(randX, randY, -10));
@@ -48,6 +50,9 @@ public class DamageText : MonoBehaviour, IPoolable
             case TextType.Counter:
                 textColor = counterColor;
                 break;
+            case TextType.Skill:
+                textColor = skillColor;
+                break;
         }
 
         StartCoroutine(FloatingRoutine());
@@ -57,10 +62,8 @@ public class DamageText : MonoBehaviour, IPoolable
     {
         // 위치 설정
         transform.position = position;
-        transform.LookAt(-Camera.main.transform.position);
-        float randX = Random.Range(-0.25f, 0.25f);
-        float randY = Random.Range(-0.25f, 0.25f);
-        transform.Translate(Vector3.up * 1.5f + new Vector3(randX, randY, -10), Space.World);
+        transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        transform.Translate(Vector3.up * 1.25f + new Vector3(0, 0, -20));
         
         // 데미지 텍스트 설정
         floatingText.text = text;
@@ -78,6 +81,9 @@ public class DamageText : MonoBehaviour, IPoolable
                 break;
             case TextType.Counter:
                 textColor = counterColor;
+                break;
+            case TextType.Skill:
+                textColor = skillColor;
                 break;
         }
 

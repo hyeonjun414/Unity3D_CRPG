@@ -15,8 +15,9 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 54325af2fc0ebb54aa7ab57446c3178f, type: 3}
-  name: Ghost
-  desc: "\uACE0\uC2A4\uD2B8 LV1"
+  name: "\uACE0\uC2A4\uD2B8"
+  desc: "\uC720\uB839\uC774\uC9C0\uB9CC \uC678\uACAC\uC740 \uADF8\uB807\uAC8C \uBB34\uC12D\uC9C0
+    \uC54A\uB2E4."
   cost: 1
   level: 0
   hp: 400

@@ -8,6 +8,9 @@ public enum RelicType
     RandomEvolution,
     AttackSpeedUp,
     StartMpUp,
+    RerollCostDown,
+    DamageUp,
+    RandomSummon,
 }
 [CreateAssetMenu(fileName = "Relic Data", menuName = "Data/Relic Data")]
 public class RelicData : ItemData

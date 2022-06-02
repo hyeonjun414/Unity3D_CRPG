@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: DropDown
   m_EditorClassIdentifier: 
   skillType: 8
+  skillName: "\uAE09\uC18D \uAC15\uD558"
+  skillDesc: "\uD558\uB298\uB85C \uB0A0\uC544\uC62C\uB77C \uD0C0\uAC9F \uADFC\uCC98\uC758
+    \uD55C \uD0C0\uC77C\uC5D0 \uB5A8\uC5B4\uC9D1\uB2C8\uB2E4. \uB5A8\uC5B4\uC9C8
+    \uB54C \uC8FC\uBCC0 1\uCE78\uC5D0 \uC704\uCE58\uD55C \uC801\uB4E4\uC5D0\uAC8C
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   effectInterval: 3
   effectCount: 1
   skillPrefab: {fileID: 6760398749084636834, guid: 2695ae4b4cc891545b3a83dc19470bcc,

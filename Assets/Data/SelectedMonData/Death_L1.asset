@@ -15,8 +15,8 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: cdc2fcc817739674fa0b0e1d3a4813bd, type: 3}
-  name: Death
-  desc: "\uB370\uC2A4 LV1"
+  name: "\uB370\uC2A4"
+  desc: "\uC8FD\uC74C\uACFC \uD568\uAED8\uD558\uB294 \uC874\uC7AC"
   cost: 3
   level: 0
   hp: 700

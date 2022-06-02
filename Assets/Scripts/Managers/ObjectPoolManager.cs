@@ -19,7 +19,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     public GameObject UseObj(GameObject obj)
     {
         // 오브젝트풀 매니저에 등록된 오브젝트가 아니라면
-        print(obj.name);
+        //print(obj.name);
         if(!pools.ContainsKey(obj.name))
         {
             // 해당 오브젝트의 풀을 만들어준다.

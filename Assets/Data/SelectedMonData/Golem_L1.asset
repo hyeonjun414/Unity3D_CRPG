@@ -15,8 +15,8 @@ MonoBehaviour:
   itemType: 0
   cardType: 0
   icon: {fileID: 21300000, guid: 39f337341056230469456b2036df88dc, type: 3}
-  name: Golem
-  desc: "\uACE8\uB818 LV1"
+  name: "\uACE8\uB818"
+  desc: "\uB10C \uBABB\uC9C0\uB098\uAC04\uB2E4"
   cost: 2
   level: 0
   hp: 1000

@@ -34,7 +34,7 @@ public class SummonManager : Singleton<SummonManager>
         monster.transform.rotation = Quaternion.LookRotation(dir);
         monster.transform.localScale = Vector3.one;
         monster.gameObject.layer = layerNum;
-        monster.transform.SetParent(GameManager.Instance.worldCanvas.transform, true);
+        monster.transform.SetParent(GameManager.Instance.objectSpace, true);
         if (monster != null)
         {
             switch(owner)
@@ -55,6 +55,7 @@ public class SummonManager : Singleton<SummonManager>
             monster.InputData(md);
             monster.anim.SetTrigger("Spawn");
             bt.state = TileState.STAY;
+            bt.monster = monster;
             UIManager.Instance.battleInfoUI.UpdateUI();
             
             return monster;

@@ -168,7 +168,7 @@ public class Monster : LivingEntity, IPoolable
     public override void Hit(LivingEntity enemy)
     {
         OnHit?.Invoke((Monster)enemy);
-        HP -= enemy.damage;
+        HP -= GameManager.Instance.ApplyRandomValue(enemy.damage);
         MP += 3;
         
         statusBar?.UpdateUI();
@@ -246,4 +246,5 @@ public class Monster : LivingEntity, IPoolable
         yield return new WaitForSeconds(duration);
         isCC = false;
     }
+
 }

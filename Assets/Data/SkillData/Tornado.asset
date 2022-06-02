@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Tornado
   m_EditorClassIdentifier: 
   skillType: 7
+  skillName: "\uB3CC\uD48D"
+  skillDesc: "\uBC14\uB78C\uC744 \uC77C\uC73C\uCF1C \uD0C0\uAC9F\uC744 \uC5EC\uB824\uBC88
+    \uD0C0\uACA9\uD569\uB2C8\uB2E4. "
   effectInterval: 5
   effectCount: 1
   skillPrefab: {fileID: 4769148499558900710, guid: 62e0c474ae6af4a4c98294c799bdc304,
