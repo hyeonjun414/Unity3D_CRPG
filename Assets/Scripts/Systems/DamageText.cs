@@ -9,7 +9,8 @@ public enum TextType
     Heal,
     Mana,
     Counter,
-    Skill
+    Skill,
+    Spell,
 }
 
 public class DamageText : MonoBehaviour, IPoolable
@@ -24,6 +25,7 @@ public class DamageText : MonoBehaviour, IPoolable
     public Color manaColor;
     public Color counterColor;
     public Color skillColor;
+    public Color spellColor;
 
     public void Enable(int damage, Vector3 position, TextType tt)
     {
@@ -52,6 +54,9 @@ public class DamageText : MonoBehaviour, IPoolable
                 break;
             case TextType.Skill:
                 textColor = skillColor;
+                break;
+            case TextType.Spell:
+                textColor = spellColor;
                 break;
         }
 
@@ -84,6 +89,9 @@ public class DamageText : MonoBehaviour, IPoolable
                 break;
             case TextType.Skill:
                 textColor = skillColor;
+                break;
+            case TextType.Spell:
+                textColor = spellColor;
                 break;
         }
 

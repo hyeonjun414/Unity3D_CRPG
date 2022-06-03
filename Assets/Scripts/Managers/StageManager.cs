@@ -18,8 +18,7 @@ public class StageManager : Singleton<StageManager>
 
     public int curStageLevel; // x 좌표
     public int curStagePos; // y 좌표
-
-    public StageData[] stageDatas;
+    public StageDB stageDB;
     public Transform stageMapUIPos;
 
     private void Awake()
@@ -206,7 +205,6 @@ public class StageManager : Singleton<StageManager>
                 if(tempList.Count > 0)
                 {
                     count++;
-                    //print($"Merge Count : {count}");
                     StageData targetData = RandomStageType(tempList[0].xPos);
                     for (int k = 0; k < tempList.Count; k++)
                     {
@@ -243,24 +241,24 @@ public class StageManager : Singleton<StageManager>
     {
         // 만약 첫 단계면 몬스터랑 배틀 확정
         if (level == 0)
-            return stageDatas[(int)StageType.Enemy];
+            return stageDB.stageData[(int)StageType.Enemy];
         else if (level == stageWidth - 1)
-            return stageDatas[(int)StageType.Rest];
+            return stageDB.stageData[(int)StageType.Rest];
         else if (level == stageWidth)
-            return stageDatas[(int)StageType.Boss];
+            return stageDB.stageData[(int)StageType.Boss];
 
         StageData randomData = null;
         // 이후에는 랜덤 인카운트
         // 
         int rand = Random.Range(0, 101);
         if(rand < 60)
-            randomData = stageDatas[(int)StageType.Enemy];
+            randomData = stageDB.stageData[(int)StageType.Enemy];
         else if (rand < 70)
-            randomData = stageDatas[(int)StageType.Shop];
+            randomData = stageDB.stageData[(int)StageType.Shop];
         else if (rand < 85)
-            randomData = stageDatas[(int)StageType.Rest];
+            randomData = stageDB.stageData[(int)StageType.Rest];
         else
-            randomData = stageDatas[(int)StageType.Event];
+            randomData = stageDB.stageData[(int)StageType.Event];
 
         return randomData;
     }

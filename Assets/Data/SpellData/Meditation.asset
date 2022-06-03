@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b729eb4f60f0f9f4a81df82434cb09ba, type: 3}
   m_Name: Meditation
   m_EditorClassIdentifier: 
+  itemType: 0
   cardType: 1
   icon: {fileID: 21300000, guid: 85c50e3fac4a9134d8b8d22a5111d61f, type: 3}
   name: "\uBA85\uC0C1"
-  desc: "\uC120\uD0DD\uB41C \uBAAC\uC2A4\uD130\uC758 \uB9C8\uB098\uB97C \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  desc: "\uC120\uD0DD\uB41C \uBAAC\uC2A4\uD130\uC758 \uC2DC\uC791 \uB9C8\uB098\uB97C
+    \uCD5C\uB300\uB85C \uC62C\uB9BD\uB2C8\uB2E4."
   cost: 2
-  spellType: 2
+  spellType: 1

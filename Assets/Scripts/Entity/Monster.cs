@@ -23,6 +23,7 @@ public enum MonsterLevel
     LV1,
     LV2,
     LV3,
+    End
 }
 public enum TargetStrategy
 {
@@ -154,6 +155,7 @@ public class Monster : LivingEntity, IPoolable
         range = data.range;
         attackSpeed = data.attackSpeed;
         moveSpeed = data.moveSpeed;
+        level = data.level;
 
 
         SetUp();

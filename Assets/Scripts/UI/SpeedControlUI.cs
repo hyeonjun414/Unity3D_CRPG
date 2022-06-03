@@ -36,6 +36,10 @@ public class SpeedControlUI : MonoBehaviour
         {
             BtnQuad();
         }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            Time.timeScale = 0f;
+        }
     }
 
     public void ReturnSpeed()
@@ -60,7 +64,7 @@ public class SpeedControlUI : MonoBehaviour
         Time.timeScale = 1f;
         speedState = SpeedState.Normal;
         StopAllCoroutines();
-        StartCoroutine(MoveIndicator(selectImg.transform.position, normalSpeedBtn.transform.position, 0.2f));
+        StartCoroutine(MoveIndicator(selectImg.transform.localPosition, normalSpeedBtn.transform.localPosition, 0.2f));
     }
 
     public void BtnDouble()
@@ -69,7 +73,7 @@ public class SpeedControlUI : MonoBehaviour
         speedState = SpeedState.Double;
         Time.timeScale = 2f;
         StopAllCoroutines();
-        StartCoroutine(MoveIndicator(selectImg.transform.position, doubleSpeedBtn.transform.position, 0.2f));
+        StartCoroutine(MoveIndicator(selectImg.transform.localPosition, doubleSpeedBtn.transform.localPosition, 0.2f));
     }
 
     public void BtnQuad()
@@ -78,7 +82,7 @@ public class SpeedControlUI : MonoBehaviour
         speedState = SpeedState.Quad;
         Time.timeScale = 4f;
         StopAllCoroutines();
-        StartCoroutine(MoveIndicator(selectImg.transform.position, quadSpeedBtn.transform.position, 0.2f));
+        StartCoroutine(MoveIndicator(selectImg.transform.localPosition, quadSpeedBtn.transform.localPosition, 0.2f));
     }
 
 
@@ -90,7 +94,7 @@ public class SpeedControlUI : MonoBehaviour
             if (curTime > time)
                 break;
             curTime += Time.unscaledDeltaTime;
-            selectImg.transform.position = Vector3.Lerp(p1, p2, curTime/time);
+            selectImg.transform.localPosition = Vector3.Lerp(p1, p2, curTime/time);
 
             yield return null;
         }

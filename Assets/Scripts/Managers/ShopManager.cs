@@ -31,20 +31,19 @@ public class ShopManager : Singleton<ShopManager>
     public void GenerateShop(int minPrice, int maxPrice)
     {
         shopitems.Clear();
-        ItemData[] tempList = null;
+        ItemData tempItem = null;
         for(int i = 0; i < 10; i++)
         {
             switch(Random.Range(0,2))
             {
                 case 0:
-                    tempList = RewardManager.Instance.cardDatas;
+                    tempItem = RewardManager.Instance.RandomCard();
                     break;
                 case 1:
-                    tempList = RewardManager.Instance.relicDatas;
+                    tempItem = RewardManager.Instance.RandomRelic();
                     break;
             }
-            shopitems.Add(new ShopItem(tempList[Random.Range(0, tempList.Length)],
-                Random.Range(minPrice, maxPrice + 1)));
+            shopitems.Add(new ShopItem(tempItem, Random.Range(minPrice, maxPrice + 1)));
         }
     }
 

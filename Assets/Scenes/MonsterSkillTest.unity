@@ -1827,12 +1827,7 @@ MonoBehaviour:
     type: 3}
   curStageLevel: 0
   curStagePos: 0
-  stageDatas:
-  - {fileID: 11400000, guid: 94369807374f3c54cb0645355fb9de12, type: 2}
-  - {fileID: 11400000, guid: b0c5afe6dbf63d844bf3b05ae9d4e7cb, type: 2}
-  - {fileID: 11400000, guid: c28303f1bd7b1a842a5a11560d28ede1, type: 2}
-  - {fileID: 11400000, guid: 421f57925a8202742bca7ac66dae7fc3, type: 2}
-  - {fileID: 11400000, guid: f0eb25ab8b4916b4995ae64a3f800c89, type: 2}
+  stageDB: {fileID: 11400000, guid: cdc2e2742e7676848bdf245e3e9f1dcd, type: 2}
   stageMapUIPos: {fileID: 1256663336}
 --- !u!114 &80701396
 MonoBehaviour:
@@ -1856,6 +1851,7 @@ MonoBehaviour:
     type: 3}
   minGold: 10
   maxGold: 30
+  rewardDB: {fileID: 11400000, guid: 1d7d9a0123d51db4ab22ec42076f2153, type: 2}
   cardDatas:
   - {fileID: 11400000, guid: edddfac1e83d84a4cba4d9dad060ea9b, type: 2}
   - {fileID: 11400000, guid: 3fa14736486e63643891976b55b557e3, type: 2}
@@ -1866,6 +1862,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c663fa6a9fbfd9949ab70cbde5882225, type: 2}
   - {fileID: 11400000, guid: ac4076bb04e02d644bb6d7379e31f49e, type: 2}
   - {fileID: 11400000, guid: ced30615c15439c4cae58bb18a8a27da, type: 2}
+  - {fileID: 11400000, guid: 66fe4af93c3cfd745944ee7340194141, type: 2}
+  - {fileID: 11400000, guid: a54c5f4104bede84a9ca1261aa314164, type: 2}
+  - {fileID: 11400000, guid: 555fa833e82975d46b4b4b7a5e7a4dab, type: 2}
+  - {fileID: 11400000, guid: c1fab0087936b7749a08fd1767df07d9, type: 2}
+  - {fileID: 11400000, guid: 65d0b25ab562f0e4cb17cb5ea46e6713, type: 2}
   relicDatas:
   - {fileID: 11400000, guid: 2895a7947d2e16d4a8ed48902d749f5a, type: 2}
   - {fileID: 11400000, guid: 765e728d089213f48a1930c961805c4c, type: 2}
@@ -7515,11 +7516,11 @@ RectTransform:
   m_Father: {fileID: 1980044430}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -40, y: -7}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -40, y: -7.5}
   m_SizeDelta: {x: 45, y: 65}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &367651618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11826,7 +11827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 7.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 45, y: 65}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &636602590

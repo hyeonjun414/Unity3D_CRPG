@@ -30,7 +30,7 @@ public class DropDownSkill : Skill
             case 2:
                 dropRange = 2;
                 dropDamage = 300;
-                effectSize = 1.5f;
+                effectSize = 2f;
                 break;
         }
     }
@@ -62,7 +62,7 @@ public class DropDownSkill : Skill
         curTime = 0;
         Vector3 curPos = monster.transform.position;
         BattleTile targetTile = null;
-        if(monster.target == null)
+        if(monster.target == null || monster.target.isVanished)
         {
             targetTile = BattleManager.Instance.stage.RandomNoneTile();
         }
@@ -81,7 +81,7 @@ public class DropDownSkill : Skill
             targetBt = BattleManager.Instance.stage.RandomNoneTile();
         }
 
-        dropDownEft.transform.position = targetBt.transform.position;
+        dropDownEft.transform.position = targetBt.transform.position + Vector3.up * 0.5f;
         
 
         monster.curTile = targetBt;
@@ -95,7 +95,7 @@ public class DropDownSkill : Skill
             monster.transform.position = Vector3.Lerp(curPos, targetBt.transform.position, curTime/Droptime);
             yield return null;
         }
-        if(dropRange == 0)
+        if(skillLevel == 0)
         {
             monster.target.Hit(dropDamage);
             monster.isVanished = false;

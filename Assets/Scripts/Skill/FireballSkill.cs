@@ -22,7 +22,6 @@ public class FireballSkill : Skill
     }
     public void AllFireball()
     {
-        print("Fireball Casting");
 
         Monster target = null;
         MonsterOwner targetOwner = MonsterOwner.Player;

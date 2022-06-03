@@ -4,10 +4,14 @@ using UnityEngine;
 
 public enum SpellType
 {
-    None,
-    Heal,
+    HealthUp,
     Meditation,
-    Evolution
+    Evolution,
+    Honesty,
+    Acceleration,
+    Sacrifice,
+    End
+
 }
 [CreateAssetMenu(fileName = "Spell Data", menuName = "Card/Spell Data")]
 public class SpellData : CardData

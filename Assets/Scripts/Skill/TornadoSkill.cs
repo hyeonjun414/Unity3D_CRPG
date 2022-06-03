@@ -49,7 +49,10 @@ public class TornadoSkill : Skill
         tornadoEffect.transform.position = monster.target.curTile.transform.position;
         for(int i = 0; i < hitCount; i++)
         {
-            monster.transform.LookAt(monster.target.transform);
+            if (monster.target == null) break;
+            Vector3 lookPos = monster.target.transform.position;
+            lookPos.y = 0;
+            monster.transform.rotation = Quaternion.LookRotation(lookPos);
             GameObject go = ObjectPoolManager.Instance.UseObj(hitEffect.gameObject);
             go.transform.SetParent(null, true);
             go.transform.position = monster.target.transform.position + Vector3.up;

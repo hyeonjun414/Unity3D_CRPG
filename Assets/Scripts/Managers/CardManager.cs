@@ -118,12 +118,16 @@ public class CardManager : Singleton<CardManager>
     }
     public void TurnEndReroll()
     {
+        guideLine.enabled = false;
+        holder.selectedCardIndex = Null;
         StartCoroutine(RerollRoutine());
     }
     public void UseRerollBtn()
     {
         if (player.MP < player.rerollCost || !BattleManager.Instance.isPrepared) 
             return;
+        holder.selectedCardIndex = Null;
+        guideLine.enabled = false;
         player.UseMp(player.rerollCost);
         StartCoroutine(RerollRoutine());
     }

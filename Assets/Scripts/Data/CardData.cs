@@ -5,7 +5,8 @@ using UnityEngine;
 public enum CardType
 {
     Monster,
-    Spell
+    Spell,
+    End
 }
 
 [CreateAssetMenu(fileName = "Card Data", menuName = "Card/Card Data")]

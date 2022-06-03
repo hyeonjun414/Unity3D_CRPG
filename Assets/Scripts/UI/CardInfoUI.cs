@@ -85,6 +85,32 @@ public class CardInfoUI : MonoBehaviour
         }
         gameObject.SetActive(true);
     }
+    public void InfoEnter(Monster monster)
+    {
+        SetPosition();
+        monsterObj.SetActive(true);
+        spellObj.SetActive(false);
+
+        MonsterData data = monster.monsterData;
+        nameText.text = data.name;
+        costText.text = data.cost.ToString();
+        typeText.text = "몬스터";
+
+        monDescText.text = data.desc;
+        monSkillNameText.text = data.skillData != null ? data.skillData.skillName : "X";
+        monSkillDescText.text = data.skillData != null ? data.skillData.skillDesc : "해당 몬스터는 스킬이 없습니다";
+        monPreEvoText.text = data.prevMonster != null ? data.prevMonster.name : "X";
+        monCurEvoText.text = data.name;
+        monNextEvoText.text = data.nextMonster != null ? data.nextMonster.name : "X";
+        monHpText.text = monster.maxHp.ToString();
+        monMpText.text = monster.maxMp.ToString();
+        monDamageText.text = monster.damage.ToString();
+        monArmorText.text = monster.armor.ToString();
+        monRangeText.text = monster.range.ToString();
+        monAttackSpeedText.text = monster.attackSpeed.ToString();
+
+        gameObject.SetActive(true);
+    }
     public void InfoExit()
     {
         gameObject.SetActive(false);

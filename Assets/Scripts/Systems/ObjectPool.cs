@@ -34,7 +34,7 @@ public class ObjectPool : MonoBehaviour
     public void Enqueue(GameObject obj)
     {
         obj.transform.SetParent(transform, false);
-        obj.transform.position = Vector3.zero;
+        obj.transform.position = Vector3.down * 10f;
         objQueue.Enqueue(obj);
     }
 }

@@ -17,8 +17,7 @@ public class RewardManager : Singleton<RewardManager>
 
 
     [Header("Database")]
-    public CardData[] cardDatas;
-    public RelicData[] relicDatas;
+    public RewardDB rewardDB;
 
     private void Awake()
     {
@@ -34,10 +33,10 @@ public class RewardManager : Singleton<RewardManager>
         switch ((ItemType)rand)
         {
             case ItemType.Card:
-                reward.ActivateCard(cardDatas[Random.Range(0, cardDatas.Length)]);
+                reward.ActivateCard(RandomCard());
                 break;
             case ItemType.Relic:
-                reward.ActivateRelic(relicDatas[Random.Range(0, relicDatas.Length)]);
+                reward.ActivateRelic(RandomRelic());
                 break;
         }
         reward.transform.position += pos;
@@ -70,31 +69,51 @@ public class RewardManager : Singleton<RewardManager>
     }
     public void StartText()
     {
-        int rand;
         for (int i = 0; i < 5; i++)
-        {
-            rand = Random.Range(0, cardDatas.Length);
-            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Deck, cardDatas[rand]);
-        }
+            CardManager.Instance.MoveCard(CardSpace.Field, CardSpace.Deck, RandomCard());
         
+    }
+    public CardData RandomCard()
+    {
+        CardData cd = null;
+        switch(Random.Range(0, (int)CardType.End))
+        {
+            case 0:
+                cd = RandomMonsterData();
+                break;
+            case 1:
+                cd = RandomSpell();
+                break;
+
+        }
+        return cd;
     }
     public MonsterData RandomMonsterData()
     {
-        CardData md = null;
-        int rand = 0;
-        while(true)
+        MonsterData[] monList = null;
+
+        int rand = Random.Range(0, 101);
+        if(rand <= 80)
         {
-            rand = Random.Range(0, cardDatas.Length);
-            if(cardDatas[rand] is MonsterData)
-            {
-                md = cardDatas[rand];
-                break;
-            }
+            monList = rewardDB.monsters_lv1;
         }
-        return (MonsterData)md;
+        else if (rand <= 95)
+        {
+            monList = rewardDB.monsters_lv2;
+        }
+        else
+        {
+            monList = rewardDB.monsters_lv3;
+        }
+
+        return monList[Random.Range(0, monList.Length)];   
+    }
+    public SpellData RandomSpell()
+    {
+        return rewardDB.spellData[Random.Range(0, (int)SpellType.End)];
     }
     public RelicData RandomRelic()
     {
-        return relicDatas[Random.Range(0, relicDatas.Length)];
+        return rewardDB.relicData[Random.Range(0, rewardDB.relicData.Length)];
     }
 }
