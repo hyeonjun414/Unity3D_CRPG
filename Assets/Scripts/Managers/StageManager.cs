@@ -11,6 +11,7 @@ public class StageManager : Singleton<StageManager>
     public int stageHeight;
     public int stageWidth;
     public List<Stage> stages;
+    public Stage startStage;
     public Stage endStage;
     public Stage curStage;
 
@@ -34,9 +35,10 @@ public class StageManager : Singleton<StageManager>
         stages = new List<Stage>();
         GenerateStage();
         DetectAndMerge();
-        curStage = stages[0];
-        curStagePos = stages[0].yPos;
-        curStageLevel = stages[0].xPos;
+        curStage = stages[Random.Range(0, stageHeight)];
+        curStagePos = curStage.yPos;
+        curStageLevel = curStage.xPos;
+        GenerateGate();
     }
     private void Update()
     {
@@ -127,7 +129,9 @@ public class StageManager : Singleton<StageManager>
             ResetStage();
 
         Stage tempStage = null;
-        for(int i = 0; i < stageWidth; i++)
+
+
+        for (int i = 0; i < stageWidth; i++)
         {
             for(int j = 0; j < stageHeight; j++)
             {
@@ -225,7 +229,7 @@ public class StageManager : Singleton<StageManager>
         {
             stage.transform.localPosition = new Vector3(stage.xPos * 100f, stage.yPos* 100f, 0);
         }
-        endStage.transform.localPosition = new Vector3(endStage.xPos * 100f + 50, endStage.yPos * 100f, 0);
+        endStage.transform.localPosition = new Vector3(endStage.xPos * 100f + 75, endStage.yPos * 100f, 0);
     }
     public void ResetStage()
     {

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616f5a10a2d466643bfbb13401547466, type: 3}
+  m_Name: EnemyLevel1
+  m_EditorClassIdentifier: 
+  wave1: 010000000300000005000000
+  wave2: 020000000400000006000000
+  wave3: 030000000600000009000000
+  monsters:
+  - {fileID: 11400000, guid: c663fa6a9fbfd9949ab70cbde5882225, type: 2}
+  - {fileID: 11400000, guid: ac4076bb04e02d644bb6d7379e31f49e, type: 2}
+  - {fileID: 11400000, guid: edddfac1e83d84a4cba4d9dad060ea9b, type: 2}
+  - {fileID: 11400000, guid: 3fa14736486e63643891976b55b557e3, type: 2}
+  - {fileID: 11400000, guid: ebfc7a12f15838c469244af3122251a3, type: 2}
+  - {fileID: 11400000, guid: 15be9463667aeef44844c021261d48c6, type: 2}
+  - {fileID: 11400000, guid: d2a3c0adcf838774caeede09e6ad09c8, type: 2}
+  - {fileID: 11400000, guid: 60adebf015bf0294b8b0f553735385b9, type: 2}
