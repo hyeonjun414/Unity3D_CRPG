@@ -23,7 +23,8 @@ public class TitleManager : MonoBehaviour
 
     public void BtnPlayGame()
     {
-        SceneManager.LoadSceneAsync("StageStartScene");
+        LodingManager.LoadScene("StageStartScene");
+        //SceneManager.LoadSceneAsync("StageStartScene");
     }
     public void BtnOpenOption()
     {

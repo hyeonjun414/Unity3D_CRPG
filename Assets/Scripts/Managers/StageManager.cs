@@ -49,7 +49,7 @@ public class StageManager : Singleton<StageManager>
     public void HomeGate()
     {
         List<Stage> gates = DistinctGate(stages.FindAll((sameStage) =>
-        sameStage.xPos == curStageLevel+1));
+        sameStage.xPos == curStageLevel+1), 0);
 
 
         Vector3 gatePos = new Vector3(14, 0.5f, 0);
@@ -75,18 +75,9 @@ public class StageManager : Singleton<StageManager>
         sameStage.xPos == curStage.xPos && sameStage.yPos == curStage.yPos &&
         curStage.stageNode.nextNode.yPos != sameStage.stageNode.nextNode.yPos);
         nextStages.Add(curStage);
-        nextStages.Sort(delegate (Stage a, Stage b)
-            {
-                if(a.stageNode.nextNode.yPos > b.stageNode.nextNode.yPos)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
-            }
-            );
+
+        nextStages = DistinctGate(nextStages, 1);
+
         Vector3 gatePos = new Vector3(14, 0.5f, 0);
         for(int i = 0; i < nextStages.Count; i++)
         {
@@ -95,38 +86,63 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
-    public List<Stage> DistinctGate(List<Stage> nextstage)
+    public List<Stage> DistinctGate(List<Stage> nextstage, int type)
     {
-        nextstage.Sort(delegate (Stage a, Stage b)
-        {
-            if (a.yPos < b.yPos)
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-
-            return 0;
-        });
-
-
         List<Stage> gates = new List<Stage>();
+        Stage stage = null;
 
-        for (int i = stageHeight; i >= 0; i--)
+        if (type == 0)
         {
-            if (nextstage.Exists((gate) => gate.yPos == i))
+            nextstage.Sort(delegate (Stage a, Stage b)
             {
-                gates.Add(nextstage[i]);
+                if (a.yPos < b.yPos)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            });
+
+            for (int i = stageHeight - 1; i >= 0; i--)
+            {
+                stage = nextstage.Find((x) => x.yPos == i);
+                if (stage != null)
+                {
+                    gates.Add(stage);
+                }
             }
         }
+        else
+        {
+            nextstage.Sort(delegate (Stage a, Stage b)
+            {
+                if (a.stageNode.nextNode.yPos < b.stageNode.nextNode.yPos)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            });
 
+            for (int i = stageHeight - 1; i >= 0; i--)
+            {
+                stage = nextstage.Find((x) => x.stageNode.nextNode.yPos == i);
+                if (stage != null)
+                {
+                    gates.Add(stage);
+                }
+            }
+        }
         return gates;
     }
 
     public void GenerateScene(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "LoadingScene") return;
         print("Scene Making...");
         int rand = 0;
         switch (curStage.stageData.type)

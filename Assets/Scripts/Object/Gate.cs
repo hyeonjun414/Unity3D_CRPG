@@ -31,7 +31,7 @@ public class Gate : MonoBehaviour
             StageManager.Instance.curStage = connectedStage;
             StageManager.Instance.curStageLevel = connectedStage.xPos;
             StageManager.Instance.curStagePos = connectedStage.yPos;
-            SceneManager.LoadSceneAsync(destination);
+            LodingManager.LoadScene(destination);
         }
     }
 

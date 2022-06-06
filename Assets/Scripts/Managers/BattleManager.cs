@@ -40,6 +40,8 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void FindingEnemyAndStage(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "LoadingScene") return;
+
         stage = FindObjectOfType<BattleStage>();
         enemy = FindObjectOfType<Enemy>();
         player = FindObjectOfType<Player>();

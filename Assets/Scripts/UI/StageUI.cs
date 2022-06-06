@@ -37,7 +37,6 @@ public class StageUI : MonoBehaviour
         stageUnits[stageUnits.Length - 1].UpdateUI(StageManager.Instance.endStage);
         int level = StageManager.Instance.curStageLevel;
         int pos = StageManager.Instance.curStagePos;
-        print(level);
         if(level == -1)
         {
             curStageIndicator.transform.position = startPos.position;
@@ -77,8 +76,6 @@ public class StageUI : MonoBehaviour
         StageManager sm = StageManager.Instance;
         float x = sm.stageMapUIPos.sizeDelta.x;
         float y = sm.stageMapUIPos.sizeDelta.y;
-        print(sm);
-        print($"{x},{y}");
         x /= sm.stageWidth-1;
         y /= sm.stageHeight - 1;
         foreach (Stage stage in sm.stages)
