@@ -9,5 +9,6 @@ public class StageDB : ScriptableObject
     public StageData[] stageData;
 
     [Header("Enemy")]
-    public EnemySummonData[] enemySummonData;
+    public EnemyData[] enemyData;
+    public GameObject[] enemyPrefab;
 }

@@ -20,7 +20,7 @@ public class StageManager : Singleton<StageManager>
     public int curStageLevel; // x 좌표
     public int curStagePos; // y 좌표
     public StageDB stageDB;
-    public Transform stageMapUIPos;
+    public RectTransform stageMapUIPos;
 
     private void Awake()
     {
@@ -35,9 +35,7 @@ public class StageManager : Singleton<StageManager>
         stages = new List<Stage>();
         GenerateStage();
         DetectAndMerge();
-        curStage = stages[Random.Range(0, stageHeight)];
-        curStagePos = curStage.yPos;
-        curStageLevel = curStage.xPos;
+
         GenerateGate();
     }
     private void Update()
@@ -47,8 +45,30 @@ public class StageManager : Singleton<StageManager>
             GenerateGate();
         }
     }
+
+    public void HomeGate()
+    {
+        List<Stage> gates = DistinctGate(stages.FindAll((sameStage) =>
+        sameStage.xPos == curStageLevel+1));
+
+
+        Vector3 gatePos = new Vector3(14, 0.5f, 0);
+        for (int i = 0; i < gates.Count; i++)
+        {
+            Gate gate = Instantiate(gatePrefab, gatePos + Vector3.forward * (gates[i].yPos - curStage.yPos) * 5f, gatePrefab.transform.rotation);
+            gate.SetUp(gates[i]);
+        }
+    }
+
     public void GenerateGate()
     {
+        if (curStage == startStage)
+        {
+            HomeGate();
+            return;
+        }
+
+
         if (curStage == endStage) return;
 
         List<Stage> nextStages = stages.FindAll((sameStage) => 
@@ -75,19 +95,54 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
+    public List<Stage> DistinctGate(List<Stage> nextstage)
+    {
+        nextstage.Sort(delegate (Stage a, Stage b)
+        {
+            if (a.yPos < b.yPos)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+
+            return 0;
+        });
+
+
+        List<Stage> gates = new List<Stage>();
+
+        for (int i = stageHeight; i >= 0; i--)
+        {
+            if (nextstage.Exists((gate) => gate.yPos == i))
+            {
+                gates.Add(nextstage[i]);
+            }
+        }
+
+        return gates;
+    }
+
     public void GenerateScene(Scene scene, LoadSceneMode mode)
     {
         print("Scene Making...");
         int rand = 0;
         switch (curStage.stageData.type)
         {
-            case StageType.Enemy:
+            case StageType.EnemyLv1:
+            case StageType.EnemyLv2:
+            case StageType.Boss:
+
                 {
                     EnemyStageData data = (EnemyStageData)curStage.stageData;
                     rand = Random.Range(0, data.enemyMaps.Length);
                     Instantiate(data.enemyMaps[rand]);
                     Instantiate(data.enemyBattleStages[rand]);
-                    Instantiate(data.Enemy, new Vector3(11, 0.5f, 0), data.Enemy.transform.rotation);
+                    rand = Random.Range(0, stageDB.enemyPrefab.Length);
+                    Enemy enemy = Instantiate(stageDB.enemyPrefab[rand], new Vector3(11, 0.5f, 0), stageDB.enemyPrefab[rand].transform.rotation).GetComponent<Enemy>();
+                    enemy.SetData(SetEnemyData());
                 }
                 break;
             case StageType.Rest:
@@ -111,26 +166,16 @@ public class StageManager : Singleton<StageManager>
                     GenerateGate();
                 }
                 break;
-            case StageType.Boss:
-                {
-                    EnemyStageData data = (EnemyStageData)curStage.stageData;
-                    rand = Random.Range(0, data.enemyMaps.Length);
-                    Instantiate(data.enemyMaps[rand]);
-                    Instantiate(data.enemyBattleStages[rand]);
-                    Instantiate(data.Enemy, new Vector3(11, 0.5f, 0), data.Enemy.transform.rotation);
-                }
-                break;
         }
     }
 
     public void GenerateStage()
     {
-        if(stages != null)
-            ResetStage();
-
         Stage tempStage = null;
 
 
+
+        // 일반 노드 만들기
         for (int i = 0; i < stageWidth; i++)
         {
             for(int j = 0; j < stageHeight; j++)
@@ -142,6 +187,17 @@ public class StageManager : Singleton<StageManager>
                 stages.Add(tempStage);
             }
         }
+
+        // 시작 노드 만들기
+        tempStage = Instantiate(stageObj);
+        tempStage.transform.SetParent(stageMapUIPos.transform, false);
+        tempStage.xPos = -1;
+        tempStage.yPos = stageHeight / 2;
+        tempStage.transform.localScale = Vector3.one * 2f;
+        tempStage.lr.enabled = false;
+        tempStage.SetUp(stageDB.stageData[(int)StageType.Home]);
+        startStage = tempStage;
+
         // 보스 노드 만들기
         tempStage = Instantiate(stageObj);
         tempStage.transform.SetParent(stageMapUIPos.transform, false);
@@ -149,10 +205,9 @@ public class StageManager : Singleton<StageManager>
         tempStage.yPos = stageHeight/2;
         tempStage.transform.localScale = Vector3.one * 2f;
         tempStage.lr.enabled = false;
-        tempStage.SetUp(RandomStageType(tempStage.xPos));
+        tempStage.SetUp(stageDB.stageData[(int)StageType.Boss]);
         endStage = tempStage;
 
-        // 노드 경로와 색상 지정
         for (int j = 0; j < stageHeight; j++)
         {
             int offsetX = 0;
@@ -192,7 +247,6 @@ public class StageManager : Singleton<StageManager>
             endStage.stageNode.prevNode = stages[stageHeight * (stageWidth - 1) + j];
         }
 
-        MoveStage();
 
     }
 
@@ -217,53 +271,55 @@ public class StageManager : Singleton<StageManager>
                 }
             }
         }
+        curStage = startStage;
+        curStagePos = curStage.yPos;
+        curStageLevel = curStage.xPos;
 
-        // 생성된 유닛을 스테이지 UI가 알도록 함
         UIManager.Instance.stageUI.FindStageUnits();
+        UIManager.Instance.stageUI.SetLineAndPosition();
     }
     
-    // 생성한 스테이지 노드들을 각각 위치에 맞게 이동시킨다.
-    public void MoveStage()
-    {
-        foreach (Stage stage in stages)
-        {
-            stage.transform.localPosition = new Vector3(stage.xPos * 100f, stage.yPos* 100f, 0);
-        }
-        endStage.transform.localPosition = new Vector3(endStage.xPos * 100f + 75, endStage.yPos * 100f, 0);
-    }
-    public void ResetStage()
-    {
-        foreach (Stage stage in stages)
-        {
-            Destroy(stage.gameObject);
-        }
-        stages.Clear();
-    }
 
     // 스테이지의 특성을 지정하는 로직
     public StageData RandomStageType(int level)
     {
         // 만약 첫 단계면 몬스터랑 배틀 확정
         if (level == 0)
-            return stageDB.stageData[(int)StageType.Enemy];
-        else if (level == stageWidth - 1)
-            return stageDB.stageData[(int)StageType.Rest];
-        else if (level == stageWidth)
-            return stageDB.stageData[(int)StageType.Boss];
+            return stageDB.stageData[(int)StageType.EnemyLv1];
 
         StageData randomData = null;
         // 이후에는 랜덤 인카운트
-        // 
         int rand = Random.Range(0, 101);
-        if(rand < 60)
-            randomData = stageDB.stageData[(int)StageType.Enemy];
-        else if (rand < 70)
+        if(rand < 70)
+            randomData = stageDB.stageData[(int)StageType.EnemyLv1];
+        else if (rand < 80)
+            randomData = stageDB.stageData[(int)StageType.EnemyLv2];
+        else if (rand < 87)
             randomData = stageDB.stageData[(int)StageType.Shop];
-        else if (rand < 85)
+        else if (rand < 94)
             randomData = stageDB.stageData[(int)StageType.Rest];
         else
             randomData = stageDB.stageData[(int)StageType.Event];
 
         return randomData;
+    }
+    public EnemyData SetEnemyData()
+    {
+        EnemyData enemyData = null;
+
+        if(curStage.stageData.type == StageType.EnemyLv1)
+        {
+            enemyData = stageDB.enemyData[0];
+        }
+        else if (curStage.stageData.type == StageType.EnemyLv2)
+        {
+            enemyData = stageDB.enemyData[1];
+        }
+        else
+        {
+            enemyData = stageDB.enemyData[2];
+        }
+
+        return enemyData;
     }
 }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public enum StageType
 {
-    Enemy,
+    Home,
+    EnemyLv1,
+    EnemyLv2,
     Rest,
     Event,
     Shop,

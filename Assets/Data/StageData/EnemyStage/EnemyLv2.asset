@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74111b178d62da645bd9e25563f75a8f, type: 3}
-  m_Name: Enemy
+  m_Name: EnemyLv2
   m_EditorClassIdentifier: 
-  type: 0
-  icon: {fileID: 21300000, guid: 0e997383644a9694b9ceb7a78047d73b, type: 3}
+  type: 2
+  icon: {fileID: 21300000, guid: 9cebafe5c38a548c6b1571f18ea7e6df, type: 3}
   optionalMap: {fileID: 0}
   enemyMaps:
   - {fileID: 607547154522598183, guid: 0a976914f52de8545b00c6fdfa3687bd, type: 3}
@@ -25,4 +25,3 @@ MonoBehaviour:
   - {fileID: 923254113450533771, guid: 9cf590bf92aa9fc44acdd65754072a4d, type: 3}
   - {fileID: 4703414355441739998, guid: ce01fb31f348e47449195cacf53574df, type: 3}
   - {fileID: 6136241530296000258, guid: 97fc39d940bd8484c8328da024c0c0ca, type: 3}
-  Enemy: {fileID: 1796178817942925910, guid: 53a112b95b9065b469a7eccb8484623b, type: 3}

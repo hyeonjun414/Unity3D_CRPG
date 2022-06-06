@@ -6,9 +6,15 @@ using UnityEngine.UI;
 public class StageUI : MonoBehaviour
 {
     [Header("Stage UI")]
+    public List<Stage> stages;
     public Animator anim;
     public StageUnit[] stageUnits;
     public GameObject curStageIndicator;
+
+    [Header("Unit Position")]
+    public RectTransform stageGroup;
+    public Transform startPos;
+    public Transform endPos;
     public void FindStageUnits()
     {
         stageUnits = GetComponentsInChildren<StageUnit>();
@@ -27,10 +33,24 @@ public class StageUI : MonoBehaviour
                 stageUnits[i].ResetUI();
             }
         }
+        stageUnits[stageUnits.Length - 2].UpdateUI(StageManager.Instance.startStage);
         stageUnits[stageUnits.Length - 1].UpdateUI(StageManager.Instance.endStage);
         int level = StageManager.Instance.curStageLevel;
         int pos = StageManager.Instance.curStagePos;
-        curStageIndicator.transform.position = stageList.Find((x) => x.xPos == level && x.yPos == pos).transform.position;
+        print(level);
+        if(level == -1)
+        {
+            curStageIndicator.transform.position = startPos.position;
+        }
+        else if(level == StageManager.Instance.stageWidth)
+        {
+            curStageIndicator.transform.position = endPos.position;
+        }
+        else
+        {
+            curStageIndicator.transform.position = stageList.Find((x) => x.xPos == level && x.yPos == pos).transform.position;
+        }
+       
     }
     public void ActiveMap()
     {
@@ -42,8 +62,32 @@ public class StageUI : MonoBehaviour
         anim.SetBool("IsActive", false);
     }
 
-    public void Disable()
+    public void BtnExit()
     {
         gameObject.SetActive(false);
+    }
+
+    public void SetLineAndPosition()
+    {
+        SetStagePos();
+    }
+    // 생성한 스테이지 노드들을 각각 위치에 맞게 이동시킨다.
+    public void SetStagePos()
+    {
+        StageManager sm = StageManager.Instance;
+        float x = sm.stageMapUIPos.sizeDelta.x;
+        float y = sm.stageMapUIPos.sizeDelta.y;
+        print(sm);
+        print($"{x},{y}");
+        x /= sm.stageWidth-1;
+        y /= sm.stageHeight - 1;
+        foreach (Stage stage in sm.stages)
+        {
+            stage.transform.localPosition = new Vector3(stage.xPos * x, stage.yPos * y, 0);
+        }
+        sm.startStage.transform.position = startPos.position;
+        sm.endStage.transform.position = endPos.position;
+
+        UpdateUI();
     }
 }

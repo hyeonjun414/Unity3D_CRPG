@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 4}
-  m_SizeDelta: {x: -16, y: -24}
+  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_SizeDelta: {x: -10, y: -15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1676469155743304220
 CanvasRenderer:
@@ -186,7 +186,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1676469157236496560
 MonoBehaviour:
@@ -201,13 +201,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageNode:
-    nextNode: []
-    prevNode: []
-  yPos: 0
+    nextNode: {fileID: 0}
+    prevNode: {fileID: 0}
   xPos: 0
+  yPos: 0
   lr: {fileID: 1676469157236496561}
   stageData: {fileID: 0}
-  stageUnit: {fileID: 1676469157236496563}
 --- !u!114 &1676469157236496563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 1676469155743304221}
   stageData: {fileID: 0}
+  stage: {fileID: 0}
 --- !u!120 &1676469157236496561
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2037694573
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}

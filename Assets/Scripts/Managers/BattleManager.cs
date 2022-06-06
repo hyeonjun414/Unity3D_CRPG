@@ -163,7 +163,6 @@ public class BattleManager : Singleton<BattleManager>
         if(enemyMonster.Count < allyMonster.Count)
         {
             enemy.Hit(player);
-            enemy.waveCount++;
         }
         // 적 몬스터가 아군 몬스터보다 많을 때 -> 적이 승리했을때
         else

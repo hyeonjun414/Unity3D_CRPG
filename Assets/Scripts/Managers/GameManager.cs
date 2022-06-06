@@ -82,27 +82,6 @@ public class GameManager : Singleton<GameManager>
     {
         ApplySceneLoadedFunc();
     }
-    public GameObject mouseVfx;
-    private void Update()
-    {
-        // 옵션 창을 열고 게임을 일시정지 시킨다.
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            OptionManager.Instance.OptionBtn();
-            IsPause = !IsPause;
-        }
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            BattleTile targetBt = BattleManager.Instance.stage.battleTiles[33];
-            print($"Target tiles: {targetBt}, {targetBt.tilePos}");
-            List<BattleTile> tiles = BattleManager.Instance.stage.FindAroundTile(targetBt);
-            for(int i = 0; i < tiles.Count; i++)
-            {
-                print($"{i} tiles: {tiles[i]}, {tiles[i].tilePos}");
-            }
-        }
-
-    }
 
     // 데미지 텍스트를 띄우는 함수
     public void CreateText(int damage, Vector3 pos, TextType tt)

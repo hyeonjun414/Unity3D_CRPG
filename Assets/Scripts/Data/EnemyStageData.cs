@@ -8,5 +8,4 @@ public class EnemyStageData : StageData
     [Header("Enemy Stage")]
     public GameObject[] enemyMaps;
     public GameObject[] enemyBattleStages;
-    public GameObject Enemy;
 }

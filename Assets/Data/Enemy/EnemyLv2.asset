@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca4f855f4362a7f4f834de3a7209d90c, type: 3}
-  m_Name: Shop
+  m_Script: {fileID: 11500000, guid: 3468318943018c944ad76fdeaff50276, type: 3}
+  m_Name: EnemyLv2
   m_EditorClassIdentifier: 
-  type: 5
-  icon: {fileID: 21300000, guid: 5341ddc86f90a463589ba5118780f2ad, type: 3}
-  optionalMap: {fileID: 703062436172719123, guid: c8e28a5a436fe8a47874a1fdfc1a64dd,
-    type: 3}
+  level: 2
+  minSummonCount: 4
+  maxSummonCount: 5
+  Hp: 15
+  summonData: {fileID: 11400000, guid: 43fc1d4cd4b96654ba42e91eb1ebd164, type: 2}
