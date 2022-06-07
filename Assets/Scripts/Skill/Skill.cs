@@ -20,6 +20,8 @@ public abstract class Skill : MonoBehaviour, IPoolable
     }
     public virtual IEnumerator CastingRoutine()
     {
+        yield return null;
+
         monster.isCasting = true;
         monster.anim.SetTrigger("Cast");
         for(int i = 0; i < effectCount; i++)

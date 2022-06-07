@@ -38,6 +38,9 @@ public class UIManager : Singleton<UIManager>
     public GameObject optionUI;
     public SpeedControlUI speedUI;
 
+    [Header("Fade Panel")]
+    public Image fadePanel;
+
     private void Awake()
     {
         if (_instance == null)

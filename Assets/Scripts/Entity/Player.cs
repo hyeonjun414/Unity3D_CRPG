@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : LivingEntity
 {
-    private static Player instance = null;
+    public static Player Instance = null;
     [Header("Player")]
     public int mpRegen = 10;
     public int rerollCost = 5;
@@ -25,13 +25,12 @@ public class Player : LivingEntity
 
     private void Awake()
     {
-        if (instance != null)
-            Destroy(gameObject);
+        if (Instance != null)
+            DestroyImmediate(gameObject);
         else
         {
             DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += ResetPosition;
-            instance = this;
+            Instance = this;
         }
         
 
@@ -61,9 +60,12 @@ public class Player : LivingEntity
 
     }
 
-    public void ResetPosition(Scene scene, LoadSceneMode mode)
+    public void ResetPlayer(Scene scene, LoadSceneMode mode)
     {
+        //if (scene.name != "SceneChangeTest") return;
         transform.position = new Vector3(-14, 0.5f, 0);
+        MP = maxMp;
+        statusUI.UpdateUI();
     }
 
     void Update()

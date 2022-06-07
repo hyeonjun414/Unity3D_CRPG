@@ -31,16 +31,13 @@ public class DeathRaySkill : Skill
                 break;
         }
     }
-    public override IEnumerator CastingRoutine()
-    {
-        return base.CastingRoutine();
-    }
     public override void Casting()
     {
         StartCoroutine("ShotRayRoutine");
     }
     public IEnumerator ShotRayRoutine()
     {
+        print("ray");
         Monster target = null;
         List<Monster> targetList = null;
         switch (monster.owner)
@@ -57,6 +54,7 @@ public class DeathRaySkill : Skill
             target = targetList[Random.Range(0, targetList.Count)];
 
             Projectile proj = ObjectPoolManager.Instance.UseObj(ray).GetComponent<Projectile>();
+            print(proj);
             proj.transform.position = transform.position + Vector3.up * 2;
             proj.transform.rotation = Quaternion.identity;
             proj.SetUp(monster, target, rayDamage, 2, ProjectileMoveType.Indirect);

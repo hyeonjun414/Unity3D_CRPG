@@ -26,6 +26,14 @@ public class CommandManager : Singleton<CommandManager>
         {
             ActiveMenu();
         }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            StageManager.Instance.GenerateGate();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            CardManager.Instance.TurnEndReroll();
+        }
     }
 
     public void ActiveMap()
@@ -33,11 +41,10 @@ public class CommandManager : Singleton<CommandManager>
         StageUI go = UIManager.Instance.stageUI;
         go.UpdateUI();
         go.gameObject.SetActive(!go.gameObject.activeSelf);
-        GameManager.Instance.IsPause = !GameManager.Instance.IsPause;
+        GameManager.Instance.PlayGame(go.gameObject.activeSelf);
     }
     public void ActiveMenu()
     {
         OptionManager.Instance.OptionBtn();
-        GameManager.Instance.IsPause = !GameManager.Instance.IsPause;
     }
 }

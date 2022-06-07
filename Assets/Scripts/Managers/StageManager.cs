@@ -38,13 +38,6 @@ public class StageManager : Singleton<StageManager>
 
         GenerateGate();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            GenerateGate();
-        }
-    }
 
     public void HomeGate()
     {
@@ -67,7 +60,7 @@ public class StageManager : Singleton<StageManager>
             HomeGate();
             return;
         }
-
+         
 
         if (curStage == endStage) return;
 
@@ -142,7 +135,8 @@ public class StageManager : Singleton<StageManager>
 
     public void GenerateScene(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "LoadingScene") return;
+        if (scene.name != "SceneChangeTest") return;
+
         print("Scene Making...");
         int rand = 0;
         switch (curStage.stageData.type)

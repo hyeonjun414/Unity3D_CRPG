@@ -20,12 +20,12 @@ MonoBehaviour:
     \uB728\uAC81\uB2E4."
   cost: 8
   level: 2
-  hp: 2000
-  mp: 80
-  damage: 100
-  armor: 40
+  hp: 2500
+  mp: 100
+  damage: 180
+  armor: 50
   range: 1
-  attackSpeed: 0.7
+  attackSpeed: 0.5
   moveSpeed: 1
   monsterSize: 1
   evolutionCost: 0

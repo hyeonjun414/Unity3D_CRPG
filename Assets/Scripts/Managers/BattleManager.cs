@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BattleManager : Singleton<BattleManager>
 {
@@ -30,17 +31,9 @@ public class BattleManager : Singleton<BattleManager>
     {
         return pf.ExcutePathFind(start.curTile.tilePos, end.curTile.tilePos, stage);
     }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            CardManager.Instance.TurnEndReroll();
-        }
-    }
     public void FindingEnemyAndStage(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "LoadingScene") return;
+        if (scene.name != "SceneChangeTest") return;
 
         stage = FindObjectOfType<BattleStage>();
         enemy = FindObjectOfType<Enemy>();
@@ -191,6 +184,11 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void StageClear()
     {
+        if(StageManager.Instance.curStage == StageManager.Instance.endStage)
+        {
+            GameClear();
+            return;
+        }
         CardManager.Instance.MoveAlltoDeck();
         CameraManager.Instance.SwitchCam(0);
         RewardManager.Instance.StageReward(Vector3.zero);
@@ -213,6 +211,28 @@ public class BattleManager : Singleton<BattleManager>
             bt.monster = null;
         }
         isPrepared = false;
+    }
+    public void GameClear()
+    {
+        StartCoroutine(GameClearRoutine());
+    }
+    IEnumerator GameClearRoutine()
+    {
+        yield return null;
+        float curTime = 0f;
+        while(true)
+        {
+            if (curTime >= 3f) break;
+
+            curTime += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(1f, 0.2f, curTime / 3f);
+        }
+        yield return new WaitForSecondsRealtime(2f);
+
+        Time.timeScale = 1f;
+        Destroy(GameManager.Instance.gameObject);
+        Destroy(player.gameObject);
+        LoadingManager.LoadScene("EndScene");
     }
 
 }

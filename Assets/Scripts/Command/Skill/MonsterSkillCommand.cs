@@ -28,10 +28,11 @@ public class MonsterSkillCommand : SkillCommand
         monster.MP = 0;
         GameManager.Instance.CreateText(skillData.skillName, transform.position, TextType.Skill);
         Skill skill = ObjectPoolManager.Instance.UseObj(skillData.skillPrefab).GetComponent<Skill>();
+        skill.SetUp(monster, skillData);
         skill.transform.position = transform.position;
         skill.transform.rotation = Quaternion.identity;
         skill.transform.SetParent(monster.transform, true);
-        skill.SetUp(monster, skillData);
+        
     }
 
 

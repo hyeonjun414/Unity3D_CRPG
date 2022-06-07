@@ -170,19 +170,21 @@ public class Monster : LivingEntity, IPoolable
     public override void Hit(LivingEntity enemy)
     {
         OnHit?.Invoke((Monster)enemy);
-        HP -= GameManager.Instance.ApplyRandomValue(enemy.damage);
+        int resultDamage = enemy.damage - (int)(enemy.damage * armor * 0.01f);
+        HP -= resultDamage;
         MP += 3;
         
         statusBar?.UpdateUI();
-        GameManager.Instance.CreateText(enemy.damage, transform.position, TextType.Damage);
+        GameManager.Instance.CreateText(resultDamage, transform.position, TextType.Damage);
     }
     public void Hit(int damage)
     {
-        HP -= damage;
+        int resultDamage = damage - (int)(damage * armor * 0.01f);
+        HP -= resultDamage;
         MP += 3;
 
         statusBar?.UpdateUI();
-        GameManager.Instance.CreateText(damage, transform.position, TextType.Damage);
+        GameManager.Instance.CreateText(resultDamage, transform.position, TextType.Damage);
     }
     public void FindTurn()
     {

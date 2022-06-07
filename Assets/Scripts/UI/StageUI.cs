@@ -64,6 +64,7 @@ public class StageUI : MonoBehaviour
     public void BtnExit()
     {
         gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
     }
 
     public void SetLineAndPosition()

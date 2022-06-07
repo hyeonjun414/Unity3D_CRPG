@@ -19,12 +19,12 @@ MonoBehaviour:
   desc: "\uD6C4\uB4DC \uC18D \uC0AC\uC545\uD568\uC774 \uB290\uAEF4\uC9C4\uB2E4."
   cost: 3
   level: 0
-  hp: 1200
-  mp: 120
-  damage: 100
+  hp: 900
+  mp: 100
+  damage: 120
   armor: 25
   range: 2
-  attackSpeed: 0.75
+  attackSpeed: 0.7
   moveSpeed: 1
   monsterSize: 0
   evolutionCost: 0

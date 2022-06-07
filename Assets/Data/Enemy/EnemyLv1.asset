@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyLv1
   m_EditorClassIdentifier: 
   level: 1
-  minSummonCount: 3
-  maxSummonCount: 5
+  minSummonCount: 1
+  maxSummonCount: 2
   Hp: 10
+  damage: 5
   summonData: {fileID: 11400000, guid: 9c7ca4ced03383244a9e9e43a5a685c1, type: 2}

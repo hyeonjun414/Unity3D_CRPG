@@ -15,12 +15,10 @@ public class RelicManager : Singleton<RelicManager>
         if (_instance == null)
             _instance = this;
     }
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.U))
-        {
-            AddRelic(RewardManager.Instance.RandomRelic());
-        }
+        AddRelic(RewardManager.Instance.RandomRelic());
+        AddRelic(RewardManager.Instance.RandomRelic());
     }
     public void AddRelic(RelicData relic)
     {
@@ -54,7 +52,7 @@ public class RelicManager : Singleton<RelicManager>
                 GameManager.Instance.AddAction(ActionType.OnBattleStart, StartMpUp);
                 break;
             case RelicType.RerollCostDown:
-                RerollCostDown(-1);
+                RerollCostDown(-2);
                 break;
             case RelicType.DamageUp:
                 GameManager.Instance.AddAction(ActionType.OnBattleStart, DamageUp);
@@ -84,7 +82,7 @@ public class RelicManager : Singleton<RelicManager>
                 GameManager.Instance.AddAction(ActionType.OnBattleStart, StartMpUp);
                 break;
             case RelicType.RerollCostDown:
-                RerollCostDown(-1);
+                RerollCostDown(-2);
                 break;
             case RelicType.DamageUp:
                 GameManager.Instance.AddAction(ActionType.OnBattleStart, DamageUp);
@@ -135,19 +133,19 @@ public class RelicManager : Singleton<RelicManager>
         List<Monster> monList = BattleManager.Instance.allyMonster;
         foreach (Monster mon in monList)
         {
-            mon.attackSpeed *= 2f;
+            mon.attackSpeed *= 1.2f;
         }
 
     }
     public void StartMpUp()
     {
         // 전투시작 시
-        print("아군 몬스터 시작 MP 40%");
+        print("아군 몬스터 시작 MP 50%");
 
         List<Monster> monList = BattleManager.Instance.allyMonster;
         foreach(Monster mon in monList)
         {
-            mon.MP += (int)(mon.maxMp * 0.4f);
+            mon.MP += (int)(mon.maxMp * 0.5f);
             mon.statusBar.UpdateUI();
         }
         

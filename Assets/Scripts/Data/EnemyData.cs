@@ -9,6 +9,7 @@ public class EnemyData : ScriptableObject
     public int minSummonCount;
     public int maxSummonCount;
     public int Hp;
+    public int damage;
 
     [Header("Summon")]
     public EnemySummonData summonData;

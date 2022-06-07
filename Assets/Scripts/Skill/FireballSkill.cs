@@ -8,14 +8,6 @@ public class FireballSkill : Skill
     public GameObject fireball;
 
 
-    public override void SetUp(Monster monster, SkillData sd)
-    {
-        base.SetUp(monster, sd);
-    }
-    public override IEnumerator CastingRoutine()
-    {
-        return base.CastingRoutine();
-    }
     public override void Casting()
     {
         AllFireball();

@@ -39,6 +39,7 @@ public class RewardManager : Singleton<RewardManager>
                 reward.ActivateRelic(RandomRelic());
                 break;
         }
+        GenerateGold(Random.Range(0, 6), Vector3.zero);
         reward.transform.position += pos;
         reward.transform.rotation = Quaternion.identity;
     }
@@ -58,14 +59,6 @@ public class RewardManager : Singleton<RewardManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            StartText();
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            GenerateGold(10, Vector3.zero);
-        }
     }
     public void StartText()
     {

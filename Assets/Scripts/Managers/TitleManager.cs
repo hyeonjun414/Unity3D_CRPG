@@ -8,7 +8,10 @@ public class TitleManager : MonoBehaviour
     public GameObject[] maps;
 
     public GameObject optionUI;
-
+    private void Start()
+    {
+        SetResolution();
+    }
     private void Update()
     {
         foreach (GameObject map in maps)
@@ -21,9 +24,17 @@ public class TitleManager : MonoBehaviour
         }
     }
 
+    public void SetResolution()
+    {
+        int w = 1600;
+        int h = 900;
+
+        Screen.SetResolution(w, h, false);
+    }
+
     public void BtnPlayGame()
     {
-        LodingManager.LoadScene("StageStartScene");
+        LoadingManager.LoadScene("StageStartScene");
         //SceneManager.LoadSceneAsync("StageStartScene");
     }
     public void BtnOpenOption()
@@ -36,6 +47,6 @@ public class TitleManager : MonoBehaviour
     }
     public void BtnExitGame()
     {
-
+        Application.Quit();
     }
 }

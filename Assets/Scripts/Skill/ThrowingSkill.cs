@@ -11,10 +11,6 @@ public class ThrowingSkill : Skill
     private BattleTile targetBt;
     private bool isThrowing;
     public GameObject grabEffect;
-    public override void SetUp(Monster monster, SkillData sd)
-    {
-        base.SetUp(monster, sd);
-    }
     public override void Casting()
     {
         ThrowingTarget();

@@ -13,6 +13,7 @@ public class Enemy : LivingEntity
     {
         enemyData = data;
         maxHp = data.Hp;
+        damage = data.damage;
 
         anim = GetComponentInChildren<Animator>();
         SetUp();
@@ -45,7 +46,7 @@ public class Enemy : LivingEntity
     {
         HP -= entity.damage;
         anim.SetTrigger("Hit");
-        StartCoroutine(KnockbackRoutine());
+        //StartCoroutine(KnockbackRoutine());
         GameManager.Instance.CreateText(entity.damage, transform.position, TextType.Damage);
     }
 

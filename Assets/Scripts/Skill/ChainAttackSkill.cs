@@ -67,10 +67,10 @@ public class ChainAttackSkill : Skill
         {
             if (Vector3.Distance(monster.transform.position, a.transform.position) <= Vector3.Distance(monster.transform.position, b.transform.position))
             {
-                return 0;
+                return 1;
             }
             else
-                return 1;
+                return -1;
         });
         if (hits.Count > 0)
         {

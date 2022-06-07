@@ -33,6 +33,7 @@ public class OptionManager : Singleton<OptionManager>
     public void OptionBtn()
     {
         optionUI.SetActive(!optionUI.activeSelf);
+        GameManager.Instance.PlayGame(optionUI.activeSelf);
     }
 
     // 효과음 볼륨 조절 -> 효과음 슬라이더에 부착

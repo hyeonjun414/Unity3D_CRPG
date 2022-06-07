@@ -12,7 +12,7 @@ public class Ending : MonoBehaviour
     public void ReturnToTitle()
     {
         Time.timeScale = 1f;
-        LodingManager.LoadScene("TitleScene");
+        LoadingManager.LoadScene("TitleScene");
         //SceneManager.LoadSceneAsync("TitleScene");
     }
 }

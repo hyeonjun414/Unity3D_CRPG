@@ -83,6 +83,18 @@ public class GameManager : Singleton<GameManager>
         ApplySceneLoadedFunc();
     }
 
+    public void PlayGame(bool isActiveUI)
+    {
+        if(isActiveUI)
+        {
+            IsPause = true;
+        }
+        else
+        {
+            IsPause = false;
+        }
+    }
+
     // 데미지 텍스트를 띄우는 함수
     public void CreateText(int damage, Vector3 pos, TextType tt)
     {
@@ -107,6 +119,27 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.sceneLoaded += StageManager.Instance.GenerateScene;
         SceneManager.sceneLoaded += BattleManager.Instance.FindingEnemyAndStage;
+        SceneManager.sceneLoaded += Player.Instance.ResetPlayer;
+    }
+
+    public void GiveUp()
+    {
+        UIManager.Instance.messagePopUpUI.YesOrNoPopUp("여정 포기",
+            "정말로 지금까지의 여정을 포기하고 돌아가시겠습니까? \n" +
+            "\"예\" 를 누르시면 타이틀 화면으로 돌아가고 진행사항은 저장되지 않습니다.",
+            () => {
+                Destroy(gameObject);
+                Destroy(player.gameObject);
+                Time.timeScale = 1f;
+                LoadingManager.LoadScene("TitleScene");
+
+            }, null);
+    }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= StageManager.Instance.GenerateScene;
+        SceneManager.sceneLoaded -= BattleManager.Instance.FindingEnemyAndStage;
+        SceneManager.sceneLoaded -= Player.Instance.ResetPlayer;
     }
 
 }

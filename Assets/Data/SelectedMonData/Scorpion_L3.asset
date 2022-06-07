@@ -20,10 +20,10 @@ MonoBehaviour:
     \uC2A4\uCF5C\uD53C\uC628\uC5D0\uAC8C \uC874\uACBD\uBC1B\uB294\uB2E4."
   cost: 5
   level: 2
-  hp: 1400
-  mp: 50
-  damage: 60
-  armor: 20
+  hp: 2000
+  mp: 100
+  damage: 150
+  armor: 40
   range: 1
   attackSpeed: 0.8
   moveSpeed: 1

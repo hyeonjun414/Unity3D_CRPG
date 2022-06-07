@@ -55,6 +55,8 @@ public class CardManager : Singleton<CardManager>
 
         // 가이드라인을 위한 베지어 포인트를 대입
         player = FindObjectOfType<Player>();
+
+        ShuffleCard(CardSpace.Deck);
     }
 
     private void Update()

@@ -31,8 +31,6 @@ public class HealSkill : Skill
                 break;
         }
 
-        StartCoroutine("CastingRoutine");
-
     }
     public override void Casting()
     {
