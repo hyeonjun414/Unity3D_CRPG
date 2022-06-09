@@ -32,7 +32,11 @@ public class CommandManager : Singleton<CommandManager>
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            CardManager.Instance.TurnEndReroll();
+            CardManager.Instance.UseRerollBtn();
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            BattleManager.Instance.BattleStageStart();
         }
     }
 
