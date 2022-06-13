@@ -15,10 +15,11 @@ MonoBehaviour:
   skillType: 2
   skillName: "\uBC18\uACA9 \uC2E4\uB4DC"
   skillDesc: "\uC77C\uC815 \uC2DC\uAC04\uB3D9\uC548 \uBC29\uC5B4\uB9C9\uC744 \uD65C\uC131\uD654
-    \uD569\uB2C8\uB2E4. \uBC29\uC5B4\uB9C9\uC744 \uB370\uBBF8\uC9C0\uB97C \uB9C9\uC544\uC8FC\uC9C0\uB294
+    \uD569\uB2C8\uB2E4. \uBC29\uC5B4\uB9C9\uC740 \uB370\uBBF8\uC9C0\uB97C \uB9C9\uC544\uC8FC\uC9C0\uB294
     \uC54A\uC9C0\uB9CC \uC0C1\uB300\uBC29\uC758 \uACF5\uACA9\uC744 \uBC18\uC0AC\uD558\uC5EC
     \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
   effectInterval: 10
   effectCount: 1
+  skillValue: 0
   skillPrefab: {fileID: 4168569814852088502, guid: b89ad30e25a83c14a871c7f7e51ff3da,
     type: 3}

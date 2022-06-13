@@ -55,8 +55,6 @@ public class CardHolder : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.IsPause) return;
-
         ArrangeCards();
 
     }

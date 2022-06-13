@@ -139,6 +139,21 @@ public class Player : LivingEntity
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Reward"))
+        {
+            UIManager.Instance.keyUI.ItemEnter();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Reward"))
+        {
+            UIManager.Instance.keyUI.ItemExit();
+        }
+    }
     public void UseMp(int cost)
     {
         MP -= cost;

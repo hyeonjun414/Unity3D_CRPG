@@ -42,13 +42,15 @@ public class CommandManager : Singleton<CommandManager>
 
     public void ActiveMap()
     {
+        
         StageUI go = UIManager.Instance.stageUI;
         go.UpdateUI();
         go.gameObject.SetActive(!go.gameObject.activeSelf);
-        GameManager.Instance.PlayGame(go.gameObject.activeSelf);
+        GameManager.Instance.IsPause = go.gameObject.activeSelf;
     }
     public void ActiveMenu()
     {
         OptionManager.Instance.OptionBtn();
+        
     }
 }

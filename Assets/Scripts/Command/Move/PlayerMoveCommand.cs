@@ -6,15 +6,18 @@ public class PlayerMoveCommand : MoveCommand
 {
     private Player onwer;
     private Animator anim;
+    private GameManager gm;
 
     public override void Setup(LivingEntity entity)
     {
         onwer = (Player)entity;
         anim = GetComponentInChildren<Animator>();
+        gm = GameManager.Instance;
     }
 
     public override void Excute()
     {
+        if (gm.IsPause) return;
         Vector3 dir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))

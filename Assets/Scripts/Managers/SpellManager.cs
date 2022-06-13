@@ -103,7 +103,7 @@ public class SpellManager : Singleton<SpellManager>
         monster.curTile.state = TileState.NONE;
         monster.ReturnPool();
 
-        GameManager.Instance.player.MP = GameManager.Instance.player.maxMp;
+        GameManager.Instance.player.MP += 10;
         UIManager.Instance.battleInfoUI.UpdateUI();
     }
 }

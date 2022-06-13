@@ -29,6 +29,9 @@ public class UIManager : Singleton<UIManager>
     [Header("Shop UI")]
     public ShopUI shopUI;
     public GoldUI goldUI;
+
+    [Header("Key UI")]
+    public KeyUI keyUI;
     
 
     [Header("Message Box")]

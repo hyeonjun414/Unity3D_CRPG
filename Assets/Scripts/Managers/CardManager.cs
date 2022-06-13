@@ -37,6 +37,7 @@ public class CardManager : Singleton<CardManager>
 
     private Player player;
     private bool isDraw;
+    private bool isReroll= false;
     private void Awake()
     {
         if(_instance == null)
@@ -126,7 +127,7 @@ public class CardManager : Singleton<CardManager>
     }
     public void UseRerollBtn()
     {
-        if (player.MP < player.rerollCost || !BattleManager.Instance.isPrepared) 
+        if (player.MP < player.rerollCost || isReroll || !BattleManager.Instance.isPrepared ) 
             return;
         holder.selectedCardIndex = Null;
         guideLine.enabled = false;
@@ -135,8 +136,10 @@ public class CardManager : Singleton<CardManager>
     }
     IEnumerator RerollRoutine()
     {
+        isReroll = true;
         yield return StartCoroutine(FromAtoB(CardSpace.Hands, CardSpace.Graveyard));
         yield return StartCoroutine(DrawRoutine());
+        isReroll = false;
     }
     public IEnumerator DrawRoutine()
     {

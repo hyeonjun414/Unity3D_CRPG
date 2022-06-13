@@ -24,25 +24,10 @@ public class GameManager : Singleton<GameManager>
     public Transform objectSpace;
     private CinemachineVirtualCamera mainCam;
 
-    
+    public float prevTimeScale = 1f;
 
     public bool _isPause = false;
-    public bool IsPause
-    {
-        get { return _isPause; }
-        set 
-        { 
-            _isPause = value; 
-            if(_isPause)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
-        }
-    }
+    public bool IsPause{ get; set; }
 
     public Canvas worldCanvas;
     public DamageText damageText;
@@ -83,17 +68,7 @@ public class GameManager : Singleton<GameManager>
         ApplySceneLoadedFunc();
     }
 
-    public void PlayGame(bool isActiveUI)
-    {
-        if(isActiveUI)
-        {
-            IsPause = true;
-        }
-        else
-        {
-            IsPause = false;
-        }
-    }
+
 
     // 데미지 텍스트를 띄우는 함수
     public void CreateText(int damage, Vector3 pos, TextType tt)

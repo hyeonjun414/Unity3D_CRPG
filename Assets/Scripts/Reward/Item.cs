@@ -25,5 +25,6 @@ public abstract class Item : MonoBehaviour
     {
         coll.enabled = false;
         anim.SetTrigger("Get");
+        UIManager.Instance.keyUI.ItemExit();
     }
 }

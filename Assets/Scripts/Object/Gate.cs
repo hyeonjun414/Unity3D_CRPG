@@ -26,7 +26,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !other.isTrigger)
         {
             StageManager.Instance.curStage = connectedStage;
             StageManager.Instance.curStageLevel = connectedStage.xPos;
