@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f3fb116b301d347b73b600599cd1e1, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  skillType: 0
+  skillName: "\uD68C\uBCF5"
+  skillDesc: "\uC544\uAD70 \uC804\uCCB4\uC758 \uCCB4\uB825\uC744 \uC77C\uC815\uB7C9
+    \uD68C\uBCF5\uC2DC\uD0B5\uB2C8\uB2E4. \uB808\uBCA8\uC774 \uC0C1\uC2B9\uD560\uC218\uB85D
+    \uD68C\uBCF5\uB7C9\uACFC \uD69F\uC218\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  effectInterval: 3
+  effectCount: 1
+  skillValue: 0
+  skillPrefab: {fileID: 2692859225903091392, guid: 20cfdb4beb768334da67cba5b93373af,
+    type: 3}

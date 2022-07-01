@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f3fb116b301d347b73b600599cd1e1, type: 3}
+  m_Name: DeathRay
+  m_EditorClassIdentifier: 
+  skillType: 4
+  skillName: "\uC8FD\uC74C\uC758 \uAD11\uC120"
+  skillDesc: "\uC0B4\uC544\uC788\uB294 \uC801 \uC804\uCCB4\uC5D0 \uB79C\uB364\uC73C\uB85C
+    \uAD11\uC120\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
+  effectInterval: 3
+  effectCount: 1
+  skillValue: 0
+  skillPrefab: {fileID: 5954871388832289056, guid: 4be9b6dbc896be34484d209e9b220220,
+    type: 3}

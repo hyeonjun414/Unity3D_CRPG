@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f3fb116b301d347b73b600599cd1e1, type: 3}
+  m_Name: ChainAttack
+  m_EditorClassIdentifier: 
+  skillType: 5
+  skillName: "\uC5F0\uC1C4 \uCDA9\uACA9"
+  skillDesc: "\uC790\uC2E0\uC758 \uBAB8\uC5D0 \uBC88\uAC1C\uC758 \uD798\uC744 \uCDA9\uC804\uD558\uC5EC
+    \uACF5\uACA9\uC744 \uD560\uB54C \uC8FC\uBCC0 \uC801\uC744 \uC8FC\uAC00\uB85C
+    \uD0C0\uACA9\uD569\uB2C8\uB2E4. \uAC00\uAE4C\uC6B4 \uC801\uC744 \uC6B0\uC120
+    \uC21C\uC704\uB85C \uACF5\uACA9\uD569\uB2C8\uB2E4."
+  effectInterval: 10
+  effectCount: 1
+  skillPrefab: {fileID: 3287607155031008807, guid: ce38a12d641cf2141881944a0935508b,
+    type: 3}

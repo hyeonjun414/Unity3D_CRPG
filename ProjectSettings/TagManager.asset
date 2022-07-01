@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Gate
+  - Card
+  - Enemy
+  - Reward
   layers:
   - Default
   - TransparentFX
@@ -13,17 +17,17 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Enemy
+  - Ally
+  - InGameUI
+  - BattleTile
+  - Reward
+  - Stage
+  - Shop
+  - Event
+  - Rest
   - 
   - 
   - 
@@ -40,4 +44,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 836512009
+    locked: 0
+  - name: Object
+    uniqueID: 2052088393
+    locked: 0
+  - name: UI
+    uniqueID: 2257272723
     locked: 0

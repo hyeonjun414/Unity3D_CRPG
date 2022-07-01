@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff68c47ba3c6d174fbb86bfd8842ede8, type: 3}
+  m_Name: RewardDB
+  m_EditorClassIdentifier: 
+  monsters_lv1:
+  - {fileID: 11400000, guid: c663fa6a9fbfd9949ab70cbde5882225, type: 2}
+  - {fileID: 11400000, guid: ac4076bb04e02d644bb6d7379e31f49e, type: 2}
+  - {fileID: 11400000, guid: edddfac1e83d84a4cba4d9dad060ea9b, type: 2}
+  - {fileID: 11400000, guid: 3fa14736486e63643891976b55b557e3, type: 2}
+  - {fileID: 11400000, guid: ebfc7a12f15838c469244af3122251a3, type: 2}
+  - {fileID: 11400000, guid: 15be9463667aeef44844c021261d48c6, type: 2}
+  - {fileID: 11400000, guid: d2a3c0adcf838774caeede09e6ad09c8, type: 2}
+  - {fileID: 11400000, guid: 60adebf015bf0294b8b0f553735385b9, type: 2}
+  monsters_lv2:
+  - {fileID: 11400000, guid: be5d3f2aae099754f91cf261ee740e42, type: 2}
+  - {fileID: 11400000, guid: 184dc849cd6ab0c4cbada94648e18915, type: 2}
+  - {fileID: 11400000, guid: 7dd8e17592d30bb4392fcd0014f787b9, type: 2}
+  - {fileID: 11400000, guid: 25d86d5beaa19e441801894cec15d76b, type: 2}
+  - {fileID: 11400000, guid: 5761c06ec81b2fd429a343cdba252306, type: 2}
+  - {fileID: 11400000, guid: db611649ae1a434489d1f0d06312ea23, type: 2}
+  - {fileID: 11400000, guid: 2fe679a925d5ec54a964f01ac6156632, type: 2}
+  - {fileID: 11400000, guid: 566147231f40f03449842fb986473c4f, type: 2}
+  monsters_lv3:
+  - {fileID: 11400000, guid: e34510a59367c394fafbf226e7fb08fa, type: 2}
+  - {fileID: 11400000, guid: 657e52f5b7b4d0b4596ea76f6eab4d28, type: 2}
+  - {fileID: 11400000, guid: a5f6577f2e7056744a413589d4cf2010, type: 2}
+  - {fileID: 11400000, guid: fd2b8c514b05ed74d92690e78970ff6b, type: 2}
+  - {fileID: 11400000, guid: 1ee523482a3e0f7439e447379e245cb7, type: 2}
+  - {fileID: 11400000, guid: 0863df0e82fdd984cae1249ac731b614, type: 2}
+  - {fileID: 11400000, guid: 0e8bb7849d6180b4892c2f9708e5c078, type: 2}
+  - {fileID: 11400000, guid: 30210945d61347842b39774e1a92b9f0, type: 2}
+  spellData:
+  - {fileID: 11400000, guid: 66fe4af93c3cfd745944ee7340194141, type: 2}
+  - {fileID: 11400000, guid: ced30615c15439c4cae58bb18a8a27da, type: 2}
+  - {fileID: 11400000, guid: a54c5f4104bede84a9ca1261aa314164, type: 2}
+  - {fileID: 11400000, guid: 555fa833e82975d46b4b4b7a5e7a4dab, type: 2}
+  - {fileID: 11400000, guid: c1fab0087936b7749a08fd1767df07d9, type: 2}
+  - {fileID: 11400000, guid: 65d0b25ab562f0e4cb17cb5ea46e6713, type: 2}
+  relicData:
+  - {fileID: 11400000, guid: 2895a7947d2e16d4a8ed48902d749f5a, type: 2}
+  - {fileID: 11400000, guid: 248548bfae96ff640ba3088a6a7c49e1, type: 2}
+  - {fileID: 11400000, guid: 765e728d089213f48a1930c961805c4c, type: 2}
+  - {fileID: 11400000, guid: d5687afcb9ab43f4db22eab93e49d148, type: 2}
+  - {fileID: 11400000, guid: c2b947ed953c38b4a85982ebdd832c69, type: 2}
+  - {fileID: 11400000, guid: fb2d7da3ee9099f4d9e22956cb7a8571, type: 2}
+  - {fileID: 11400000, guid: 51fb4722aadb3814cbcc3221fe8d25c9, type: 2}
+  - {fileID: 11400000, guid: 015be5d074b3d3943aad52d1803db207, type: 2}
