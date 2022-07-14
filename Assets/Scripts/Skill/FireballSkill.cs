@@ -32,6 +32,7 @@ public class FireballSkill : Skill
         Collider[] hits = Physics.OverlapBox(transform.position, Vector3.one * (monster.range * 2 + 1), Quaternion.identity, LayerMask.GetMask(targetLayer));
         if (hits.Length > 0)
         {
+            PlaySfx();
             foreach (Collider hit in hits)
             {
                 target = hit.gameObject.GetComponent<Monster>();

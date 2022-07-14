@@ -22,6 +22,9 @@ public class StageManager : Singleton<StageManager>
     public StageDB stageDB;
     public RectTransform stageMapUIPos;
 
+    [Header("Sound Data")]
+    public SoundData stageBGM;
+
     private void Awake()
     {
         if (_instance == null)
@@ -153,6 +156,7 @@ public class StageManager : Singleton<StageManager>
                     rand = Random.Range(0, stageDB.enemyPrefab.Length);
                     Enemy enemy = Instantiate(stageDB.enemyPrefab[rand], new Vector3(11, 0.5f, 0), stageDB.enemyPrefab[rand].transform.rotation).GetComponent<Enemy>();
                     enemy.SetData(SetEnemyData());
+                    SoundManager.Instance.PlayBGMSound(stageBGM.EnemyBGM);
                 }
                 break;
             case StageType.Rest:
@@ -160,6 +164,7 @@ public class StageManager : Singleton<StageManager>
                 {
                     Instantiate(curStage.stageData.optionalMap);
                     GenerateGate();
+                    SoundManager.Instance.PlayBGMSound(stageBGM.RestBGM);
                 }
                 break;
             case StageType.Event:
@@ -167,6 +172,7 @@ public class StageManager : Singleton<StageManager>
                 {
                     Instantiate(curStage.stageData.optionalMap);
                     GenerateGate();
+                    SoundManager.Instance.PlayBGMSound(stageBGM.EventBGM);
                 }
                 break;
             case StageType.Shop:
@@ -174,6 +180,7 @@ public class StageManager : Singleton<StageManager>
                 {
                     Instantiate(curStage.stageData.optionalMap);
                     GenerateGate();
+                    SoundManager.Instance.PlayBGMSound(stageBGM.ShopBGM);
                 }
                 break;
         }
@@ -224,7 +231,7 @@ public class StageManager : Singleton<StageManager>
             Color color = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
             for (int i = 0; i < stageWidth; i++)
             {
-                offsetX += Random.Range(-1, 2);
+                offsetX += Random.Range(-1, 2); // -1 ~ 1
                 if (j + offsetX < 0)
                 {
                     stages[stageHeight * i + j].yPos = 0;
@@ -264,7 +271,6 @@ public class StageManager : Singleton<StageManager>
     public void DetectAndMerge()
     {
         List<Stage> tempList = null;
-        int count = 0;
         for (int i = 0; i < stageWidth; i++)
         {
             for (int j = 0; j < stageHeight; j++)
@@ -272,7 +278,6 @@ public class StageManager : Singleton<StageManager>
                 tempList = stages.FindAll((stage) => stage.yPos == j && stage.xPos == i);
                 if(tempList.Count > 0)
                 {
-                    count++;
                     StageData targetData = RandomStageType(tempList[0].xPos);
                     for (int k = 0; k < tempList.Count; k++)
                     {

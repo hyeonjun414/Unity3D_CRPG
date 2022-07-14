@@ -15,6 +15,10 @@ public class StageUI : MonoBehaviour
     public RectTransform stageGroup;
     public Transform startPos;
     public Transform endPos;
+
+    [Header("StageUI Sfx")]
+    public AudioClip uiSfx;
+
     public void FindStageUnits()
     {
         stageUnits = GetComponentsInChildren<StageUnit>();
@@ -54,6 +58,7 @@ public class StageUI : MonoBehaviour
     public void ActiveMap()
     {
         anim.SetBool("IsActive", true);
+        SoundManager.Instance.PlayEffectSound(uiSfx);
         UpdateUI();
     }
     public void InactiveMap()

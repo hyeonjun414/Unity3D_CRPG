@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpellManager : Singleton<SpellManager>
 {
+    public AudioClip spellSfx;
     private void Awake()
     {
         if (_instance == null)
@@ -32,6 +33,7 @@ public class SpellManager : Singleton<SpellManager>
                 Sacrifice(monster);
                 break;
         }
+        SoundManager.Instance.PlayEffectSound(spellSfx);
         BattleManager.Instance.player.UseMp(spell.cost);
     }
     public void HealthUp(Monster monster)

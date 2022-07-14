@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Skill : MonoBehaviour, IPoolable
 {
     public Monster monster;         // 스킬의 사용하는 몬스터
+    private SkillData skillData;
     public int skillLevel;          // 스킬의 레벨 = 몬스터의 레벨
     public float effectInterval;    // 스킬의 효과 간격
     public float effectCount;       // 스킬의 효과
@@ -12,9 +13,11 @@ public abstract class Skill : MonoBehaviour, IPoolable
     public virtual void SetUp(Monster monster, SkillData sd)
     {
         this.monster = monster;
+        skillData = sd;
         effectInterval = sd.effectInterval;
         effectCount = sd.effectCount;
         skillLevel = (int)monster.level;
+
         monster.skill = this;
         StartCoroutine("CastingRoutine");
     }
@@ -33,6 +36,12 @@ public abstract class Skill : MonoBehaviour, IPoolable
         ReturnPool();
     }
     public abstract void Casting();
+
+    public void PlaySfx()
+    {
+        if(skillData.skillSfx != null)
+            SoundManager.Instance.PlayEffectSound(skillData.skillSfx);
+    }
 
 
     protected virtual void OnDisable() { }

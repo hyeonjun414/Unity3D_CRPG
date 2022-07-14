@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   skillType: 1
+  skillName: 
+  skillDesc: 
   effectInterval: 1
   effectCount: 1
-  castingTime: 1
+  skillValue: 0
+  skillSfx: {fileID: 8300000, guid: 7d100ef740928724dbbdaad0b62324fd, type: 3}
   skillPrefab: {fileID: 5836562006743711447, guid: b268fe9350af8bf44b421adbca156d22,
     type: 3}

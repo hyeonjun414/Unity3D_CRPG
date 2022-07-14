@@ -35,6 +35,7 @@ public class ShieldSkill : Skill
     }
     public override void Casting()
     {
+        PlaySfx();
         monster.isCasting = false;
     }
 

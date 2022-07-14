@@ -33,27 +33,21 @@ public class ClosestTargetFindCommand : FindCommand
                 targetLayer = "Ally";
                 break;
         }
-        Collider[] hits = Physics.OverlapBox(transform.position, Vector3.one * 50, Quaternion.identity,LayerMask.GetMask(targetLayer));
-        if(hits.Length > 0)
-        {
+        Collider[] hits = Physics.OverlapBox(transform.position,Vector3.one * 50,
+            Quaternion.identity,LayerMask.GetMask(targetLayer));
+
+        if(hits.Length > 0){
             float minDist = 500;
             Monster tempMonster;
             float dist;
-            for(int i = 0; i < hits.Length; i++)
-            {
+            for(int i = 0; i < hits.Length; i++){
                 tempMonster = hits[i].gameObject.GetComponent<Monster>();
-                if(tempMonster != null && tempMonster.owner == targetOwner)
-                {
+                if(tempMonster != null && tempMonster.owner == targetOwner) {
                     dist = Vector3.Distance(tempMonster.transform.position, transform.position);
-                    if(minDist > dist)
-                    {
+                    if(minDist > dist){
                         minDist = dist;
                         target = tempMonster;
-                    }
-                }
-            }
-        }
-
+                    }}}}
         return target;
     }
 

@@ -29,6 +29,7 @@ public class ThrowingSkill : Skill
     }
     IEnumerator ThrowRoutine(Vector3 p1, Vector3 p3, float time)
     {
+        PlaySfx();
         monster.target.ApplyCC(time);
         grabEffect.SetActive(true);
         grabEffect.transform.rotation = Quaternion.identity;

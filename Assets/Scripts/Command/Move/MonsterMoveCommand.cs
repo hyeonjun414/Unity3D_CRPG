@@ -36,24 +36,16 @@ public class MonsterMoveCommand : MoveCommand
         List<Vector2> moveList = BattleManager.Instance.PathFinding(monster, monster.target);
         if (moveList.Count == 0)
         {
-            lr.positionCount = 0;
             yield break;
         }
         else if (moveList.Count <= monster.range+1)
         {
-            lr.positionCount = 0;
             monster.transform.LookAt(monster.target.transform.position);
             yield break;
         }
         else
         {
             monster.isMoving = true;
-/*            lr.positionCount = moveList.Count;
-            for (int i = 0; i < moveList.Count; i++)
-            {
-                BattleTile bt = bs.battleMap[(int)moveList[i].x, (int)moveList[i].y];
-                lr.SetPosition(i, bt.transform.position + Vector3.up * 0.2f);
-            }*/
             monster.curTile.state = TileState.NONE;
             monster.nextTile = bs.battleMap[(int)moveList[1].x, (int)moveList[1].y];
             monster.nextTile.state = TileState.STAY;

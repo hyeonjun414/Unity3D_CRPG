@@ -8,6 +8,8 @@ public class ShopUI : MonoBehaviour
 
     public ShopUnit[] shopUnits;
 
+    public AudioClip shopSfx;
+
     public void UpdateUI()
     {
         List<ShopItem> tempList = ShopManager.Instance.shopitems;
@@ -26,6 +28,7 @@ public class ShopUI : MonoBehaviour
     public void OpenShop()
     {
         gameObject.SetActive(true);
+        SoundManager.Instance.PlayEffectSound(shopSfx);
         UpdateUI();
     }
     public void CloseShop()

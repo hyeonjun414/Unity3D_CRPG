@@ -52,7 +52,7 @@ public class DeathRaySkill : Skill
         for(int i = 0; i < rayCount; i++)
         {
             target = targetList[Random.Range(0, targetList.Count)];
-
+            PlaySfx();
             Projectile proj = ObjectPoolManager.Instance.UseObj(ray).GetComponent<Projectile>();
             print(proj);
             proj.transform.position = transform.position + Vector3.up * 2;

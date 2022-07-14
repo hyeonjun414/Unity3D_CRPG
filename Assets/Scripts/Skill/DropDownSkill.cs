@@ -95,7 +95,9 @@ public class DropDownSkill : Skill
             monster.transform.position = Vector3.Lerp(curPos, targetBt.transform.position, curTime/Droptime);
             yield return null;
         }
-        if(skillLevel == 0)
+
+        PlaySfx();
+        if (skillLevel == 0)
         {
             monster.target.Hit(dropDamage);
             monster.isVanished = false;

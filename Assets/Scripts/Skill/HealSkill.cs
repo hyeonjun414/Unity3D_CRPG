@@ -49,6 +49,7 @@ public class HealSkill : Skill
         }
         for(int i = 0; i < healCount; i++)
         {
+            PlaySfx();
             foreach (Monster m in list)
             {
                 m.HP += healAmount;

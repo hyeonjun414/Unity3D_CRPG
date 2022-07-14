@@ -57,6 +57,7 @@ public class TornadoSkill : Skill
             go.transform.SetParent(null, true);
             go.transform.position = monster.target.transform.position + Vector3.up;
             monster.target.Hit(hitDamage);
+            PlaySfx();
             yield return new WaitForSeconds(hitInterval);
         }
         tornadoEffect.SetActive(false);

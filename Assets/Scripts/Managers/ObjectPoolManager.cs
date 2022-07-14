@@ -19,7 +19,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     public GameObject UseObj(GameObject obj)
     {
         // 오브젝트풀 매니저에 등록된 오브젝트가 아니라면
-        //print(obj.name);
         if(!pools.ContainsKey(obj.name))
         {
             // 해당 오브젝트의 풀을 만들어준다.
@@ -33,7 +32,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
         // 해당 오브젝트 이름에 해당하는 풀을 찾아 오브젝트를 하나 꺼내온다.
         return pools[obj.name].Dequeue();
-
     }
     // 사용된 오브젝트 반환
     public void ReturnObj(GameObject obj)

@@ -8,7 +8,8 @@ public class Coin : MonoBehaviour, IPoolable
     public Effect getEffect;
 
     public int value;
-    
+
+    public AudioClip coinSfx;
 
     public Collider coll;
     public Vector3 initPos;
@@ -68,10 +69,11 @@ public class Coin : MonoBehaviour, IPoolable
         if(getEffect != null)
         {
             GameObject go = ObjectPoolManager.Instance.UseObj(getEffect.gameObject);
+            
             go.transform.SetParent(null, false);
             go.transform.position = transform.position;
         }
-
+        SoundManager.Instance.PlayEffectSound(coinSfx);
         ReturnPool();
     }
 

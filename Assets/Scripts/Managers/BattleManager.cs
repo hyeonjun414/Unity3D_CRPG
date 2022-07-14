@@ -19,6 +19,11 @@ public class BattleManager : Singleton<BattleManager>
 
     public bool isStage = false;
     public bool isPrepared = false;
+
+    [Header("Battle Sfx")]
+    public AudioClip battleStartSfx;
+    public AudioClip battleWinSfx;
+
     private void Awake()
     {
         if (_instance == null)
@@ -54,7 +59,6 @@ public class BattleManager : Singleton<BattleManager>
     {
         while(true)
         {
-
             FindTurn(enemyMonster);
             FindTurn(allyMonster);
 
@@ -63,18 +67,15 @@ public class BattleManager : Singleton<BattleManager>
 
             AttackTurn(enemyMonster);
             AttackTurn(allyMonster);
-            
+           
             ResultTurn(enemyMonster);
             ResultTurn(allyMonster);
 
             EndTurn();
-
             yield return null;
         }
-
-
-        
     }
+
 
     private void FindTurn(List<Monster> monList)
     {
@@ -135,6 +136,7 @@ public class BattleManager : Singleton<BattleManager>
         //MapSearch();
         if (allyMonster.Count == 0) return;
         GameManager.Instance.UseAction(ActionType.OnBattleStart);
+        SoundManager.Instance.PlayEffectSound(battleStartSfx);
         StartCoroutine("BattleLogic");
 
     }
@@ -189,6 +191,7 @@ public class BattleManager : Singleton<BattleManager>
             GameClear();
             return;
         }
+        SoundManager.Instance.PlayEffectSound(battleWinSfx);
         CardManager.Instance.MoveAlltoDeck();
         CameraManager.Instance.SwitchCam(0);
         RewardManager.Instance.StageReward(Vector3.zero);

@@ -85,6 +85,7 @@ public class ChainAttackSkill : Skill
                 target = hits[i].gameObject.GetComponent<Monster>();
                 lr.SetPosition(i+1, target.transform.position + Vector3.up);
                 target.Hit(chainDamage);
+                PlaySfx();
                 Effect hit = ObjectPoolManager.Instance.UseObj(hitEffect).GetComponent<Effect>();
                 hit.transform.SetParent(null, true);
                 hit.transform.position = target.transform.position + Vector3.up;

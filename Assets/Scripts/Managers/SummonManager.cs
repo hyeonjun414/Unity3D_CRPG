@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SummonManager : Singleton<SummonManager>
 {
-    
+    public AudioClip summonSfx;
 
     private void Awake()
     {
@@ -42,6 +42,7 @@ public class SummonManager : Singleton<SummonManager>
                 case MonsterOwner.Player:
                     dir = Vector3.right;
                     BattleManager.Instance.allyMonster.Add(monster);
+                    SoundManager.Instance.PlayEffectSound(summonSfx);
                     break;
                 case MonsterOwner.Enemy:
                     dir = Vector3.left;

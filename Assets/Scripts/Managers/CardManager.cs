@@ -26,6 +26,9 @@ public class CardManager : Singleton<CardManager>
     public int maxHandCount = 5;
     public int maxDeckCount = 20;
 
+    [Header("SFX")]
+    public AudioClip drawSound;
+
     [Header("GuideLine")]
     public int pointCount;
     public LineRenderer guideLine;
@@ -82,7 +85,7 @@ public class CardManager : Singleton<CardManager>
     {
         // 덱의 카드 개수가 최대 개수이면 습득을 취소한다.
         if (deck.Count >= maxDeckCount) return;
-
+        
         MoveCard(CardSpace.Field, CardSpace.Deck, data);
     }
     public void MoveCard(CardSpace from, CardSpace to, CardData data)
@@ -146,7 +149,6 @@ public class CardManager : Singleton<CardManager>
         isDraw = true;
         while(hands.Count < 5)
         {
-            
             if(deck.Count == 0)
             {
                 if(graveyard.Count == 0) 
@@ -155,6 +157,7 @@ public class CardManager : Singleton<CardManager>
                 yield return StartCoroutine(FromAtoB(CardSpace.Graveyard, CardSpace.Deck));
             }
             MoveCard(CardSpace.Deck, CardSpace.Hands, deck[0]);
+            SoundManager.Instance.PlayEffectSound(drawSound);
             holder.UpdateUI();
             yield return new WaitForSeconds(0.2f);
         }
@@ -177,21 +180,14 @@ public class CardManager : Singleton<CardManager>
         List<CardData> aList = null;
         switch (a)
         {
-            case CardSpace.Hands:
-                aList = hands;
-                break;
-            case CardSpace.Deck:
-                aList = deck;
-                break;
-            case CardSpace.Graveyard:
-                aList = graveyard;
-                break;
+            case CardSpace.Hands: aList = hands; break;
+            case CardSpace.Deck: aList = deck; break;
+            case CardSpace.Graveyard: aList = graveyard; break;
         }
-        int aCount = aList.Count;
-
+        int aListCount = aList.Count;
         ShuffleCard(a);
 
-        for(int i = 0; i < aCount; i++)
+        for(int i = 0; i < aListCount; i++)
         {
             MoveCard(a, b, aList[0]);
             yield return new WaitForSeconds(0.05f);
@@ -199,26 +195,21 @@ public class CardManager : Singleton<CardManager>
     }
     public void ShuffleCard(CardSpace space)
     {
-        switch(space)
+        List<CardData> shuffleCard = null;
+        switch (space)
         {
-            case CardSpace.Graveyard: 
-                for(int i = 0; i < graveyard.Count; i++)
-                {
-                    int rand = Random.Range(0, graveyard.Count);
-                    CardData temp = graveyard[i];
-                    graveyard[i] = graveyard[rand];
-                    graveyard[rand] = temp;
-                }
-                break;
-            case CardSpace.Deck:
-                for (int i = 0; i < deck.Count; i++)
-                {
-                    int rand = Random.Range(0, deck.Count);
-                    CardData temp = deck[i];
-                    deck[i] = deck[rand];
-                    deck[rand] = temp;
-                }
-                break;
+            case CardSpace.Graveyard: shuffleCard = graveyard; break;
+            case CardSpace.Deck: shuffleCard = deck; break;
+        }
+        if(shuffleCard != null)
+        {
+            for (int i = 0; i < shuffleCard.Count; i++)
+            {
+                int rand = Random.Range(0, shuffleCard.Count);
+                CardData temp = shuffleCard[i];
+                shuffleCard[i] = shuffleCard[rand];
+                shuffleCard[rand] = temp;
+            }
         }
     }
     // 마우스 클릭 처리

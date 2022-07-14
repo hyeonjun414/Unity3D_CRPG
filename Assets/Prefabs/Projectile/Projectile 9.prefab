@@ -9595,9 +9595,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit: {fileID: 1059669524233346, guid: 2236dc94b9a4e784fa56dfb61cadc900, type: 3}
   moveType: 1
+  damage: 0
   owner: {fileID: 0}
   target: {fileID: 0}
   duration: 0
+  projHeight: 0
+  projSfx: {fileID: 8300000, guid: a423d8b636fee874bb69791948a3f2ed, type: 3}
 --- !u!1 &1679846206416546
 GameObject:
   m_ObjectHideFlags: 0

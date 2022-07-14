@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fbfeed14bd9b94a9a38290982a6482, type: 3}
+  m_Name: StageBgm
+  m_EditorClassIdentifier: 
+  EnemyBGM: {fileID: 8300000, guid: 5c727a9345565304db3377bc9e5221fc, type: 3}
+  ShopBGM: {fileID: 8300000, guid: b4427b55e19bc0840b557300b4e8a604, type: 3}
+  EventBGM: {fileID: 8300000, guid: 80d151cd91886ba44ae209b9d50ef514, type: 3}
+  RestBGM: {fileID: 8300000, guid: 3cce02bac95f3614fb7ee1a4ff634f3f, type: 3}

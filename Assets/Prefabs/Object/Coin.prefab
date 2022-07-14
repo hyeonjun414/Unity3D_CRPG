@@ -81,6 +81,7 @@ MonoBehaviour:
   target: {fileID: 0}
   getEffect: {fileID: 0}
   value: 0
+  coinSfx: {fileID: 8300000, guid: e24660d400ba6134c87670153a571fa6, type: 3}
   coll: {fileID: 0}
   initPos: {x: 0, y: 0, z: 0}
 --- !u!1 &3635829658039109495

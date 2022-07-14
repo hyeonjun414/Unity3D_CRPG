@@ -23,6 +23,9 @@ public class CardHolder : MonoBehaviour
     [SerializeField] private float selectInterval;   // 마우스 오버시 다른 카드들이 양옆으로 밀리는 간격
 
 
+    [Header("Select Card Sfx")]
+    public AudioClip cardSelectSfx;
+
     public List<CardData> handList;
     void Start()
     {
@@ -63,22 +66,27 @@ public class CardHolder : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1) && handList.Count >= 1)
         {
             selectedCardIndex = 0;
+            SoundManager.Instance.PlayEffectSound(cardSelectSfx);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && handList.Count >= 2)
         {
             selectedCardIndex = 1;
+            SoundManager.Instance.PlayEffectSound(cardSelectSfx);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && handList.Count >= 3)
         {
             selectedCardIndex = 2;
+            SoundManager.Instance.PlayEffectSound(cardSelectSfx);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4) && handList.Count >= 4)
         {
             selectedCardIndex = 3;
+            SoundManager.Instance.PlayEffectSound(cardSelectSfx);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5) && handList.Count >= 5)
         {
             selectedCardIndex = 4;
+            SoundManager.Instance.PlayEffectSound(cardSelectSfx);
         }
     }
 

@@ -26,7 +26,8 @@ public class MonsterMeleeAttackCommand : MonsterAttackCommand
         if (monster.target == null) return;
 
         monster.target.Hit(monster.Attack());
-        
+        if (monster.monsterData.attackSfx != null)
+            SoundManager.Instance.PlayEffectSound(monster.monsterData.attackSfx);
         UIManager.Instance.battleInfoUI.UpdateUI();
         
     }

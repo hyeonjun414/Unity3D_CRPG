@@ -16,7 +16,11 @@ public class MonsterSkillCommand : SkillCommand
     }
     public override void Excute()
     {
-        if (monster.target == null || monster.target.isVanished || monster.isMoving || monster.isCC || monster.isCasting)
+        if (monster.target == null ||
+            monster.target.isVanished ||
+            monster.isMoving ||
+            monster.isCC ||
+            monster.isCasting)
         {
             return;
         }
@@ -32,7 +36,6 @@ public class MonsterSkillCommand : SkillCommand
         skill.transform.position = transform.position;
         skill.transform.rotation = Quaternion.identity;
         skill.transform.SetParent(monster.transform, true);
-        
     }
 
 

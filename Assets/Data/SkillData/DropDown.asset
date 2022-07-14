@@ -20,5 +20,7 @@ MonoBehaviour:
     \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   effectInterval: 3
   effectCount: 1
+  skillValue: 0
+  skillSfx: {fileID: 8300000, guid: 860a3d8c64d4085479d3b0336c9694fa, type: 3}
   skillPrefab: {fileID: 6760398749084636834, guid: 2695ae4b4cc891545b3a83dc19470bcc,
     type: 3}

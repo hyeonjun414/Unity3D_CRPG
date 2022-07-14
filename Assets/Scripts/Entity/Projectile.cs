@@ -21,6 +21,9 @@ public class Projectile : MonoBehaviour, IPoolable
 
     [Header("Indirect Option")]
     public float projHeight;
+
+    [Header("Projectile Sfx")]
+    public AudioClip projSfx;
     public void SetUp(Monster owner, Monster target, int damage,float duration, ProjectileMoveType pmt = ProjectileMoveType.Direct)
     {
         this.owner = owner;
@@ -96,6 +99,7 @@ public class Projectile : MonoBehaviour, IPoolable
         }
         CreateHit();
         target.Hit(owner.Attack());
+        SoundManager.Instance.PlayEffectSound(projSfx);
         UIManager.Instance.battleInfoUI.UpdateUI();
         ReturnPool();
 

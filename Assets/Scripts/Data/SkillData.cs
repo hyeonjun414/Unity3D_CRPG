@@ -29,7 +29,8 @@ public class SkillData : ScriptableObject
     [Header("Skill value")]
     public int skillValue;
 
-
+    [Header("Skill Sfx")]
+    public AudioClip skillSfx;
 
     [Header("Skill Prefab")]
     public GameObject skillPrefab;

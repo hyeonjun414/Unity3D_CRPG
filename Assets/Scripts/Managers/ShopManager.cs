@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShopManager : Singleton<ShopManager>
 {
+    public AudioClip buySfx;
+
     public int curGold = 1000;
     public int GOLD
     {
@@ -62,6 +64,7 @@ public class ShopManager : Singleton<ShopManager>
                 RelicManager.Instance.AddRelic((RelicData)shopItem.itemData);
                 break;
         }
+        SoundManager.Instance.PlayEffectSound(buySfx);
         return true;
     }
 }

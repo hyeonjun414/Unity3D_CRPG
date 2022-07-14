@@ -32,4 +32,5 @@ MonoBehaviour:
   nextMonster: {fileID: 11400000, guid: be5d3f2aae099754f91cf261ee740e42, type: 2}
   monster: {fileID: 587330191617741767, guid: 640d35d6254f913409b12e79d7a51e70, type: 3}
   projectile: {fileID: 0}
+  attackSfx: {fileID: 8300000, guid: e7cacf094f4289148800fcd32580aff4, type: 3}
   skillData: {fileID: 11400000, guid: 2134e421074e45748a80803ba409d031, type: 2}

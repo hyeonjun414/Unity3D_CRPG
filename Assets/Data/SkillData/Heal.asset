@@ -20,5 +20,6 @@ MonoBehaviour:
   effectInterval: 3
   effectCount: 1
   skillValue: 0
+  skillSfx: {fileID: 8300000, guid: 6daeb6d953e6176498cfa776eba1092b, type: 3}
   skillPrefab: {fileID: 2692859225903091392, guid: 20cfdb4beb768334da67cba5b93373af,
     type: 3}

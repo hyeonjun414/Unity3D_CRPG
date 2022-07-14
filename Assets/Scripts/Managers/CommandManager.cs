@@ -45,8 +45,11 @@ public class CommandManager : Singleton<CommandManager>
         
         StageUI go = UIManager.Instance.stageUI;
         go.UpdateUI();
+        
         go.gameObject.SetActive(!go.gameObject.activeSelf);
         GameManager.Instance.IsPause = go.gameObject.activeSelf;
+        if(go.gameObject.activeSelf)
+            SoundManager.Instance.PlayEffectSound(go.uiSfx);
     }
     public void ActiveMenu()
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RestObj : MonoBehaviour
 {
+    public GameObject restEffect;
+    public AudioSource sfx;
     public bool isUsed = false;
 
     public void Resting(Player player)
@@ -16,6 +18,8 @@ public class RestObj : MonoBehaviour
         {
             player.Heal(10);
         }
+        sfx.Stop();
+        restEffect.SetActive(false);
         isUsed = true;
     }
 }
