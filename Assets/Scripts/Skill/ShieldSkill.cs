@@ -24,10 +24,10 @@ public class ShieldSkill : Skill
                 counterDamage = 50;
                 break;
             case 1:
-                counterDamage = 100;
+                counterDamage = 75;
                 break;
             case 2:
-                counterDamage = 200;
+                counterDamage = 100;
                 break;
         }
 

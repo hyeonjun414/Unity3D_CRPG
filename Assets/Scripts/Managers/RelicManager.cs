@@ -156,6 +156,9 @@ public class RelicManager : Singleton<RelicManager>
     {
         // 즉시 적용
         GameManager.Instance.player.rerollCost += value;
+
+        if(GameManager.Instance.player.rerollCost < 0)
+            GameManager.Instance.player.rerollCost = 0;
         GameManager.Instance.player.statusUI.UpdateUI();
     }
     public void DamageUp()

@@ -63,7 +63,8 @@ public class Player : LivingEntity
     public void ResetPlayer(Scene scene, LoadSceneMode mode)
     {
         //if (scene.name != "SceneChangeTest") return;
-        transform.position = new Vector3(-14, 0.5f, 0);
+        transform.position = new Vector3(-11, 0.5f, 0);
+        transform.rotation = Quaternion.LookRotation(Vector3.right);
         MP = maxMp;
         statusUI.UpdateUI();
     }

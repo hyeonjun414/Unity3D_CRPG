@@ -16,6 +16,6 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 4918a3cd4ca88cf44a9e6a6ae4748dd4, type: 3}
   relicType: 7
   relicName: "\uB204\uAD70\uAC00\uC758 \uD574\uACE8"
-  relicDesc: "\uC804\uD22C\uAC00 \uC2DC\uC791\uB420 \uB54C 1\uB808\uBCA8 \uBAAC\uC2A4\uD130
-    \uD55C\uB9C8\uB9AC\uB97C \uB79C\uB364\uC73C\uB85C \uC18C\uD658\uD55C\uB2E4."
+  relicDesc: "\uC804\uD22C\uAC00 \uC2DC\uC791\uB420 \uB54C \uD655\uB960\uC5D0 \uB530\uB77C
+    \uB79C\uB364\uD55C \uBAAC\uC2A4\uD130 \uD55C\uB9C8\uB9AC\uB97C \uC18C\uD658\uD55C\uB2E4."
   relicPrefab: {fileID: 0}

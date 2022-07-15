@@ -21,7 +21,7 @@ MonoBehaviour:
   level: 0
   hp: 1300
   mp: 70
-  damage: 120
+  damage: 100
   armor: 25
   range: 1
   attackSpeed: 0.5

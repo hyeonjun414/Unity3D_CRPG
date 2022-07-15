@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EnemyBoss
   m_EditorClassIdentifier: 
   level: 3
-  minSummonCount: 3
-  maxSummonCount: 4
-  Hp: 20
+  minSummonCount: 2
+  maxSummonCount: 3
+  Hp: 15
   damage: 15
   summonData: {fileID: 11400000, guid: a48f7f424638b2a479c04593e088cb07, type: 2}

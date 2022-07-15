@@ -21,8 +21,8 @@ MonoBehaviour:
   cost: 11
   level: 2
   hp: 1800
-  mp: 80
-  damage: 120
+  mp: 60
+  damage: 130
   armor: 30
   range: 3
   attackSpeed: 0.7

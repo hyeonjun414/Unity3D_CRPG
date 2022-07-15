@@ -15,6 +15,6 @@ MonoBehaviour:
   level: 2
   minSummonCount: 2
   maxSummonCount: 3
-  Hp: 15
+  Hp: 10
   damage: 10
   summonData: {fileID: 11400000, guid: 43fc1d4cd4b96654ba42e91eb1ebd164, type: 2}

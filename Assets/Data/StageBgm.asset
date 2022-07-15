@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fbfeed14bd9b94a9a38290982a6482, type: 3}
   m_Name: StageBgm
   m_EditorClassIdentifier: 
-  EnemyBGM: {fileID: 8300000, guid: 5c727a9345565304db3377bc9e5221fc, type: 3}
+  EnemyBGM: {fileID: 8300000, guid: 59083a4066cbc284c803f7dca1ad27da, type: 3}
   ShopBGM: {fileID: 8300000, guid: b4427b55e19bc0840b557300b4e8a604, type: 3}
   EventBGM: {fileID: 8300000, guid: 80d151cd91886ba44ae209b9d50ef514, type: 3}
-  RestBGM: {fileID: 8300000, guid: 3cce02bac95f3614fb7ee1a4ff634f3f, type: 3}
+  RestBGM: {fileID: 8300000, guid: 9117855acc727a2478e116eb2d2dabfd, type: 3}
