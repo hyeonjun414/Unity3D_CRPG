@@ -35,34 +35,31 @@ public class PathFinder : MonoBehaviour
 {
     BattleTile[,] map;
     public int mapSize;
-    public List<Vector2> dir = new List<Vector2>();
+    public Vector2[] dir = new Vector2[] {
+            new Vector2(-1, 0),
+            new Vector2(1, 0),
+            new Vector2(0, 1),
+            new Vector2(0, -1),
+            new Vector2(-1, -1),
+            new Vector2(-1, 1),
+            new Vector2(1, -1),
+            new Vector2(1, 1)
+    };
 
-    void Awake()
-    {
-        AddDir();
-    }
+    private int lineG;
+    private int crossG;
 
-    public void AddDir()
-    {
-        dir.Add(new Vector2(-1, 0));
-        dir.Add(new Vector2(1, 0));
-        dir.Add(new Vector2(0, 1));
-        dir.Add(new Vector2(0, -1));
-        dir.Add(new Vector2(-1, -1));
-        dir.Add(new Vector2(-1, 1));
-        dir.Add(new Vector2(1, -1));
-        dir.Add(new Vector2(1, 1));
-    }
 
-    public List<Vector2> ExcutePathFind(Vector2 _start, Vector2 _end, BattleStage bs)
+
+    public List<Vector2> ExcutePathFind(Vector2 _start, Vector2 _end, BattleStage battleStage)
     {
-        map = bs.battleMap;
-        mapSize = bs.mapSize;
+        map = battleStage.battleMap;
+        mapSize = battleStage.mapSize;
         
         return Astar(_start, _end);
     }
     // 한 정점을 기준으로 도착점까지의 h값을 추산하여 반환하는 함수
-    public int GetH(Vector2 start, Vector2 end)
+    private int GetH(Vector2 start, Vector2 end)
     {
         int xSize = (int)Mathf.Abs(start.x - end.x);
         int ySize = (int)Mathf.Abs(start.y - end.y);
@@ -72,7 +69,7 @@ public class PathFinder : MonoBehaviour
         return 10 * line + 14 * cross;
     }
     // 해당 좌표의 정점이 리스트에 존재하는지 확인하는 함수
-    public PathNode GetNodeFromList(LinkedList<PathNode> _list, Vector2 _point)
+    private PathNode GetNodeFromList(List<PathNode> _list, Vector2 _point)
     {
         PathNode resultNode = null;
         foreach (PathNode node in _list)
@@ -83,7 +80,7 @@ public class PathFinder : MonoBehaviour
         return resultNode;
     }
     // 오픈 리스트에서 f값이 가장 작은 정점을 반환하는 함수
-    public PathNode NodeWithLowestF(LinkedList<PathNode> _list)
+    private PathNode NodeWithLowestF(List<PathNode> _list)
     {
         PathNode Node = null;
         int minF = Constants.INF;
@@ -100,11 +97,10 @@ public class PathFinder : MonoBehaviour
         }
         return Node;
     }
-    public List<Vector2> Astar(Vector2 start, Vector2 end)
+    private List<Vector2> Astar(Vector2 start, Vector2 end)
     {
-        LinkedList<PathNode> openList = new LinkedList<PathNode>();
-        openList.AddLast(new PathNode(null, start, 0, GetH(start, end)));
-
+        List<PathNode> openList = new List<PathNode>();
+        openList.Add(new PathNode(null, start, 0, GetH(start, end)));
         while (true)
         {
             PathNode openNode = NodeWithLowestF(openList);
@@ -126,7 +122,7 @@ public class PathFinder : MonoBehaviour
                 }
                 return tempList;
             }
-            for (int i = 0; i < dir.Count; i++)
+            for (int i = 0; i < dir.Length; i++)
             {
                 if (openNode.point.y + dir[i].y >= 0 &&
                     openNode.point.y + dir[i].y < mapSize &&
@@ -144,13 +140,13 @@ public class PathFinder : MonoBehaviour
                     if (GetNodeFromList(openList, map[childX, childY].tilePos) != null &&
                         !tempNode.isActive) continue;
 
-                    int newG = 10;
+                    int newG = lineG;
                     int newH = GetH(map[childX, childY].tilePos, end);
                     int newF = newG + newH;
 
                     if (tempNode == null)
                     {
-                        openList.AddLast(new PathNode(openNode, map[childX, childY].tilePos, newG, newH));
+                        openList.Add(new PathNode(openNode, map[childX, childY].tilePos, newG, newH));
                     }
                     else if (tempNode.f > newF)
                     {

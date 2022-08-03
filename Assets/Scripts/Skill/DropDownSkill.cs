@@ -70,7 +70,7 @@ public class DropDownSkill : Skill
         {
             targetTile = monster.target.curTile;
         }
-        List<BattleTile> aroundTiles =  BattleManager.Instance.stage.FindAroundTile(targetTile);
+        List<BattleTile> aroundTiles =  BattleManager.Instance.stage.FindAroundTile(targetTile, dropRange);
         BattleTile targetBt = aroundTiles.Find((x)=> x.state == TileState.NONE);
         GameObject dropDownEft = ObjectPoolManager.Instance.UseObj(downHitEffect.gameObject);
         dropDownEft.transform.SetParent(null, false);

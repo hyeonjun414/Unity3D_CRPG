@@ -12,40 +12,38 @@ public class BattleStage : MonoBehaviour
 
     
     public Material[] tileColors;
-    public int mapSize = 8;
+    public int mapSize;
 
     
     public BattleTile[,] battleMap; // astar용
     public List<BattleTile> battleTiles; // 탐색용
 
-    private Animator anim;
+    private Animator animator;
     void Awake()
     {
+        animator = GetComponent<Animator>();
+
         // 배틀 타일 배열을 맵 사이즈 만큼 할당해준다. -> 8 X 8
         battleMap = new BattleTile[mapSize, mapSize];
         // 자식에서 배틀 타일들을 받아온다.
         battleTiles = GetComponentsInChildren<BattleTile>().ToList();
 
         // 경로 탐색을 위한 타일 포지션을 잡아준다.
-        int count = 0;
-        for(int i = 0; i < mapSize; i++)
+        int tileCount = 0;
+        for(int yIndex = 0; yIndex < mapSize; yIndex++)
         {
-            for(int j = 0; j < mapSize; j++)
+            for(int xIndex = 0; xIndex < mapSize; xIndex++)
             {
-                battleTiles[count].tileIndex = count;
-                battleTiles[count].maxTileIndex = battleTiles.Count;
-                battleMap[i,j] = battleTiles[count++];
-                battleMap[i, j].tilePos = new Vector2(i, j);
+                battleTiles[tileCount].tileIndex = tileCount;
+                battleTiles[tileCount].maxTileCount = battleTiles.Count;
+                battleMap[yIndex, xIndex] = battleTiles[tileCount++];
+                battleMap[yIndex, xIndex].tilePos = new Vector2(yIndex, xIndex);
             }
         }
     }
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
     public void StageOut()
     {
-        anim.SetTrigger("StageOut");
+        animator.SetTrigger("StageOut");
     }
     public void SelfDestroy()
     {
@@ -54,40 +52,42 @@ public class BattleStage : MonoBehaviour
 
     public BattleTile RandomNoneTile()
     {
-        BattleTile bt = null;
+        BattleTile randomNoneTile = null;
+
         while (true)
         {
-            bt = battleTiles[Random.Range(0, battleTiles.Count)];
-            if (bt.state == TileState.NONE)
+            randomNoneTile = battleTiles[Random.Range(0, battleTiles.Count)];
+            if (randomNoneTile.state == TileState.NONE)
                 break;
         }
-        return bt;
+        return randomNoneTile;
     }
     public BattleTile RandomAllyTile()
     {
-        BattleTile bt = null;
+        BattleTile randomAllyTile = null;
+
         while (true)
         {
-            bt = battleTiles[Random.Range(battleTiles.Count / 2, battleTiles.Count)];
-            if (bt.state == TileState.NONE)
+            randomAllyTile = battleTiles[Random.Range(battleTiles.Count / 2, battleTiles.Count)];
+            if (randomAllyTile.state == TileState.NONE)
                 break;
         }
-        return bt;
+        return randomAllyTile;
     }
 
     public BattleTile FindTileFromPoint(Vector2 tilePos)
     {
-        return battleTiles.Find((x) => x.tilePos == tilePos);
+        return battleTiles.Find((targetTile) => targetTile.tilePos == tilePos);
     }
 
-    public List<BattleTile> FindAroundTile(BattleTile tile, int range = 1)
+    public List<BattleTile> FindAroundTile(BattleTile centerTile, int findRange)
     {
-        float posX = tile.tilePos.x;
-        float posY = tile.tilePos.y;
-        return battleTiles.FindAll((bt)=>
-            (posX - range <= bt.tilePos.x && bt.tilePos.x <= posX + range) &&
-            (posY - range <= bt.tilePos.y && bt.tilePos.y <= posY + range) &&
-            bt != tile);
+        float posX = centerTile.tilePos.x;
+        float posY = centerTile.tilePos.y;
+        return battleTiles.FindAll((targetTile)=>
+            (posX - findRange <= targetTile.tilePos.x && targetTile.tilePos.x <= posX + findRange) &&
+            (posY - findRange <= targetTile.tilePos.y && targetTile.tilePos.y <= posY + findRange) &&
+            targetTile != centerTile);
     }
 
 }

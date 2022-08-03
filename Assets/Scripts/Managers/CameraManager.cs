@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+public enum CameraType
+{
+    PLAYER,
+    BATTLESTAGE,
+}
+
 public class CameraManager : Singleton<CameraManager>
 {
     [SerializeField]
-    CinemachineVirtualCamera[] cineCams;
+    CinemachineVirtualCamera[] virtualCameras;
 
 
     private void Awake()
@@ -15,18 +21,14 @@ public class CameraManager : Singleton<CameraManager>
             _instance = this;
     }
 
-    public void SwitchCam(int idx)
+    public void SwitchCam(CameraType targetCamera)
     {
-        for (int i = 0; i < cineCams.Length; i++)
+        for (CameraType cameraIndex = 0; cameraIndex < (CameraType)virtualCameras.Length; cameraIndex++)
         {
-            if(i == idx)
-            {
-                cineCams[i].Priority = 1;
-            }
+            if(cameraIndex == targetCamera)
+                virtualCameras[(int)cameraIndex].Priority = 1;
             else
-            {
-                cineCams[i].Priority = 0;
-            }
+                virtualCameras[(int)cameraIndex].Priority = 0;
         }
     }
 }
